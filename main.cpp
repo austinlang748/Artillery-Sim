@@ -20,39 +20,143 @@
  *****************************************************************************/
 
 #include <iostream>
+#include <iomanip>
+#include <string>
 #include <cmath>
 using namespace std;
 
+// projectile motion constants
+const double artilleryV0         = 827.0;    // m/s
+const double artilleryMass       = 46.7;     // kg
+const double artilleryDiameterMm = 154.89;   // mm
+double getArtilleryDiameter() { return artilleryDiameterMm / 1000; } // m
+
 // functions for quick geometric calculations:
-double deg(double angleRadians) { return 180 * angleRadians / M_PI; }
-double rad(double angleDegrees) { return M_PI * angleDegrees / 180; }
-double mag(double x, double y) { return sqrt(x * x + y * y); }
+double deg(double angleRadians)  { return 180 * angleRadians / M_PI; }
+double rad(double angleDegrees)  { return M_PI * angleDegrees / 180; }
+double mag(double x, double y)   { return sqrt(x * x + y * y); }
+
 double cartesianToAngle(double x, double y)
 {
    return atan2(x, y);
 }
+
 double verticalComponent(double magnitude, double angleDegrees)
 {
    return magnitude * sin(rad(angleDegrees));
 }
+
 double horizontalComponent(double magnitude, double angleDegrees)
 {
    return magnitude * cos(rad(angleDegrees));
 }
 
+double dragForce(double c, double p, double v, double a)
+{
+   /************************************
+    * d = ½ c ρ v² a
+    * =================================
+    * d = force in newtons (N)
+    * c = drag coefficient
+    * ρ = density of the fluid/gas
+    * v = velocity of the projectile
+    * a = surface area
+    ************************************/
+   return 0.5 * c * p * v*v * a;
+}
 
-int main() {
+double circleArea(double radius)
+{
+   /************************************
+    * a = π r²
+    * =================================
+    * a = area of the circle (m²)
+    * r = radius of the circle
+    ************************************/
+   return M_PI * radius*radius;
+}
 
+double getForce(double mass, double acceleration)
+{
+   /************************************
+    * f = m a	
+    * =================================
+    * f = force in newtons (N)
+    * m = mass in kilograms (kg)
+    * a = acceleration (m/s²)
+    ************************************/
+   return mass * acceleration;
+}
+
+
+// prompt
+float promptFloat(string prompt)
+{
+   try {
+      cout << prompt << " ";
+      float result;
+      cin >> result;
+      cout << endl;
+      return result;
+   }
+   // error handling
+   catch(const exception& e) {
+      cerr << e.what() << '\n';
+      return -1.0;
+   }
+}
+
+// quadratic formula
+float quadraticFormula(float a, float b, float c, bool debug = false)
+{
+   if (debug)
+      cout  << "[debug] Quadratic formula(" 
+            << a << ", "
+            << b << ", "
+            << c << ")\n";
+
+   float discriminant = b*b - 4*a*c;
+   if (debug) cout << "Discriminant == " << discriminant << endl;
+
+   if (discriminant == 0) return -b/(2*a);
+
+   int error = -1;
+
+   float x1 = (-b + sqrt(discriminant)) / (2*a);
+   float x2 = (-b - sqrt(discriminant)) / (2*a);
+   
+   if (debug) cout << "roots: x1 == " << x1 << ", x2 == " << x2 << endl;
+
+   if (x1 < 0 || x2 < 0) return error;
+   else return max(x1, x2);
+
+   return error;
+}
+
+
+int main()
+{
    // prompt for initial angle
-   cout << "What is the angle of the howitzer where 0 is up? ";
-   double angle_0 = 0.0;
-   cin >> angle_0;
+   double angle_0 = promptFloat("What is the angle of the howitzer where 0 is up?");
+
+   // TODO: replace these placeholders
+   double g = -9.81;
+   double c = .3;
+   double p = 1;
+   double vy = verticalComponent(artilleryV0, rad(angle_0));
+   double artilleryRadius = getArtilleryDiameter() * .5;
+   double a = circleArea(artilleryRadius);
+   double dragForce = dragForce(c,p,vy,a), rad(angle_0));
+   double dragy = verticalComponent(dragForce / artilleryMass);
 
    // =================================
    /* TODO: calculate hang time based on parabolic equation of height with respect to time */
    // y(t) = ½ g dy t^2 + vy0 t + y0
    // find t where y == 0 and t != 0a
    // =================================
+   double hangTime = quadraticFormula(
+      g + dragy, vy, 0
+   );
 
    // vy0 = F0 * sin(angle) / mass
 
@@ -72,11 +176,17 @@ int main() {
 
    // =================================
    // TODO: calculate horizontal distance based on hang time
-   // x(t) = vx0 t + x0; find xn (x0 == 0)
+   // x(t) = dx t² + vx0 t + x0; find xn (x0 == 0)
    // =================================
-
+   
    // vx0 = F0 * cos(angle) / mass
+   double vx0 = horizontalComponent(artilleryV0, rad(angle_0));
 
+   double ddx = horizontalComponent(dragForce, rad(angle_0))/artilleryMass;
+
+   double horizontalDistance = quadraticFormula(
+      ddx, vx0, 0
+   );
 
    // =================================
    // test cases for video:
@@ -86,9 +196,18 @@ int main() {
    // backwards:   angle == -45
    // =================================
 
+   // display results:
+
+   // TODO: replace placeholders
+
+   // distance
+   cout << "Distance:" << setw(12) << horizontalDistance << "m" << setw(18);
+
+   // total hang time
+   cout << "Hang Time: " << setw(10) << hangTime << "s\n";
+
    return 0;
 }
-
 // drag coefficients of air at different given speeds:
 //    Mach	        Drag Coefficient
 //    0.300	        0.1629
