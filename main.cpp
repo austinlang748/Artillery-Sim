@@ -391,9 +391,12 @@ int main()
       dy               += ddy;
       y                += dy;
       
+      cout << t << " " << y << endl;
    }
 
    // distance
+   cout.setf(ios::fixed);
+   cout.precision(2);
    cout << "Distance:" << setw(12) << x << "m" << setw(18);
 
    // total hang time
