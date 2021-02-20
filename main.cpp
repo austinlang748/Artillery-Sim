@@ -390,8 +390,6 @@ int main()
       ddy               = getAccelerationY(g, dragF, angle);
       dy               += ddy;
       y                += dy;
-      
-      cout << t << " " << y << endl;
    }
 
    // distance
