@@ -25,6 +25,10 @@
 #include <cmath>
 using namespace std;
 
+#ifndef M_PI              // Define M_PI 
+#define M_PI 3.14159265358979323846
+#endif
+
 // projectile motion constants
 const double artilleryV0         = 827.0;    // m/s
 const double artilleryMass       = 46.7;     // kg
@@ -217,7 +221,7 @@ double mag(double x, double y)   { return sqrt(x * x + y * y); }
 
 double cartesianToAngle(double x, double y)
 {
-   return atan2(x, y);
+   return atan2(y, x);
 }
 
 double verticalComponent(double magnitude, double angleDegrees)
@@ -267,6 +271,8 @@ double getForce(double mass, double acceleration)
    return mass * acceleration;
 }
 
+double max(double a, double b) { return (a > b ? a : b); }
+
 double getAccelerationX(double dragF, double angle)
 {
    return -horizontalComponent(dragF, angle)/artilleryMass;
@@ -274,7 +280,7 @@ double getAccelerationX(double dragF, double angle)
 
 double getAccelerationY(double gravity, double dragF, double angle)
 {
-   return verticalComponent(dragF, angle)/artilleryMass + gravity;
+   return -verticalComponent(dragF, angle)/artilleryMass + gravity;
 }
 
 
@@ -331,7 +337,7 @@ int main()
    double angle_0 = promptFloat("What is the angle of the howitzer where 0 is up? (degrees)");
 
    // initialize angle/speed
-   double angle            = angle_0;
+   double angle            = 90 - angle_0;
    double speed            = artilleryV0;
 
    // initialize position
@@ -358,15 +364,13 @@ int main()
 
    // set up loop 
    double t = 0.0;
-   const double fps = 60;
-   const double dt = 1000/fps;
    while (y >= 0)
    {
-      // increment time by deltaTime (predefined)
-      t += dt;
+      // Increment by 0.5
+      t += 0.5;
 
       // update angle/speed/velocity
-      angle             = cartesianToAngle(dx, dy);
+      angle             = deg(cartesianToAngle(dx, dy));
       speed             = mag(dx, dy);
       dx                = horizontalComponent(speed, angle);
       dy                = verticalComponent(speed, angle);
