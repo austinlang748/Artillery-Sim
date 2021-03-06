@@ -33,6 +33,8 @@ public:
    bool operator != (const Velocity & rhs) const {
       return dx != rhs.dx || dy != rhs.dy;
    }
+
+   friend class TestVelocity;
 };
 
 // contents of old file
