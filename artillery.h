@@ -1,9 +1,10 @@
-﻿//
-//  artillery.h
-//  Lab08
-//
-//  Created by Austin Hilderbrand on 3/6/21.
-//
+﻿/*************************************************
+ * Artillery.h
+ * Artillery class header file
+ * Authors:
+ *      Austin Hilderbrand (creator of functions)
+ *      Elijah Harrison (populated functions)
+ *************************************************/
 
 #pragma once
 
@@ -23,6 +24,7 @@ private:
    Position    position;
    Velocity    velocity;
    Velocity    acceleration;
+   double      initialPositionX;
    double      angle;
    double      speed;
    double      artilleryRadius;
@@ -32,40 +34,52 @@ private:
    double      a;       // surface area of artillery
    double      dragF;   // drag force
 
+
+   static double dragForce(double c, double p, double v, double a);
+   static double circleArea(double radius);
+   static double getForce(double mass, double acceleration);
+   static double getAccelerationX(double dragF, double angle);
+   static double getAccelerationY(double gravity, double dragF, double angle);
+
+
 public:
    
-   // constructor
+   /*************************************************
+    * ARTILLERY : Constructor
+    * param: position_0 : Position
+    * param: angle_0    : double
+    *************************************************/
    Artillery(Position position_0, double angle_0) : 
-      angle       (angle_0),
-      position    (position_0)
-   {
-      
       // initialize angle/speed
-      angle = 90 - angle;
-      speed = artilleryV0;
+      angle             (90 - angle_0),
+      speed             (artilleryV0),
 
-      // initialize velocity
-      velocity = Velocity(
+      // initialize position
+      position          (position_0),
+      initialPositionX  (position_0.getMetersX()),
+
+      // initialize veloicty
+      velocity (Velocity(
          Trig.horizontalComponent(speed, angle),
-         Trig.verticalComponenet(speed, angle)
-      );
+         Trig.verticalComponent(speed, angle)
+      )),
 
       // initialize gravity
-      g = altitudeToGravity(position.getMetersY());
+      g                 (altitudeToGravity(position.getMetersY())),
 
       // initialize drag
-      c = machToDragCoefficient(speed);
-      p = altitudeToDensity(position.getMetersY());
-      artilleryRadius = getArtilleryDiameter() * .5;
-      a = circleArea(artilleryRadius);
-      dragF = dragForce(c, p, speed, a);
+      c                 (machToDragCoefficient(speed)),
+      p                 (altitudeToDensity(position.getMetersY())),
+      artilleryRadius   (getArtilleryDiameter() * .5),
+      a                 (circleArea(artilleryRadius)),
+      dragF             (dragForce(c, p, speed, a)),
 
       // initialize acceleration
-      acceleration = Velocity(
+      acceleration      (Velocity(
          getAccelerationX(dragF, angle),
          getAccelerationY(g, dragF, angle)
-      );      
-}
+      ))
+   { }
 
    void update() {
       // update angle/speed/velocity
@@ -93,53 +107,10 @@ public:
       position.add(velocity);
    }
 
-   static double dragForce(double c, double p, double v, double a)
-   {
-      /************************************
-       * d = ½ c ρ v² a
-       * =================================
-       * d = force in newtons (N)
-       * c = drag coefficient
-       * ρ = density of the fluid/gas
-       * v = velocity of the projectile
-       * a = surface area
-       ************************************/
-      return 0.5 * c * p * v * v * a;
-   }
-
-   static double circleArea(double radius)
-   {
-      /************************************
-       * a = π r²
-       * =================================
-       * a = area of the circle (m²)
-       * r = radius of the circle
-       ************************************/
-      return M_PI * radius * radius;
-   }
-
-   static double getForce(double mass, double acceleration)
-   {
-      /************************************
-       * f = m a
-       * =================================
-       * f = force in newtons (N)
-       * m = mass in kilograms (kg)
-       * a = acceleration (m/s²)
-       ************************************/
-      return mass * acceleration;
-   }
-
-   static double getAccelerationX(double dragF, double angle)
-   {
-      return -(Trig.horizontalComponent(dragF, angle) / artilleryMass);
-   }
-
-   static double getAccelerationY(double gravity, double dragF, double angle)
-   {
-      return -(Trig.verticalComponent(dragF, angle) / artilleryMass + gravity);
-   }
-
+   double getAltitude() const { return position.getMetersY(); }
+   double getSpeed()    const { return speed; }
+   double getDistance() const { return position.getMetersX() - initialPositionX; }
+   double getHangTime() const { return position.getMetersY(); }
 
 };
 
