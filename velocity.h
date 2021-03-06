@@ -33,7 +33,7 @@ public:
    // getters
    double getDx()    const { return dx; }
    double getDy()    const { return dy; }
-   double getSpeed() const { return mag(dx, dy); }
+   double getSpeed() const { return Trig::mag(dx, dy); }
 
    bool operator == (const Velocity& rhs) const;
    bool operator != (const Velocity& rhs) const;
