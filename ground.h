@@ -10,7 +10,8 @@
 #pragma once
 
 #include "position.h"   // for Point
-#include "uiDraw.h"
+#include "uiDraw.h"   // for random() and drawLine()
+#include <cassert>
 
  /***********************************************************
   * GROUND

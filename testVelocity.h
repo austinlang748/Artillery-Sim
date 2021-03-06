@@ -41,11 +41,11 @@ public:
    {
       //setup
       Velocity vel;
-      vel.getDx() = 100;
+      vel.setDx(100);
       //exercise
       vel.setDx("string");
       //verfify
-      assert(vel.getDx() == 100)
+      assert(vel.getDx() == 100);
       //teardown
    }
 
@@ -57,7 +57,7 @@ public:
       //exercise
       vel.setDx(200);
       //verfify
-      assert(vel.getDx() == 200)
+      assert(vel.getDx() == 200);
       //teardown
       }
 
@@ -103,8 +103,8 @@ public:
    {
       //setup
       Velocity vel;
-      vel.getDx() = 100;
-      vel.getDy() = 100;
+      vel.setDx(100);
+      vel.setDy(100);
       //exercise
       vel.set("string", 200);
       //verfify
@@ -117,8 +117,8 @@ public:
    {
       //setup
       Velocity vel;
-      vel.getDx() = 100;
-      vel.getDy() = 100;
+      vel.setDx(100);
+      vel.setDy(100);
       //exercise
       vel.set(200, 200);
       //verfify

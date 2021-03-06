@@ -2,12 +2,11 @@
 //  Trig::hpp
 //  Lab08
 //
-//  Created by Elijah Harrison on 3/6/21.
+// static functions for quick geometric calculations
 //
 
 #pragma once
 
-// functions for quick geometric calculations:
 class Trig
 {
 public:

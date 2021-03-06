@@ -16,6 +16,8 @@
 		C1D4EB482577FC25002B56E3 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1D4EB462577FC25002B56E3 /* OpenGL.framework */; };
 		C1D4EB492577FC25002B56E3 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1D4EB472577FC25002B56E3 /* GLUT.framework */; };
 		EEF7D4C725F42F1400836719 /* trig.h in Sources */ = {isa = PBXBuildFile; fileRef = EEF7D4C625F42EDE00836719 /* trig.h */; };
+		EEF7D4D525F4332100836719 /* howitzer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EEF7D4D325F4332100836719 /* howitzer.cpp */; };
+		EEF7D4D625F4332100836719 /* artillery.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EEF7D4D425F4332100836719 /* artillery.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -50,6 +52,13 @@
 		EEF7D4C225F4011C00836719 /* velocity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = velocity.cpp; sourceTree = "<group>"; };
 		EEF7D4C325F4011C00836719 /* velocity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = velocity.h; sourceTree = "<group>"; };
 		EEF7D4C625F42EDE00836719 /* trig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = trig.h; sourceTree = "<group>"; };
+		EEF7D4CB25F432C700836719 /* tables.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tables.h; sourceTree = "<group>"; };
+		EEF7D4CF25F4332000836719 /* howitzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = howitzer.h; sourceTree = "<group>"; };
+		EEF7D4D025F4332000836719 /* testArtillery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testArtillery.h; sourceTree = "<group>"; };
+		EEF7D4D125F4332000836719 /* artillery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = artillery.h; sourceTree = "<group>"; };
+		EEF7D4D225F4332100836719 /* testHowitzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testHowitzer.h; sourceTree = "<group>"; };
+		EEF7D4D325F4332100836719 /* howitzer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = howitzer.cpp; sourceTree = "<group>"; };
+		EEF7D4D425F4332100836719 /* artillery.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = artillery.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +78,10 @@
 			isa = PBXGroup;
 			children = (
 				C1D4EB342577FC12002B56E3 /* Lab08.cpp */,
+				EEF7D4D325F4332100836719 /* howitzer.cpp */,
+				EEF7D4CF25F4332000836719 /* howitzer.h */,
+				EEF7D4D425F4332100836719 /* artillery.cpp */,
+				EEF7D4D125F4332000836719 /* artillery.h */,
 				C1D4EB322577FC12002B56E3 /* ground.cpp */,
 				C1D4EB382577FC13002B56E3 /* ground.h */,
 				C1D4EB332577FC12002B56E3 /* position.cpp */,
@@ -77,9 +90,12 @@
 				C1D4EB3D2577FC14002B56E3 /* test.h */,
 				C1D4EB372577FC13002B56E3 /* testPosition.h */,
 				EEF7D4C125F3FFF100836719 /* testVelocity.h */,
+				EEF7D4D025F4332000836719 /* testArtillery.h */,
+				EEF7D4D225F4332100836719 /* testHowitzer.h */,
+				EEF7D4CB25F432C700836719 /* tables.h */,
+				EEF7D4C625F42EDE00836719 /* trig.h */,
 				EEF7D4C225F4011C00836719 /* velocity.cpp */,
 				EEF7D4C325F4011C00836719 /* velocity.h */,
-				EEF7D4C625F42EDE00836719 /* trig.h */,
 				C1D4EB352577FC12002B56E3 /* uiDraw.cpp */,
 				C1D4EB392577FC13002B56E3 /* uiDraw.h */,
 				C1D4EB3A2577FC13002B56E3 /* uiInteract.cpp */,
@@ -163,10 +179,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEF7D4C725F42F1400836719 /* trig.h in Sources */,
+				EEF7D4D525F4332100836719 /* howitzer.cpp in Sources */,
 				C1D4EB402577FC14002B56E3 /* Lab08.cpp in Sources */,
 				C1D4EB3F2577FC14002B56E3 /* position.cpp in Sources */,
 				C1D4EB3E2577FC14002B56E3 /* ground.cpp in Sources */,
 				C1D4EB422577FC14002B56E3 /* test.cpp in Sources */,
+				EEF7D4D625F4332100836719 /* artillery.cpp in Sources */,
 				C1D4EB412577FC14002B56E3 /* uiDraw.cpp in Sources */,
 				C1D4EB432577FC14002B56E3 /* uiInteract.cpp in Sources */,
 			);
