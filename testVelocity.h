@@ -12,6 +12,7 @@
 #include <iostream>
 #include "velocity.h"
 #include <cassert>
+#include <math.h>
 
 using namespace std;
 
@@ -20,21 +21,25 @@ class TestVelocity
 public:
    void run()
    {
-         test_setDx_invalid();           
-         test_setDx_valid();           
-         test_setDy_invalid();           
-         test_setDy_valid();           
-         test_set_invalidDy(); 
-         test_set_invalidDx();
-         test_set_valid();           
-         test_addDx_invalid();           
-         test_addDx_valid();           
-         test_addDy_invalid();           
-         test_addDy_valid();           
-         test_add_invalid();           
-         test_add_valid();           
-         test_addMagnitude_invalid();           
-         test_addMagnitude_valid();           
+
+      test_setDx_invalid();           
+      test_setDx_valid();           
+      test_setDy_invalid();           
+      test_setDy_valid();           
+      test_set_invalidDy(); 
+      test_set_invalidDx();
+      test_set_valid();           
+      test_addDx_invalid();           
+      test_addDx_valid();           
+      test_addDy_invalid();           
+      test_addDy_valid();           
+      test_add_invalidDy();    
+      test_add_invalidDx();
+      test_add_valid();           
+      test_addMagnitude_negMag();    
+      test_addMagnitude_negAngle();
+      test_addMagnitude_largeAngle();
+      test_addMagnitude_valid();           
    }
 
    void test_setDx_invalid()
@@ -57,7 +62,7 @@ public:
       //exercise
       vel.setDx(200);
       //verfify
-      assert(vel.dx == 200)
+      assert(vel.dx == 200);
       //teardown
       }
 
@@ -133,84 +138,140 @@ public:
       Velocity vel;
       vel.dx = 100;
       //exercise
-      vel.addDx(50);
+      vel.addDx("string");
       //verfify
-      assert(vel.dx == 150);
+      assert(vel.dx == 100);
       //teardown
    }
 
    void test_addDx_valid()
    {
       //setup
+      Velocity vel;
+      vel.dx = 100;
       //exercise
+      vel.addDx(50);
       //verfify
+      assert(vel.dx == 150);
       //teardown
    }
 
    void test_addDy_invalid()
    {
       //setup
+      Velocity vel;
+      vel.dy = 100;
       //exercise
+      vel.addDy("string");
       //verfify
+      assert(vel.dy == 100);
       //teardown
    }
 
    void test_addDy_valid()
    {
       //setup
+      Velocity vel;
+      vel.dy = 100;
       //exercise
+      vel.addDy(50);
       //verfify
+      assert(vel.dy == 150);
       //teardown
    }
 
-   void test_add_invalid()
+   void test_add_invalidDy()
    {
       //setup
+      Velocity vel;
+      vel.dx = 100;
+      vel.dy = 100;
       //exercise
+      vel.add(50, "string");
       //verfify
+      assert(vel.dx == 150);
+      assert(vel.dy == 100);
+      //teardown
+   }
+
+   void test_add_invalidDx()
+   {
+      //setup
+      Velocity vel;
+      vel.dx = 100;
+      vel.dy = 100;
+      //exercise
+      vel.add("string", 50);
+      //verfify
+      assert(vel.dx == 100);
+      assert(vel.dy == 150);
       //teardown
    }
 
    void test_add_valid()
    {
       //setup
+      Velocity vel;
+      vel.dx = 100;
+      vel.dy = 100;
       //exercise
+      vel.add(50, 50);
       //verfify
+      assert(vel.dx == 150);
+      assert(vel.dy == 150);
       //teardown
    }
 
-   void test_addMagnitude_invalid()
+   void test_addMagnitude_negMag()
    {
       //setup
+      Velocity vel;
+      vel.set(100, 100);
       //exercise
+      vel.addMagnitude(2, -100);
       //verfify
+      assert(vel.dx == 100 + 100 * cos(2 - M_PI));
+      assert(vel.dy == 100 + 100 * sin(2 - M_PI));
+      //teardown
+   }
+
+   void test_addMagnitude_negAngle()
+   {
+      //setup
+      Velocity vel;
+      vel.set(100, 100);
+      //exercise
+      vel.addMagnitude(-M_PI, 100);
+      //verfify
+      assert(vel.dx == 100 + 100 * cos(-M_PI + 2 * M_PI));
+      assert(vel.dy == 100 + 100 * sin(-M_PI + 2 * M_PI));
+      //teardown
+   }
+
+   void test_addMagnitude_largeAngle()
+   {
+      //setup
+      Velocity vel;
+      vel.set(100, 100);
+      //exercise
+      vel.addMagnitude(3 * M_PI, 100);
+      //verfify
+      assert(vel.dx == 100 + 100 * cos(3 * M_PI - 2 * M_PI));
+      assert(vel.dy == 100 + 100 * sin(3 * M_PI - 2 * M_PI));
       //teardown
    }
 
    void test_addMagnitude_valid()
    {
       //setup
+      Velocity vel;
+      vel.set(100, 100);
       //exercise
+      vel.addMagnitude(M_PI, 100);
       //verfify
+      assert(vel.dx == 100 + 100 * cos(M_PI));
+      assert(vel.dy == 100 + 100 * sin(M_PI));
       //teardown
    }
    
 };
-
-/**************************************************************************************
-Class under test : Velocity       Input parameters                       Output
-test_setDx_invalid(‘string’)                             ERROR : invalid
-test_setDx_valid(-100.00)                              dx = -100.00
-test_setDy_invalid(‘string’)                             ERROR : invalid
-test_setDy_valid(-100.00)                              dy = -100.00
-test_set_invalid(‘string’, 100)                        ERROR : invalid
-test_set_valid(100, 100)                             dx = 100, dy = 100
-test_addDx_invalid(‘string’)                             ERROR : invalid
-test_addDx_valid(40)                                   dx += 40
-test_addDy_invalid(‘string’)                             Error : invalid
-test_addDy_valid(-40)                                  dy += -40
-test_add_invalid(‘string’, 40)                         ERROR : invalid
-test_add_valid(40, 40)                               dx += 40, dy += 40
-test_addMagnitude_invalid(2, -100)                              ERROR : invalid
-test_addMagnitude_valid(2, 100)                               dx += 100cos(2), dy += 100sin(2)
-*********************************************************************************************/
