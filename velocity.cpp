@@ -62,7 +62,7 @@ std::istream& operator >> (std::istream& in, Velocity& v)
  * return bool: is equivalent
  ******************************************/
 bool Velocity::operator == (const Velocity & rhs) const {
-    return dx == rhs.dx && dy == rhs.dy;
+    return dx == rhs.getDx() && dy == rhs.getDy();
 }
 
 /*******************************************
@@ -71,7 +71,7 @@ bool Velocity::operator == (const Velocity & rhs) const {
  * return bool: is not equivalent
  ******************************************/
 bool Velocity::operator != (const Velocity & rhs) const {
-    return dx != rhs.dx || dy != rhs.dy;
+    return dx != rhs.getDx() || dy != rhs.getDy();
 }
 
 /*******************************************
@@ -120,6 +120,6 @@ void Velocity::add(double ddx, double ddy) {
  * VELOCITY : add magnitude
  ***/
 void Velocity::addMagnitude(double angleRadians, double magnitude) {
-    addDx(Trig.horizontalComponent(  magnitude, Trig.deg(angleRadians)));
-    addDx(Trig.verticalComponent(    magnitude, Trig.deg(angleRadians)));
+    addDx(Trig::horizontalComponent(   magnitude, Trig::deg(angleRadians)));
+    addDx(Trig::verticalComponent(     magnitude, Trig::deg(angleRadians)));
 }

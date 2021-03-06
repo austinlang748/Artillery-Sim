@@ -59,12 +59,12 @@ double Artillery::circleArea(double radius) {
  * 
  **************************************************/
 double Artillery::getAccelerationX(double dragF, double angle) {
-    return -(Trig.horizontalComponent(dragF, angle) / artilleryMass);
+    return -(Trig::horizontalComponent(dragF, angle) / artilleryMass);
 }
 
 /*************************************************
  * 
  **************************************************/
 double Artillery::getAccelerationY(double gravity, double dragF, double angle) {
-    return -(Trig.verticalComponent(dragF, angle) / artilleryMass + gravity);
+    return -(Trig::verticalComponent(dragF, angle) / artilleryMass + gravity);
 }

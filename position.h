@@ -12,6 +12,7 @@
 #pragma once
 
 #include <iostream>
+#include "velocity.h"
 
 /*********************************************
  * Position

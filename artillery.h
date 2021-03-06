@@ -60,8 +60,8 @@ public:
 
       // initialize veloicty
       velocity (Velocity(
-         Trig.horizontalComponent(speed, angle),
-         Trig.verticalComponent(speed, angle)
+         Trig::horizontalComponent(speed, angle),
+         Trig::verticalComponent(speed, angle)
       )),
 
       // initialize gravity
@@ -83,7 +83,7 @@ public:
 
    void update() {
       // update angle/speed/velocity
-      angle = Trig.deg(Trig.cartesianToAngle(v.dx, v.dy));
+      angle = Trig::deg(Trig::cartesianToAngle(v.getDx(), v.getDy()));
       speed = v.getSpeed();
 
       // update gravity

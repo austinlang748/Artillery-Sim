@@ -7,6 +7,7 @@
 
 #pragma once
 #include <cmath>
+#include "trig.h"
 
 /**
  * Velocity Class
@@ -22,20 +23,20 @@ public:
    // constructors
    Velocity() : dx(0.0), dy(0.0)  {}
    Velocity(double dx, double dy) { set(dx, dy); }
-   Velocity(const Velocity & v) : dx(v.dx), dy(v.dy) {}
+   Velocity(const Velocity & v) : dx(v.getDx()), dy(v.getDy()) {}
    Velocity& operator = (const Velocity& v);
 
    // getters
    double getDx()    const { return dx; }
    double getDy()    const { return dy; }
-   double getSpeed() const { return Trig.mag(dx, dy); }
+   double getSpeed() const { return Trig::mag(dx, dy); }
 
    bool operator == (const Velocity & rhs) const;
    bool operator != (const Velocity & rhs) const;
 
    // setters
-   void setDx(double dx) { this.dx = dx; }
-   void setDy(double dy) { this.dy = dy; }
+   void setDx(double dx) { this->dx = dx; }
+   void setDy(double dy) { this->dy = dy; }
 
    void set(const Velocity &v);
    void set(double dx, double dy);
@@ -47,26 +48,4 @@ public:
    void add(Velocity v);
    void add(double ddx, double ddy);
    void addMagnitude(double angleRadians, double magnitude);
-};
-
-// functions for quick geometric calculations:
-class Trig
-{
-public:
-   static double deg(double angleRadians) { return 180 * angleRadians / M_PI; }
-   static double rad(double angleDegrees) { return M_PI * angleDegrees / 180; }
-   static double mag(double x, double y)  { return sqrt(x * x + y * y); }
-
-   static double cartesianToAngle(double x, double y) {
-      return atan2(y, x);
-   }
-
-   static double verticalComponent(double magnitude, double angleDegrees) {
-      return magnitude * sin(rad(angleDegrees));
-   }
-
-   static double horizontalComponent(double magnitude, double angleDegrees) {
-      return magnitude * cos(rad(angleDegrees));
-   }
-
 };

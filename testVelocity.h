@@ -41,11 +41,11 @@ public:
    {
       //setup
       Velocity vel;
-      vel.dx = 100;
+      vel.getDx() = 100;
       //exercise
       vel.setDx("string");
       //verfify
-      assert(vel.dx == 100)
+      assert(vel.getDx() == 100)
       //teardown
    }
 
@@ -53,11 +53,11 @@ public:
    {
       //setup
       Velocity vel;
-      vel.dx = 100;
+      vel.setDx(100);
       //exercise
       vel.setDx(200);
       //verfify
-      assert(vel.dx == 200)
+      assert(vel.getDx() == 200)
       //teardown
       }
 
@@ -65,11 +65,11 @@ public:
    {
       //setup
       Velocity vel;
-      vel.dy = 100;
+      vel.setDx(100);
       //exercise
       vel.setDy("string");
       //verfify
-      assert(vel.dy == 100);
+      assert(vel.getDy() == 100);
       //teardown
    }
 
@@ -77,11 +77,11 @@ public:
    {
       //setup
       Velocity vel;
-      vel.dy == 100;
+      vel.getDy() == 100;
       //exercise
       vel.setDy(200);
       //verfify
-      assert(vel.dy == 200);
+      assert(vel.getDy() == 200);
       //teardown
    }
 
@@ -89,13 +89,13 @@ public:
    {
       //setup
       Velocity vel;
-      vel.dx = 100;
-      vel.dy = 100;
+      vel.setDx(100);
+      vel.setDy(100);
       //exercise
       vel.set(200, "string");
       //verfify
-      assert(vel.dx == 200);
-      assert(vel.dy == 100);
+      assert(vel.getDx() == 200);
+      assert(vel.getDy() == 100);
       //teardown
    }
 
@@ -103,13 +103,13 @@ public:
    {
       //setup
       Velocity vel;
-      vel.dx = 100;
-      vel.dy = 100;
+      vel.getDx() = 100;
+      vel.getDy() = 100;
       //exercise
       vel.set("string", 200);
       //verfify
-      assert(vel.dx == 100);
-      assert(vel.dy == 200);
+      assert(vel.getDx() == 100);
+      assert(vel.getDy() == 200);
       //teardown
    }
 
@@ -117,13 +117,13 @@ public:
    {
       //setup
       Velocity vel;
-      vel.dx = 100;
-      vel.dy = 100;
+      vel.getDx() = 100;
+      vel.getDy() = 100;
       //exercise
       vel.set(200, 200);
       //verfify
-      assert(vel.dx == 200);
-      assert(vel.dy == 200);
+      assert(vel.getDx() == 200);
+      assert(vel.getDy() == 200);
       //teardown
    }
 
@@ -131,11 +131,11 @@ public:
    {
       //setup
       Velocity vel;
-      vel.dx = 100;
+      vel.setDx(100);
       //exercise
       vel.addDx(50);
       //verfify
-      assert(vel.dx == 150);
+      assert(vel.getDx() == 150);
       //teardown
    }
 
@@ -199,17 +199,17 @@ public:
 
 /**************************************************************************************
 Class under test : Velocity       Input parameters                       Output
-test_setDx_invalid(‘string’)                             ERROR : invalid
+test_setDx_invalid(ï¿½stringï¿½)                             ERROR : invalid
 test_setDx_valid(-100.00)                              dx = -100.00
-test_setDy_invalid(‘string’)                             ERROR : invalid
+test_setDy_invalid(ï¿½stringï¿½)                             ERROR : invalid
 test_setDy_valid(-100.00)                              dy = -100.00
-test_set_invalid(‘string’, 100)                        ERROR : invalid
+test_set_invalid(ï¿½stringï¿½, 100)                        ERROR : invalid
 test_set_valid(100, 100)                             dx = 100, dy = 100
-test_addDx_invalid(‘string’)                             ERROR : invalid
+test_addDx_invalid(ï¿½stringï¿½)                             ERROR : invalid
 test_addDx_valid(40)                                   dx += 40
-test_addDy_invalid(‘string’)                             Error : invalid
+test_addDy_invalid(ï¿½stringï¿½)                             Error : invalid
 test_addDy_valid(-40)                                  dy += -40
-test_add_invalid(‘string’, 40)                         ERROR : invalid
+test_add_invalid(ï¿½stringï¿½, 40)                         ERROR : invalid
 test_add_valid(40, 40)                               dx += 40, dy += 40
 test_addMagnitude_invalid(2, -100)                              ERROR : invalid
 test_addMagnitude_valid(2, 100)                               dx += 100cos(2), dy += 100sin(2)
