@@ -7,10 +7,33 @@
 
 #pragma once
 
-class Velocity()
+class Velocity
 {
+private:
+   double dx;
+   double dy;
+
+public:
+
+   // constructors
+   Velocity()            : dx(0.0), dy(0.0)  {}
+   Velocity(double dx, double dy); // in meters
+   Velocity(const Velocity & v) : dx(v.dx), dy(v.dy) {}
+   Velocity& operator = (const Velocity& v);
+
+   // getters
+   double getDx();
+   double getDy();
+   double getSpeed();
    
-}
+   bool operator == (const Velocity & rhs) const {
+      return dx == rhs.dx && dy == rhs.dy;
+   }
+   
+   bool operator != (const Velocity & rhs) const {
+      return dx != rhs.dx || dy != rhs.dy;
+   }
+};
 
 // contents of old file
 #include <iostream>
