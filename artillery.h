@@ -26,6 +26,7 @@ private:
    Position    position;
    Velocity    velocity;
    Velocity    acceleration;
+   double      hangTime;
    double      initialPositionX;
    double      angle;
    double      speed;

@@ -153,12 +153,14 @@
     <ClInclude Include="artillery.h" />
     <ClInclude Include="ground.h" />
     <ClInclude Include="howitzer.h" />
+    <ClInclude Include="tables.h" />
     <ClInclude Include="testArtillery.h" />
     <ClInclude Include="testHowitzer.h" />
     <ClInclude Include="position.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="testPosition.h" />
     <ClInclude Include="testVelocity.h" />
+    <ClInclude Include="trig.h" />
     <ClInclude Include="uiDraw.h" />
     <ClInclude Include="uiInteract.h" />
     <ClInclude Include="velocity.h" />

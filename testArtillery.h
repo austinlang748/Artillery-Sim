@@ -2,7 +2,7 @@
  * Header File:
  *    Test Artillery : Test the Artillery class
  * Authors:
- *    Elijah Harrison and Austin Hilderbrand
+ *    Austin Hilderbrand
  * Summary:
  *    All the unit tests for Artillery
  ************************************************************************/
@@ -20,142 +20,166 @@ class TestArtillery
 public:
    void run()
    {
-      test_initialize_invalidPoint();
-      test_initialize_invalidVel();
-      test_initialize_invalidTime(); 
       test_initialize_valid();
-      test_getAltitude_invalidTime(); 
-      test_getAltitude_validTime(); 
-      test_getSpeed_invalidTime(); 
-      test_getSpeed_validTime(); 
-      test_getDistance_invalidTime(); 
-      test_getDistance_validTime(); 
-      test_getHangTime_invalidTime(); 
-      test_getHangTime_validTime(); 
-   }
-
-   void test_initialize_invalidPoint()
-   {
-      //setup
-      Artillery() artillery;
-      //exercise
-      //verfify
-      //teardown
-   }
-
-   void test_initialize_invalidVel()
-   {
-      //setup
-      Artillery() artillery;
-      //exercise
-      //verfify
-      //teardown
-   }
-
-   void test_initialize_invalidTime()
-   {
-      //setup
-      Artillery() artillery;
-      //exercise
-      //verfify
-      //teardown
+      test_initialize_invalidPoint();
+      test_initialize_invalidAngle1();
+      test_initialize_invalidAngle2();
+      test_initialize_valid();
+      test_getAltitude_initial(); 
+      test_getAltitude_valid();
+      test_getSpeed_initial(); 
+      test_getSpeed_valid();
+      test_getDistance_initial();
+      test_getSpeed_valid();
+      test_getHangTime_initial(); 
+      test_get_hangTime_valid();
    }
 
    void test_initialize_valid()
    {
       //setup
-      Artillery() artillery;
+      Position point0(0, 0);
       //exercise
+      Artillery artillery(point0, M_PI / 4);
       //verfify
+      assert(artillery.position.getMetersX == 0);
+      assert(artillery.position.getMetersY == 0);
+      assert(artillery.angle == M_PI / 4);
       //teardown
    }
 
-   void test_getAltitude_invalidTime()
+   void test_initialize_invalidPoint()
    {
       //setup
-      Artillery() artillery;
+      Position point0(-1, 0);
       //exercise
+      Artillery artillery(point0, M_PI / 4);
       //verfify
+      assert(artillery.position.getMetersX == 0);
+      assert(artillery.position.getMetersY == 0);
       //teardown
    }
 
-   void test_getAltitude_validTime()
+   void test_initialize_invalidAngle1()
    {
       //setup
-      Artillery() artillery;
+      Position point0(0, 0);
       //exercise
+      Artillery artillery(point0, M_PI);
       //verfify
+      assert(artillery.angle == 0.00);
       //teardown
    }
 
-   void test_getSpeed_invalidTime()
+   void test_initialize_invalidAngle2()
    {
       //setup
-      Artillery() artillery;
+      Position point0(-1, 1);
       //exercise
+      Artillery artillery(point0, -M_PI);
       //verfify
+      assert(artillery.angle == 0.00);
       //teardown
    }
 
-   void test_getSpeed_validTime()
+   void test_getAltitude_initial()
    {
       //setup
-      Artillery() artillery;
+      Position point0(0, 0);
+      Artillery artillery(point0, M_PI / 4);
       //exercise
+      double altitude = artillery.getAltitude();
       //verfify
+      assert(altitude == 0);
+      //teardown
+   }
+
+   void test_getAltitude_valid()
+   {
+      //setup
+      Position point0(0, 1000);
+      Artillery artillery(point0, M_PI / 4);
+      //exercise
+      double altitude = artillery.getAltitude();
+      //verfify
+      assert(altitude == 1000);
+      //teardown
+   }
+
+   void test_getSpeed_valid()
+   {
+      //setup
+      Position point0(0, 0);
+      Artillery artillery(point0, M_PI / 4);
+      artillery.velocity.setDx(300);
+      artillery.velocity.setDy(400);
+      //exercise
+      double speed = artillery.getSpeed();
+      //verfify
+      assert(speed == 500);
+      //teardown
+   }
+
+   void test_getSpeed_initial()
+   {
+      //setup
+      Position point0(0, 0);
+      Artillery artillery(point0, M_PI / 4);
+      //exercise
+      double speed = artillery.getSpeed();
+      //verfify
+      assert(speed == 0);
       //teardown
    }
 
    void test_getDistance_invalidTime()
    {
       //setup
-      Artillery() artillery;
+      Position point0(100, 0);
+      Artillery artillery(point0, M_PI / 4);
       //exercise
+      double distance = artillery.getDistance();
       //verfify
+      assert(distance == 100);
       //teardown
    }
 
-   void test_getDistance_validTime()
+   void test_getDistance_initial()
    {
       //setup
-      Artillery() artillery;
+      Position point0(0, 0);
+      Artillery artillery(point0, M_PI / 4);
       //exercise
+      double distance = artillery.getDistance();
       //verfify
+      assert(distance == 0);
       //teardown
    }
 
-   void test_getHangTime_invalidTime()
+   void test_getHangTime_valid()
    {
       //setup
-      Artillery() artillery;
+      Position point0(0, 0);
+      Artillery artillery(point0, M_PI / 4);
+      artillery.hangTime = 100;
       //exercise
+      double time = artillery.getHangTime();
       //verfify
+      assert(time == 100);
       //teardown
    }
 
-   void test_getHangTime_validTime()
+   void test_getHangTime_initial()
    {
       //setup
-      Artillery() artillery;
+      Position point0(0, 0);
+      Artillery artillery(point0, M_PI / 4);
       //exercise
+      double time = artillery.getHangTime();
       //verfify
+      assert (time == 0);
       //teardown
    }
 
 };
-
-/*********************************************************************************************
-test_initialize_invalidPoint     point = (-1, 1)                        ERROR: invalid point
-test_initialize_invalidVel       velocity = (1, 1)                      ERROR : starting velocity should be 0
-test_initialize_invalidTime      time = 10                              ERROR : starting hang time should be 0
-test_initialize_valid((150, 200), (800, 800), (0, 0), 0)  point = (150, 200) ScreenTopRight = (800, 800) velocity = (0, 0) time = 0
-test_getAltitude_invalidTime     at t = -1                              point.gety = 0
-test_getAltitude_validTime       at t = 10                              point.gety >= 0
-test_getSpeed_invalidTime        at t = -1                              velocity.getSpeed = 0
-test_getSpeed_validTime          at t = 10                              velocity.getSpeed >= 0
-test_getDistance_invalidTime     at t = -1                              point.getx = 0
-test_getDistance_validTime       at t = 10                              point.getx >= 0
-test_getHangTime_invalidTime     at t = -1                              time = 0
-test_getHangTime_validTime       at t = 10                              time >= 0
-*************************************************************************************************/
 
