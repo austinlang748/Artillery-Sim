@@ -35,6 +35,10 @@ public:
    double getPixelsX() const { return x / metersFromPixels; }
    double getPixelsY() const { return y / metersFromPixels; }
 
+   bool operator == (const Position& rhs) const;
+   bool operator != (const Position& rhs) const;
+
+
    // setters
    void setMetersX(double xMeters)  { this->x = xMeters; }
    void setMetersY(double yMeters)  { this->y = yMeters; }

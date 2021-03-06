@@ -75,8 +75,8 @@ public:
       Velocity vel1(100, 100);
       Velocity vel2(vel1);
       //verfify
-      assert(vel2.dx == vel1.dx == 100);
-      assert(vel2.dy == vel1.dy == 100);
+      assert(vel2.dx == 100 && vel1.dx == 100);
+      assert(vel2.dy == 100 && vel1.dy == 100);
       //teardown
    }
 
@@ -143,7 +143,7 @@ public:
    {
       //setup
       Velocity vel;
-      vel.dy == 100;
+      vel.dy = 100;
       //exercise
       vel.setDy(200);
       //verfify
