@@ -2,6 +2,29 @@
     "files.associations": {
         "*.csv": "csv",
         "*.md": "markdown",
-        "unordered_map": "cpp"
+        "unordered_map": "cpp",
+        "string": "cpp",
+        "__bit_reference": "cpp",
+        "__functional_03": "cpp",
+        "__hash_table": "cpp",
+        "__mutex_base": "cpp",
+        "__node_handle": "cpp",
+        "__tuple": "cpp",
+        "atomic": "cpp",
+        "complex": "cpp",
+        "iterator": "cpp",
+        "memory_resource": "cpp",
+        "functional": "cpp",
+        "istream": "cpp",
+        "memory": "cpp",
+        "optional": "cpp",
+        "ostream": "cpp",
+        "sstream": "cpp",
+        "streambuf": "cpp",
+        "string_view": "cpp",
+        "system_error": "cpp",
+        "tuple": "cpp",
+        "utility": "cpp",
+        "vector": "cpp"
     }
 }
