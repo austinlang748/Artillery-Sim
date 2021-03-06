@@ -26,16 +26,18 @@ public:
    Velocity& operator = (const Velocity& v);
 
    // getters
-   double getDx()    const { return dx; }
-   double getDy()    const { return dy; }
-   double getSpeed() const { return mag(dx, dy); }
-
-   bool operator == (const Velocity & rhs) const;
-   bool operator != (const Velocity & rhs) const;
-
-   // setters
-   void setDx(double dx) { this.dx = dx; }
-   void setDy(double dy) { this.dy = dy; }
+   double getDx();
+   double getDy();
+   double getSpeed();
+   
+   bool operator == (const Velocity & rhs) const {
+      return dx == rhs.dx && dy == rhs.dy;
+   }
+   
+   bool operator != (const Velocity & rhs) const {
+      return dx != rhs.dx || dy != rhs.dy;
+   }
+};
 
    void set(const Velocity &v);
    void set(double dx, double dy);
