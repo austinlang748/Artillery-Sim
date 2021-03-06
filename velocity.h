@@ -1,5 +1,5 @@
 //
-//  velocity.hpp
+//  velocity.h
 //  Lab08
 //
 //  Created by Elijah Harrison on 3/6/21.
@@ -301,7 +301,7 @@ double getAccelerationY(double gravity, double dragF, double angle)
 }
 
 
-int main()
+int oldmain()
 {
    // // prompt for initial angle
    // double angle_0 = promptFloat("What is the angle of the howitzer where 0 is up? (degrees)");
@@ -366,14 +366,6 @@ int main()
       dy               += ddy;
       y                += dy;
    }
-
-   // distance
-   cout.setf(ios::fixed);
-   cout.precision(2);
-   cout << "Distance:" << setw(12) << x << "m" << setw(18);
-
-   // total hang time
-   cout << "Hang Time: " << setw(10) << t << "s\n";
 
    return 0;
 }

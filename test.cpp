@@ -9,6 +9,9 @@
 
 #include "test.h"
 #include "testPosition.h"
+#include "testVelocity.h"
+#include "testHowitzer.h"
+#include "testArtillery.h"
 
 /*****************************************************************
  * TEST RUNNER
@@ -17,6 +20,9 @@
 void testRunner()
 {
    TestPosition().run();
+   TestVelocity().run(); 
+   TestHowitzer().run();
+   TestArtillery().run();
 }
 
 
