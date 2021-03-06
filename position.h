@@ -36,6 +36,7 @@ public:
    // setters
    void setMetersX(double xMeters)  { this->x = xMeters; }
    void setMetersY(double yMeters)  { this->y = yMeters; }
+   void addMeters(Velocity v)       { addMetersX(v.getDx()); addMetersY(v.getDy()); }
    void addMetersX(double dxMeters) { setMetersX(getMetersX() + dxMeters); }
    void addMetersY(double dyMeters) { setMetersY(getMetersY() + dyMeters); }
    void setPixelsX(double xPixels)  { this->x = xPixels * metersFromPixels;   }

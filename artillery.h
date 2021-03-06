@@ -20,118 +20,125 @@ private:
    static const double artilleryDiameterMm = 154.89;  // mm
    static double getArtilleryDiameter() { return artilleryDiameterMm / 1000; } // m
 
-   double      angle;
-   double      speed;
    Position    position;
    Velocity    velocity;
+   Velocity    acceleration;
+   double      angle;
+   double      speed;
+   double      artilleryRadius;
+   double      g;       // gravity
+   double      c;       // drag constant
+   double      p;       // air density
+   double      a;       // surface area of artillery
+   double      dragF;   // drag force
 
 public:
    
-//    // constructor
-//    Artillery(Position position_0, double angle_0) : 
-//       angle       (angle_0),
-//       position    (position_0)
-//    {
+   // constructor
+   Artillery(Position position_0, double angle_0) : 
+      angle       (angle_0),
+      position    (position_0)
+   {
       
-//       // initialize angle/speed
-//       angle = 90 - angle;
-//       speed = artilleryV0;
+      // initialize angle/speed
+      angle = 90 - angle;
+      speed = artilleryV0;
 
-//       // initialize velocity
-//       velocity = Velocity(
-//          Trig.horizontalComponent(speed, angle),
-//          Trig.verticalComponenet(speed, angle)
-//       );
+      // initialize velocity
+      velocity = Velocity(
+         Trig.horizontalComponent(speed, angle),
+         Trig.verticalComponenet(speed, angle)
+      );
 
-//       // initialize gravity
-//       double g = altitudeToGravity(position.getPixelsY());
+      // initialize gravity
+      g = altitudeToGravity(position.getMetersY());
 
-//       // initialize drag
-//       double c = machToDragCoefficient(speed);
-//       double p = altitudeToDensity(y);
-//       double artilleryRadius = getArtilleryDiameter() * .5;
-//       double a = circleArea(artilleryRadius);
-//       double dragF = dragForce(c, p, speed, a);
+      // initialize drag
+      c = machToDragCoefficient(speed);
+      p = altitudeToDensity(position.getMetersY());
+      artilleryRadius = getArtilleryDiameter() * .5;
+      a = circleArea(artilleryRadius);
+      dragF = dragForce(c, p, speed, a);
 
-//       // initialize acceleration
-//       double ddx = getAccelerationX(dragF, angle);
-//       double ddy = getAccelerationY(g, dragF, angle);
-// }
+      // initialize acceleration
+      acceleration = Velocity(
+         getAccelerationX(dragF, angle),
+         getAccelerationY(g, dragF, angle)
+      );      
+}
 
-//    void update() {
-//       // update angle/speed/velocity
-//       angle = Trig.deg(Trig.cartesianToAngle(dx, dy));
-//       speed = Trig.mag(dx, dy);
-//       dx = Trig.horizontalComponent(speed, angle);
-//       dy = Trig.verticalComponent(speed, angle);
+   void update() {
+      // update angle/speed/velocity
+      angle = Trig.deg(Trig.cartesianToAngle(v.dx, v.dy));
+      speed = v.getSpeed();
 
-//       // update gravity
-//       g = -altitudeToGravity(y);
+      // update gravity
+      g = -altitudeToGravity(position.getMetersY());
 
-//       // update drag
-//       c = machToDragCoefficient(speed);
-//       p = altitudeToDensity(y);
-//       artilleryRadius = getArtilleryDiameter() * .5;
-//       a = circleArea(artilleryRadius);
-//       dragF = dragForce(c, p, speed, a);
+      // update drag
+      c = machToDragCoefficient(speed);
+      p = altitudeToDensity(position.getMetersY());
+      artilleryRadius = getArtilleryDiameter() * .5;
+      a = circleArea(artilleryRadius);
+      dragF = dragForce(c, p, speed, a);
 
-//       // update x
-//       ddx = getAccelerationX(dragF, angle);
-//       dx += ddx;
-//       x += dx;
+      // update acceleration
+      acceleration.set(
+         getAccelerationX(dragF, angle),
+         getAccelerationY(g, dragF, angle)
+      );
 
-//       // update y
-//       ddy = getAccelerationY(g, dragF, angle);
-//       dy += ddy;
-//       y += dy;
-//    }
+      // update position
+      velocity.add(acceleration);
+      position.add(velocity);
+   }
 
-//    static double dragForce(double c, double p, double v, double a)
-//    {
-//       /************************************
-//        * d = ½ c ρ v² a
-//        * =================================
-//        * d = force in newtons (N)
-//        * c = drag coefficient
-//        * ρ = density of the fluid/gas
-//        * v = velocity of the projectile
-//        * a = surface area
-//        ************************************/
-//       return 0.5 * c * p * v * v * a;
-//    }
+   static double dragForce(double c, double p, double v, double a)
+   {
+      /************************************
+       * d = ½ c ρ v² a
+       * =================================
+       * d = force in newtons (N)
+       * c = drag coefficient
+       * ρ = density of the fluid/gas
+       * v = velocity of the projectile
+       * a = surface area
+       ************************************/
+      return 0.5 * c * p * v * v * a;
+   }
 
-//    static double circleArea(double radius)
-//    {
-//       /************************************
-//        * a = π r²
-//        * =================================
-//        * a = area of the circle (m²)
-//        * r = radius of the circle
-//        ************************************/
-//       return M_PI * radius * radius;
-//    }
+   static double circleArea(double radius)
+   {
+      /************************************
+       * a = π r²
+       * =================================
+       * a = area of the circle (m²)
+       * r = radius of the circle
+       ************************************/
+      return M_PI * radius * radius;
+   }
 
-//    static double getForce(double mass, double acceleration)
-//    {
-//       /************************************
-//        * f = m a
-//        * =================================
-//        * f = force in newtons (N)
-//        * m = mass in kilograms (kg)
-//        * a = acceleration (m/s²)
-//        ************************************/
-//       return mass * acceleration;
-//    }
+   static double getForce(double mass, double acceleration)
+   {
+      /************************************
+       * f = m a
+       * =================================
+       * f = force in newtons (N)
+       * m = mass in kilograms (kg)
+       * a = acceleration (m/s²)
+       ************************************/
+      return mass * acceleration;
+   }
 
-//    static double getAccelerationX(double dragF, double angle)
-//    {
-//       return -(Trig.horizontalComponent(dragF, angle) / artilleryMass);
-//    }
+   static double getAccelerationX(double dragF, double angle)
+   {
+      return -(Trig.horizontalComponent(dragF, angle) / artilleryMass);
+   }
 
-//    static double getAccelerationY(double gravity, double dragF, double angle)
-//    {
-//       return -Trig.verticalComponent(dragF, angle) / artilleryMass + gravity;
-//    }
+   static double getAccelerationY(double gravity, double dragF, double angle)
+   {
+      return -(Trig.verticalComponent(dragF, angle) / artilleryMass + gravity);
+   }
 
 
 };
@@ -318,15 +325,4 @@ double altitudeToGravity(double altitude)
 
    if (altitude > altToGravTable[13].altitude) return altToGravTable[13].gravity;
    return altToGravTable[0].gravity;
-}
-
-
-int oldmain()
-{
-   // // prompt for initial angle
-   // double angle_0 = promptFloat("What is the angle of the howitzer where 0 is up? (degrees)");
-   
-   }
-
-   return 0;
 }
