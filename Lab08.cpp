@@ -15,6 +15,7 @@
 #include "uiInteract.h" // for INTERFACE
 #include "uiDraw.h"     // for RANDOM and DRAW*
 #include "ground.h"     // for GROUND
+#include "howitzer.h"   // for HOWITZER
 #include "position.h"   // for POINT
 #include "test.h"       // include unit test class
 using namespace std;
@@ -25,20 +26,29 @@ using namespace std;
  *************************************************************************/
 class Demo
 {
+private:
+   Ground   ground;        // the ground
+   Position ptUpperRight;  // size of the screen
+   Howitzer howitzer;      // howitzer cannon object
+
 public:
+
    Demo(Position ptUpperRight) :
       ptUpperRight(ptUpperRight),
-      ground(ptUpperRight),
-      time(0.0),
-      angle(0.0)
+      ground(ptUpperRight)
    {
-      ptHowitzer.setPixelsX(Position(ptUpperRight).getPixelsX() / 2.0);
-      ground.reset(ptHowitzer);
+      howitzer.setPosition(Position(
+         ptUpperRight.getPixelsX() * 0.5,
+         ground.getElevationMeters(Position(ptUpperRight.getPixelsX() * 0.5, 0.0))
+      ));
+
+      howitzer.getPosition().setPixelsX(Position(ptUpperRight).getPixelsX() / 2.0);
+      ground.reset(howitzer.getPosition());
       for (int i = 0; i < 20; i++)
-      {
-         projectilePath[i].setPixelsX((double)i * 2.0);
-         projectilePath[i].setPixelsY(ptUpperRight.getPixelsY() / 1.5);
-      }
+         howitzer.setProjectilePathAt(i, Position(
+            (double)i * 2.0,
+            ptUpperRight.getPixelsY()/1.5
+         ));
    }
    
    void update() {
@@ -63,11 +73,11 @@ public:
       ground.draw(gout);
 
       // draw the howitzer
-      gout.drawHowitzer(ptHowitzer, angle, time);
+      gout.drawHowitzer(howitzer.getPosition(), howitzer.getAngle(), howitzer.getTime());
 
       // draw the projectile
       for (int i = 0; i < 20; i++)
-         gout.drawProjectile(projectilePath[i], 0.5 * (double)i);
+         gout.drawProjectile(howitzer.getProjectilePath(i), 0.5 * (double)i);
 
       // draw some text on the screen
       gout.setf(ios::fixed | ios::showpoint);
@@ -100,13 +110,6 @@ public:
       if (pUI->getHeldKey(Q))
          exit(0);
    }
-
-   Ground ground;                 // the ground
-   Position  projectilePath[20];  // path of the projectile
-   Position  ptHowitzer;          // location of the howitzer
-   Position  ptUpperRight;        // size of the screen
-   double angle;                  // angle of the howitzer 
-   double time;                   // amount of time since the last firing
 };
 
 /*************************************

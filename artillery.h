@@ -28,7 +28,7 @@ private:
    Velocity    acceleration;
    double      hangTime;
    double      initialPositionX;
-   double      angle;
+   double      angleDegrees;
    double      speed;
    double      artilleryRadius;
    double      g;       // gravity
@@ -52,41 +52,41 @@ public:
     * param: position_0 : Position
     * param: angle_0    : double
     *************************************************/
-   Artillery(Position position_0, double angle_0) : 
+   Artillery(Position position_0, double angle_0) {
       // initialize angle/speed
-      angle             (90 - angle_0),
-      speed             (artilleryV0),
-
+      angleDegrees = 90 - angle_0;
+      speed = artilleryV0;
+      
       // initialize position
-      position          (position_0),
-      initialPositionX  (position_0.getMetersX()),
-
-      // initialize veloicty
-      velocity (Velocity(
-         Trig::horizontalComponent(speed, angle),
-         Trig::verticalComponent(speed, angle)
-      )),
-
+      position = position_0;
+      initialPositionX = position_0.getMetersX();
+      
+      // initialize velocity
+      velocity = Velocity(
+          Trig::horizontalComponent(speed, angleDegrees),
+          Trig::verticalComponent(speed, angleDegrees)
+      );
+      
       // initialize gravity
-      g                 (altitudeToGravity(position.getMetersY())),
-
+      g = altitudeToGravity(position.getMetersY());
+      
       // initialize drag
-      c                 (machToDragCoefficient(speed)),
-      p                 (altitudeToDensity(position.getMetersY())),
-      artilleryRadius   (getArtilleryDiameter() * .5),
-      a                 (circleArea(artilleryRadius)),
-      dragF             (dragForce(c, p, speed, a)),
-
+      c = machToDragCoefficient(speed);
+      p = altitudeToDensity(position.getMetersY());
+      artilleryRadius = getArtilleryDiameter() * .5;
+      a = circleArea(artilleryRadius);
+      dragF = dragForce(c, p, speed, a);
+      
       // initialize acceleration
-      acceleration      (Velocity(
-         getAccelerationX(dragF, angle),
-         getAccelerationY(g, dragF, angle)
-      ))
-   { }
+      acceleration = Velocity(
+         Trig::horizontalComponent(speed, angleDegrees),
+         Trig::verticalComponent(speed, angleDegrees)
+      );
+   }
 
    void update() {
       // update angle/speed/velocity
-      angle = Trig::deg(Trig::cartesianToAngle(velocity.getDx(), velocity.getDy()));
+      angleDegrees = Trig::deg(Trig::cartesianToAngle(velocity.getDx(), velocity.getDy()));
       speed = velocity.getSpeed();
 
       // update gravity
@@ -101,8 +101,8 @@ public:
 
       // update acceleration
       acceleration.set(
-         getAccelerationX(dragF, angle),
-         getAccelerationY(g, dragF, angle)
+         getAccelerationX(dragF, angleDegrees),
+         getAccelerationY(g, dragF, angleDegrees)
       );
 
       // update position

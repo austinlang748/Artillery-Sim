@@ -55,3 +55,21 @@ std::istream& operator >> (std::istream& in, Position& pos)
 
    return in;
 }
+
+/*******************************************
+ * POSITION : comparison operator
+ * param: rhs:Position
+ * return bool: is equivalent
+ ******************************************/
+bool Position::operator == (const Position & rhs) const {
+    return x == rhs.getX() && y == rhs.getY();
+}
+
+/*******************************************
+ * POSITION : not comparison operator
+ * param: rhs:Position
+ * return bool: is not equivalent
+ ******************************************/
+bool Position::operator != (const Position & rhs) const {
+    return x != rhs.getX() || y != rhs.getY();
+}
