@@ -7,26 +7,139 @@
 
 #pragma once
 
+#include "position.h"
+#include "velocity.h"
+#include <cmath>
+using namespace std;
+
 class Artillery
 {
+private:
+   static const double artilleryV0 = 827.0;           // m/s
+   static const double artilleryMass = 46.7;          // kg
+   static const double artilleryDiameterMm = 154.89;  // mm
+   static double getArtilleryDiameter() { return artilleryDiameterMm / 1000; } // m
+
+   double      angle;
+   double      speed;
+   Position    position;
+   Velocity    velocity;
+
+public:
+   
+//    // constructor
+//    Artillery(Position position_0, double angle_0) : 
+//       angle       (angle_0),
+//       position    (position_0)
+//    {
+      
+//       // initialize angle/speed
+//       angle = 90 - angle;
+//       speed = artilleryV0;
+
+//       // initialize velocity
+//       velocity = Velocity(
+//          Trig.horizontalComponent(speed, angle),
+//          Trig.verticalComponenet(speed, angle)
+//       );
+
+//       // initialize gravity
+//       double g = altitudeToGravity(position.getPixelsY());
+
+//       // initialize drag
+//       double c = machToDragCoefficient(speed);
+//       double p = altitudeToDensity(y);
+//       double artilleryRadius = getArtilleryDiameter() * .5;
+//       double a = circleArea(artilleryRadius);
+//       double dragF = dragForce(c, p, speed, a);
+
+//       // initialize acceleration
+//       double ddx = getAccelerationX(dragF, angle);
+//       double ddy = getAccelerationY(g, dragF, angle);
+// }
+
+//    void update() {
+//       // update angle/speed/velocity
+//       angle = Trig.deg(Trig.cartesianToAngle(dx, dy));
+//       speed = Trig.mag(dx, dy);
+//       dx = Trig.horizontalComponent(speed, angle);
+//       dy = Trig.verticalComponent(speed, angle);
+
+//       // update gravity
+//       g = -altitudeToGravity(y);
+
+//       // update drag
+//       c = machToDragCoefficient(speed);
+//       p = altitudeToDensity(y);
+//       artilleryRadius = getArtilleryDiameter() * .5;
+//       a = circleArea(artilleryRadius);
+//       dragF = dragForce(c, p, speed, a);
+
+//       // update x
+//       ddx = getAccelerationX(dragF, angle);
+//       dx += ddx;
+//       x += dx;
+
+//       // update y
+//       ddy = getAccelerationY(g, dragF, angle);
+//       dy += ddy;
+//       y += dy;
+//    }
+
+//    static double dragForce(double c, double p, double v, double a)
+//    {
+//       /************************************
+//        * d = ½ c ρ v² a
+//        * =================================
+//        * d = force in newtons (N)
+//        * c = drag coefficient
+//        * ρ = density of the fluid/gas
+//        * v = velocity of the projectile
+//        * a = surface area
+//        ************************************/
+//       return 0.5 * c * p * v * v * a;
+//    }
+
+//    static double circleArea(double radius)
+//    {
+//       /************************************
+//        * a = π r²
+//        * =================================
+//        * a = area of the circle (m²)
+//        * r = radius of the circle
+//        ************************************/
+//       return M_PI * radius * radius;
+//    }
+
+//    static double getForce(double mass, double acceleration)
+//    {
+//       /************************************
+//        * f = m a
+//        * =================================
+//        * f = force in newtons (N)
+//        * m = mass in kilograms (kg)
+//        * a = acceleration (m/s²)
+//        ************************************/
+//       return mass * acceleration;
+//    }
+
+//    static double getAccelerationX(double dragF, double angle)
+//    {
+//       return -(Trig.horizontalComponent(dragF, angle) / artilleryMass);
+//    }
+
+//    static double getAccelerationY(double gravity, double dragF, double angle)
+//    {
+//       return -Trig.verticalComponent(dragF, angle) / artilleryMass + gravity;
+//    }
+
 
 };
 
-// contents of old file
-#include <iostream>
-#include "velocity.h"
-#include <cassert>
-using namespace std;
+class Tables
+{
 
-#ifndef M_PI              // Define M_PI
-#define M_PI 3.14159265358979323846
-#endif
-
-// projectile motion constants
-const double artilleryV0 = 827.0;    // m/s
-const double artilleryMass = 46.7;     // kg
-const double artilleryDiameterMm = 154.89;   // mm
-double getArtilleryDiameter() { return artilleryDiameterMm / 1000; } // m
+};
 
 typedef struct conversionTable1 {
    double mach;
@@ -208,140 +321,11 @@ double altitudeToGravity(double altitude)
 }
 
 
-// functions for quick geometric calculations:
-double deg(double angleRadians) { return 180 * angleRadians / M_PI; }
-double rad(double angleDegrees) { return M_PI * angleDegrees / 180; }
-double mag(double x, double y) { return sqrt(x * x + y * y); }
-
-double cartesianToAngle(double x, double y)
-{
-   return atan2(y, x);
-}
-
-double verticalComponent(double magnitude, double angleDegrees)
-{
-   return magnitude * sin(rad(angleDegrees));
-}
-
-double horizontalComponent(double magnitude, double angleDegrees)
-{
-   return magnitude * cos(rad(angleDegrees));
-}
-
-double dragForce(double c, double p, double v, double a)
-{
-   /************************************
-    * d = ½ c ρ v² a
-    * =================================
-    * d = force in newtons (N)
-    * c = drag coefficient
-    * ρ = density of the fluid/gas
-    * v = velocity of the projectile
-    * a = surface area
-    ************************************/
-   return 0.5 * c * p * v * v * a;
-}
-
-double circleArea(double radius)
-{
-   /************************************
-    * a = π r²
-    * =================================
-    * a = area of the circle (m²)
-    * r = radius of the circle
-    ************************************/
-   return M_PI * radius * radius;
-}
-
-double getForce(double mass, double acceleration)
-{
-   /************************************
-    * f = m a
-    * =================================
-    * f = force in newtons (N)
-    * m = mass in kilograms (kg)
-    * a = acceleration (m/s²)
-    ************************************/
-   return mass * acceleration;
-}
-
-double max(double a, double b) { return (a > b ? a : b); }
-
-double getAccelerationX(double dragF, double angle)
-{
-   return -horizontalComponent(dragF, angle) / artilleryMass;
-}
-
-double getAccelerationY(double gravity, double dragF, double angle)
-{
-   return -verticalComponent(dragF, angle) / artilleryMass + gravity;
-}
-
-
 int oldmain()
 {
    // // prompt for initial angle
    // double angle_0 = promptFloat("What is the angle of the howitzer where 0 is up? (degrees)");
-   double angle_0 = 0.0;
-
-   // initialize angle/speed
-   double angle = 90 - angle_0;
-   double speed = artilleryV0;
-
-   // initialize position
-   double x = 0;
-   double y = 0;
-
-   // initialize velocity
-   double dx = horizontalComponent(speed, angle);
-   double dy = verticalComponent(speed, angle);
-
-   // initialize gravity
-   double g = altitudeToGravity(y);
-
-   // initialize drag
-   double c = machToDragCoefficient(speed);
-   double p = altitudeToDensity(y);
-   double artilleryRadius = getArtilleryDiameter() * .5;
-   double a = circleArea(artilleryRadius);
-   double dragF = dragForce(c, p, speed, a);
-
-   // initialize acceleration
-   double ddx = getAccelerationX(dragF, angle);
-   double ddy = getAccelerationY(g, dragF, angle);
-
-   // set up loop
-   double t = 0.0;
-   while (y >= 0)
-   {
-      // Increment by 0.5
-      t += 0.5;
-
-      // update angle/speed/velocity
-      angle = deg(cartesianToAngle(dx, dy));
-      speed = mag(dx, dy);
-      dx = horizontalComponent(speed, angle);
-      dy = verticalComponent(speed, angle);
-
-      // update gravity
-      g = -altitudeToGravity(y);
-
-      // update drag
-      c = machToDragCoefficient(speed);
-      p = altitudeToDensity(y);
-      artilleryRadius = getArtilleryDiameter() * .5;
-      a = circleArea(artilleryRadius);
-      dragF = dragForce(c, p, speed, a);
-
-      // update x
-      ddx = getAccelerationX(dragF, angle);
-      dx += ddx;
-      x += dx;
-
-      // update y
-      ddy = getAccelerationY(g, dragF, angle);
-      dy += ddy;
-      y += dy;
+   
    }
 
    return 0;

@@ -13,8 +13,7 @@
 *****************************************/
 Velocity::Velocity(double dx_init, double dy_init) : dx(0.0), dy(0.0)
 {
-   setDx(dx);
-   setDy(dy);
+   set(dx, dy);
 }
 
 /******************************************
@@ -23,8 +22,7 @@ Velocity::Velocity(double dx_init, double dy_init) : dx(0.0), dy(0.0)
  *****************************************/
 Velocity& Velocity::operator = (const Velocity& v)
 {
-   dx = v.dx;
-   dy = v.dy;
+   set(v);
    return *this;
 }
 
@@ -52,4 +50,76 @@ std::istream& operator >> (std::istream& in, Velocity& v)
    pos.setDy(dy);
 
    return in;
+}
+
+/*******************************************
+ * VELOCITY comparison operators
+ ******************************************/
+
+/*******************************************
+ * VELOCITY : comparison operator
+ * param: rhs:Velocity
+ * return bool: is equivalent
+ ******************************************/
+bool Velocity::operator == (const Velocity & rhs) const {
+    return dx == rhs.dx && dy == rhs.dy;
+}
+
+/*******************************************
+ * VELOCITY : not comparison operator
+ * param: rhs:Velocity
+ * return bool: is not equivalent
+ ******************************************/
+bool Velocity::operator != (const Velocity & rhs) const {
+    return dx != rhs.dx || dy != rhs.dy;
+}
+
+/*******************************************
+ * VELOICTY SETTERS
+ ******************************************/
+
+/*******************************************
+ * VELOCITY : set
+ * param: v:Velocity
+ ******************************************/
+void set(const Velocity &v) {
+    set(v.getDx(), v.getDy());
+}
+
+/*******************************************
+ * VELOCITY : set
+ * param: dx:double
+ * param: dy:double
+ ******************************************/
+void set(double dx, double dy) {
+    setDx(dx);
+    setDy(dy);
+}
+
+
+/**
+ * VELOCITY : ADDERS
+ ***/
+
+/**
+ * VELOCITY : add
+ ***/
+void Velocity::add(Velocity a) {
+    add(a.getDx(), a.getDy());
+}
+
+/**
+ * VELOCITY : add
+ ***/
+void Velocity::add(double ddx, double ddy) {
+    addDx(ddx);
+    addDy(ddy);
+}
+
+/**
+ * VELOCITY : add magnitude
+ ***/
+void Velocity::addMagnitude(double angleRadians, double magnitude) {
+    addDx(Trig.horizontalComponent(  magnitude, Trig.deg(angleRadians)));
+    addDx(Trig.verticalComponent(    magnitude, Trig.deg(angleRadians)));
 }
