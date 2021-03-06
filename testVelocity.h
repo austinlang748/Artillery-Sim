@@ -24,7 +24,8 @@ public:
          test_setDx_valid();           
          test_setDy_invalid();           
          test_setDy_valid();           
-         test_set_invalid();           
+         test_set_invalidDy(); 
+         test_set_invalidDx();
          test_set_valid();           
          test_addDx_invalid();           
          test_addDx_valid();           
@@ -37,116 +38,162 @@ public:
    }
 
    void test_setDx_invalid()
-      {
-         //setup
-         //exercise
-         //verfify
-         //teardown
-      }
+   {
+      //setup
+      Velocity vel;
+      vel.dx = 100;
+      //exercise
+      vel.setDx("string");
+      //verfify
+      assert(vel.dx == 100)
+      //teardown
+   }
 
    void test_setDx_valid()
-      {
-         //setup
-         //exercise
-         //verfify
-         //teardown
+   {
+      //setup
+      Velocity vel;
+      vel.dx = 100;
+      //exercise
+      vel.setDx(200);
+      //verfify
+      assert(vel.dx == 200)
+      //teardown
       }
 
    void test_setDy_invalid()
-      {
-         //setup
-         //exercise
-         //verfify
-         //teardown
-      }
+   {
+      //setup
+      Velocity vel;
+      vel.dy = 100;
+      //exercise
+      vel.setDy("string");
+      //verfify
+      assert(vel.dy == 100);
+      //teardown
+   }
 
    void test_setDy_valid()
-      {
-         //setup
-         //exercise
-         //verfify
-         //teardown
-      }
+   {
+      //setup
+      Velocity vel;
+      vel.dy == 100;
+      //exercise
+      vel.setDy(200);
+      //verfify
+      assert(vel.dy == 200);
+      //teardown
+   }
 
-   void test_set_invalid()
-      {
-         //setup
-         //exercise
-         //verfify
-         //teardown
-      }
+   void test_set_invalidDy()
+   {
+      //setup
+      Velocity vel;
+      vel.dx = 100;
+      vel.dy = 100;
+      //exercise
+      vel.set(200, "string");
+      //verfify
+      assert(vel.dx == 200);
+      assert(vel.dy == 100);
+      //teardown
+   }
+
+   void test_set_invalidDx()
+   {
+      //setup
+      Velocity vel;
+      vel.dx = 100;
+      vel.dy = 100;
+      //exercise
+      vel.set("string", 200);
+      //verfify
+      assert(vel.dx == 100);
+      assert(vel.dy == 200);
+      //teardown
+   }
 
    void test_set_valid()
-      {
-         //setup
-         //exercise
-         //verfify
-         //teardown
-      }
+   {
+      //setup
+      Velocity vel;
+      vel.dx = 100;
+      vel.dy = 100;
+      //exercise
+      vel.set(200, 200);
+      //verfify
+      assert(vel.dx == 200);
+      assert(vel.dy == 200);
+      //teardown
+   }
 
    void test_addDx_invalid()
-      {
-         //setup
-         //exercise
-         //verfify
-         //teardown
-      }
+   {
+      //setup
+      Velocity vel;
+      vel.dx = 100;
+      //exercise
+      vel.addDx(50);
+      //verfify
+      assert(vel.dx == 150);
+      //teardown
+   }
 
    void test_addDx_valid()
-      {
-         //setup
-         //exercise
-         //verfify
-         //teardown
-      }
+   {
+      //setup
+      //exercise
+      //verfify
+      //teardown
+   }
 
    void test_addDy_invalid()
-      {
-         //setup
-         //exercise
-         //verfify
-         //teardown
-      }
+   {
+      //setup
+      //exercise
+      //verfify
+      //teardown
+   }
 
    void test_addDy_valid()
-      {
-         //setup
-         //exercise
-         //verfify
-         //teardown
-      }
+   {
+      //setup
+      //exercise
+      //verfify
+      //teardown
+   }
 
    void test_add_invalid()
-      {
-         //setup
-         //exercise
-         //verfify
-         //teardown
-      }
+   {
+      //setup
+      //exercise
+      //verfify
+      //teardown
+   }
 
    void test_add_valid()
-      {
-         //setup
-         //exercise
-         //verfify
-         //teardown
-      }
+   {
+      //setup
+      //exercise
+      //verfify
+      //teardown
+   }
 
    void test_addMagnitude_invalid()
-      {
-         //setup
-         //exercise
-         //verfify
-         //teardown
-      }
+   {
+      //setup
+      //exercise
+      //verfify
+      //teardown
+   }
 
    void test_addMagnitude_valid()
-      {
-         //setup
-         //exercise
-         //verfify
-         //teardown
-      }
+   {
+      //setup
+      //exercise
+      //verfify
+      //teardown
+   }
    
 };
 
