@@ -280,8 +280,9 @@ double getAccelerationY(double gravity, double dragF, double angle)
 
 int main()
 {
-   // prompt for initial angle
-   double angle_0 = promptFloat("What is the angle of the howitzer where 0 is up? (degrees)");
+   // // prompt for initial angle
+   // double angle_0 = promptFloat("What is the angle of the howitzer where 0 is up? (degrees)");
+   double angle_0 = 0.0;
 
    // initialize angle/speed
    double angle            = 90 - angle_0;
