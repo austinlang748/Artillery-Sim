@@ -2,7 +2,7 @@
  * Header File:
  *    Test Velocity : Test the Velocity class
  * Authors:
- *    Elijah Harrison and Austin Hilderbrand
+ *    Austin Hilderbrand
  * Summary:
  *    All the unit tests for Velocity
  ************************************************************************/
@@ -21,7 +21,11 @@ class TestVelocity
 public:
    void run()
    {
-
+      test_constructorDefault();
+      test_constructorNotDefault1();
+      test_constructorNotDefault2();
+      test_constructorNotDefault1_invalid();
+      test_constructorNotDefault2_invalid();
       test_setDx_invalid();           
       test_setDx_valid();           
       test_setDy_invalid();           
@@ -42,6 +46,63 @@ public:
       test_addMagnitude_valid();           
    }
 
+   void test_constructorDefault()
+   {
+      //setup
+      //exercise
+      Velocity vel;
+      //verfify
+      assert(vel.dx == 0.00);
+      assert(vel.dy == 0.00);
+      //teardown
+   }
+
+   void test_constructorNotDefault1()
+   {
+      //setup
+      //exercise
+      Velocity vel(100, 100);
+      //verfify
+      assert(vel.dx == 100);
+      assert(vel.dy == 100);
+      //teardown
+   }
+
+   void test_constructorNotDefault2()
+   {
+      //setup
+      //exercise
+      Velocity vel1(100, 100);
+      Velocity vel2(vel1);
+      //verfify
+      assert(vel2.dx == vel1.dx == 100);
+      assert(vel2.dy == vel1.dy == 100);
+      //teardown
+   }
+
+   void test_constructorNotDefault1_invalid()
+   {
+      //setup
+      //exercise
+      Velocity vel("string", 100);
+      //verfify
+      assert(vel.dx == 0);
+      assert(vel.dy == 100);
+      //teardown
+   }
+
+   void test_constructorNotDefault2_invalid()
+   {
+      //setup
+      //exercise
+      Velocity vel1("string", 100);
+      Velocity vel2(vel1);
+      //verfify
+      assert(vel2.dx == vel1.dx == 0);
+      assert(vel2.dy == vel1.dy == 100);
+      //teardown
+   }
+
    void test_setDx_invalid()
    {
       //setup
@@ -50,7 +111,7 @@ public:
       //exercise
       vel.setDx("string");
       //verfify
-      assert(vel.dx == 100)
+      assert(vel.dx == 100);
       //teardown
    }
 

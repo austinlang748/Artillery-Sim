@@ -37,6 +37,7 @@ public:
    void test_initialize_invalidPoint()
    {
       //setup
+      Artillery() artillery;
       //exercise
       //verfify
       //teardown
@@ -45,6 +46,7 @@ public:
    void test_initialize_invalidVel()
    {
       //setup
+      Artillery() artillery;
       //exercise
       //verfify
       //teardown
@@ -53,6 +55,7 @@ public:
    void test_initialize_invalidTime()
    {
       //setup
+      Artillery() artillery;
       //exercise
       //verfify
       //teardown
@@ -61,6 +64,7 @@ public:
    void test_initialize_valid()
    {
       //setup
+      Artillery() artillery;
       //exercise
       //verfify
       //teardown
@@ -69,6 +73,7 @@ public:
    void test_getAltitude_invalidTime()
    {
       //setup
+      Artillery() artillery;
       //exercise
       //verfify
       //teardown
@@ -77,6 +82,7 @@ public:
    void test_getAltitude_validTime()
    {
       //setup
+      Artillery() artillery;
       //exercise
       //verfify
       //teardown
@@ -85,6 +91,7 @@ public:
    void test_getSpeed_invalidTime()
    {
       //setup
+      Artillery() artillery;
       //exercise
       //verfify
       //teardown
@@ -93,6 +100,7 @@ public:
    void test_getSpeed_validTime()
    {
       //setup
+      Artillery() artillery;
       //exercise
       //verfify
       //teardown
@@ -101,6 +109,7 @@ public:
    void test_getDistance_invalidTime()
    {
       //setup
+      Artillery() artillery;
       //exercise
       //verfify
       //teardown
@@ -109,6 +118,7 @@ public:
    void test_getDistance_validTime()
    {
       //setup
+      Artillery() artillery;
       //exercise
       //verfify
       //teardown
@@ -117,6 +127,7 @@ public:
    void test_getHangTime_invalidTime()
    {
       //setup
+      Artillery() artillery;
       //exercise
       //verfify
       //teardown
@@ -125,6 +136,7 @@ public:
    void test_getHangTime_validTime()
    {
       //setup
+      Artillery() artillery;
       //exercise
       //verfify
       //teardown

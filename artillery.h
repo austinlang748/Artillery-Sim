@@ -114,4 +114,5 @@ public:
    double getDistance() const { return position.getMetersX() - initialPositionX; }
    double getHangTime() const { return position.getMetersY(); }
 
+   friend class TestArtillery;
 };
