@@ -114,6 +114,9 @@ public:
    double getSpeed()    const { return speed; }
    double getDistance() const { return position.getMetersX() - initialPositionX; }
    double getHangTime() const { return position.getMetersY(); }
+   
+   void setAltitude(double y) { position.setMetersY(y); }
+   void addHangTime(double dt) { hangTime += dt; }
 
    friend class TestArtillery;
 };
