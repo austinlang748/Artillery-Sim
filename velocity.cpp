@@ -46,8 +46,8 @@ std::istream& operator >> (std::istream& in, Velocity& v)
    double dy;
    in >> dx >> dy;
 
-   pos.setDx(dx);
-   pos.setDy(dy);
+   v.setDx(dx);
+   v.setDy(dy);
 
    return in;
 }
