@@ -20,11 +20,14 @@ class TestArtillery
 public:
    void run()
    {
+      // Constructors
       test_initialize_valid();
       test_initialize_invalidPoint();
       test_initialize_invalidAngle1();
       test_initialize_invalidAngle2();
       test_initialize_valid();
+
+      // Getters
       test_getAltitude_initial(); 
       test_getAltitude_valid();
       test_getSpeed_initial(); 
@@ -32,7 +35,7 @@ public:
       test_getDistance_initial();
       test_getSpeed_valid();
       test_getHangTime_initial(); 
-      test_get_hangTime_valid();
+      test_getHangTime_valid();
    }
 
    void test_initialize_valid()
@@ -44,7 +47,7 @@ public:
       //verfify
       assert(artillery.position.getMetersX == 0);
       assert(artillery.position.getMetersY == 0);
-      assert(artillery.angle == M_PI / 4);
+      assert(artillery.angleDegrees == M_PI / 4);
       //teardown
    }
 
@@ -67,7 +70,7 @@ public:
       //exercise
       Artillery artillery(point0, M_PI);
       //verfify
-      assert(artillery.angle == 0.00);
+      assert(artillery.angleDegrees == 0.00);
       //teardown
    }
 
@@ -78,7 +81,7 @@ public:
       //exercise
       Artillery artillery(point0, -M_PI);
       //verfify
-      assert(artillery.angle == 0.00);
+      assert(artillery.angleDegrees == 0.00);
       //teardown
    }
 
