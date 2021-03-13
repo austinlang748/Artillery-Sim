@@ -148,7 +148,7 @@ int main(int argc, char** argv)
 #endif // !_WIN32
 {
    // run test
-   bool runTest = false;
+   bool runTest = true;
    if (runTest) {
       testRunner();
       return 0; // quick exit
