@@ -22,7 +22,6 @@ public:
       test_howitzer_nonDefault();
 
       // getters
-      test_howitzer_getters();
       test_howitzer_getPosition();
       test_howitzer_getAngle();
       test_howitzer_getTime();
@@ -58,7 +57,7 @@ public:
       //setup
       Position p(4, 5);
       Howitzer h(p);
-      h.angle = 5.0;
+      h.angleRadians = 5.0;
       //verify
       assert(h.angleRadians == h.getAngle());
    }
@@ -109,7 +108,7 @@ public:
    void test_howitzer_setTime() {
       //setup
       Position p(4, 5);
-      Position newTime = 5.6;
+      double newTime = 5.6;
       Howitzer h(p);
       //excercise
       h.setTime(newTime);

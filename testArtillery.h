@@ -32,7 +32,7 @@ public:
       test_getDistance_initial();
       test_getSpeed_valid();
       test_getHangTime_initial(); 
-      test_get_hangTime_valid();
+      test_getHangTime_valid();
    }
 
    void test_initialize_valid()

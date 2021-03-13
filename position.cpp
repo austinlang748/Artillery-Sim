@@ -62,7 +62,7 @@ std::istream& operator >> (std::istream& in, Position& pos)
  * return bool: is equivalent
  ******************************************/
 bool Position::operator == (const Position & rhs) const {
-    return x == rhs.getX() && y == rhs.getY();
+    return x == rhs.getMetersX() && y == rhs.getMetersY();
 }
 
 /*******************************************
@@ -71,5 +71,5 @@ bool Position::operator == (const Position & rhs) const {
  * return bool: is not equivalent
  ******************************************/
 bool Position::operator != (const Position & rhs) const {
-    return x != rhs.getX() || y != rhs.getY();
+    return x != rhs.getMetersX() || y != rhs.getMetersY();
 }
