@@ -45,8 +45,8 @@ public:
       //exercise
       Artillery artillery(point0, M_PI / 4);
       //verfify
-      assert(artillery.position.getMetersX == 0);
-      assert(artillery.position.getMetersY == 0);
+      assert(artillery.position.getMetersX() == 0);
+      assert(artillery.position.getMetersY() == 0);
       assert(artillery.angleDegrees == M_PI / 4);
       //teardown
    }
@@ -58,8 +58,8 @@ public:
       //exercise
       Artillery artillery(point0, M_PI / 4);
       //verfify
-      assert(artillery.position.getMetersX == 0);
-      assert(artillery.position.getMetersY == 0);
+      assert(artillery.position.getMetersX() == 0);
+      assert(artillery.position.getMetersY() == 0);
       //teardown
    }
 

@@ -17,6 +17,7 @@
 #include "ground.h"     // for GROUND
 #include "howitzer.h"   // for HOWITZER
 #include "position.h"   // for POINT
+#include "artillery.h"  // for ARTILLERY
 #include "test.h"       // include unit test class
 using namespace std;
 
@@ -27,9 +28,10 @@ using namespace std;
 class Demo
 {
 private:
-   Ground   ground;        // the ground
-   Position ptUpperRight;  // size of the screen
-   Howitzer howitzer;      // howitzer cannon object
+   Ground   ground;              // the ground
+   Position ptUpperRight;        // size of the screen
+   Howitzer howitzer;            // howitzer cannon object
+   vector<Artillery> artillery;  // artillery
 
 public:
 
@@ -43,7 +45,8 @@ public:
       ));
 
       howitzer.getPosition().setPixelsX(Position(ptUpperRight).getPixelsX() / 2.0);
-      ground.reset(howitzer.getPosition());
+      Position hpos = howitzer.getPosition();
+      ground.reset(hpos);
       for (int i = 0; i < 20; i++)
          howitzer.setProjectilePathAt(i, Position(
             (double)i * 2.0,
@@ -54,16 +57,16 @@ public:
    void update() {
 
       // advance time by half a second.
-      time += 0.5;
+      for (auto a : artillery) a.addHangTime(0.5);
 
       // move the projectile across the screen
       for (int i = 0; i < 20; i++)
       {
-         double x = projectilePath[i].getPixelsX();
+         double x = howitzer.getProjectilePathAt(i).getPixelsX();
          x -= 1.0;
          if (x < 0)
             x = ptUpperRight.getPixelsX();
-         projectilePath[i].setPixelsX(x);
+         howitzer.getProjectilePathAt(i).setPixelsX(x);
       }
    }
    

@@ -88,7 +88,7 @@ public:
       Howitzer howitzer(Position(10, 10));
       howitzer.projectilePath[0] = Position(20, 20);
       //exercise
-      Position projectilePosition = howitzer.getProjectilePathAt[0];
+      Position projectilePosition = howitzer.getProjectilePathAt(0);
       //verfify
       assert(projectilePosition == Position(20, 20));
       //teardown
