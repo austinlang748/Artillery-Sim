@@ -19,23 +19,29 @@ private:
 
 public:
    
-   Howitzer(Position position) : position(position) {
+   Howitzer() {
       time = 0.0;
       angleRadians = 0.0;
    }
+
+   Howitzer(Position position) : Howitzer() { // use default as delegate constructor
+      this->position = position;
+   }
    
    // getters
-   Position getPosition()           { return position; }
-   double getAngle()                { return angleRadians; }
-   double getTime()                 { return time; }
+   Position getPosition()  { return position; }
+   double getAngle()       { return angleRadians; }
+   double getTime()        { return time; }
+   
    Position getProjectilePathAt(int index) {
       return projectilePath[index];
    }
    
    // setters
-   void setPosition(Position position)             { this->position = position;  }
-   void setAngle(double angleRadians)              { this->angleRadians = angleRadians; }
-   void setTime(double time)                       { this->time = time; }
+   void setPosition(Position position) { this->position = position;  }
+   void setAngle(double angleRadians)  { this->angleRadians = angleRadians; }
+   void setTime(double time)           { this->time = time; }
+
    void setProjectilePathAt(int index, Position p) {
       projectilePath[index] = p;
    }

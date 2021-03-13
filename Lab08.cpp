@@ -37,7 +37,7 @@ public:
       ptUpperRight(ptUpperRight),
       ground(ptUpperRight)
    {
-      howitzer.setPosition(Position(
+      howitzer = Howitzer(Position(
          ptUpperRight.getPixelsX() * 0.5,
          ground.getElevationMeters(Position(ptUpperRight.getPixelsX() * 0.5, 0.0))
       ));
