@@ -1,78 +1,18 @@
 ﻿  artillery.cpp
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\trig.h(13,73): error C2065: 'M_PI': undeclared identifier
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\trig.h(14,52): error C2065: 'M_PI': undeclared identifier
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\artillery.cpp(55,12): error C2065: 'M_PI': undeclared identifier
   ground.cpp
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\trig.h(13,73): error C2065: 'M_PI': undeclared identifier
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\trig.h(14,52): error C2065: 'M_PI': undeclared identifier
   howitzer.cpp
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\trig.h(13,73): error C2065: 'M_PI': undeclared identifier
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\trig.h(14,52): error C2065: 'M_PI': undeclared identifier
   Lab08.cpp
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\trig.h(13,73): error C2065: 'M_PI': undeclared identifier
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\trig.h(14,52): error C2065: 'M_PI': undeclared identifier
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\Lab08.cpp(46,1): error C2664: 'void Ground::reset(Position &)': cannot convert argument 1 from 'Position' to 'Position &'
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\Lab08.cpp(46,40): message : A non-const reference may only be bound to an lvalue
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\ground.h(27,9): message : see declaration of 'Ground::reset'
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\Lab08.cpp(57,7): error C2065: 'time': undeclared identifier
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\Lab08.cpp(62,21): error C2065: 'projectilePath': undeclared identifier
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\Lab08.cpp(66,10): error C2065: 'projectilePath': undeclared identifier
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\Lab08.cpp(80,1): error C2039: 'getProjectilePath': is not a member of 'Howitzer'
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\howitzer.h(12): message : see declaration of 'Howitzer'
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\Lab08.cpp(86,16): error C2065: 'time': undeclared identifier
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\Lab08.cpp(93,10): error C2065: 'angle': undeclared identifier
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\Lab08.cpp(95,10): error C2065: 'angle': undeclared identifier
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\Lab08.cpp(99,10): error C2065: 'angle': undeclared identifier
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\Lab08.cpp(99,20): error C2065: 'angle': undeclared identifier
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\Lab08.cpp(101,10): error C2065: 'angle': undeclared identifier
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\Lab08.cpp(101,20): error C2065: 'angle': undeclared identifier
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\Lab08.cpp(105,10): error C2065: 'time': undeclared identifier
   position.cpp
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\trig.h(13,73): error C2065: 'M_PI': undeclared identifier
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\trig.h(14,52): error C2065: 'M_PI': undeclared identifier
   test.cpp
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\trig.h(13,73): error C2065: 'M_PI': undeclared identifier
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\trig.h(14,52): error C2065: 'M_PI': undeclared identifier
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\testHowitzer.h(91,1): error C3867: 'Howitzer::getProjectilePathAt': non-standard syntax; use '&' to create a pointer to member
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\testHowitzer.h(91,1): error C2109: subscript requires array or pointer type
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\testArtillery.h(48,1): error C3867: 'Position::getMetersX': non-standard syntax; use '&' to create a pointer to member
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\testArtillery.h(49,1): error C3867: 'Position::getMetersY': non-standard syntax; use '&' to create a pointer to member
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\testArtillery.h(61,1): error C3867: 'Position::getMetersX': non-standard syntax; use '&' to create a pointer to member
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\testArtillery.h(62,1): error C3867: 'Position::getMetersY': non-standard syntax; use '&' to create a pointer to member
   uiDraw.cpp
+C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\trig.h(10,1): warning C4005: 'M_PI': macro redefinition
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\corecrt_math_defines.h(22): message : see previous definition of 'M_PI'
   uiInteract.cpp
+C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\trig.h(10,1): warning C4005: 'M_PI': macro redefinition
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\corecrt_math_defines.h(22): message : see previous definition of 'M_PI'
 C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\uiInteract.cpp(307,74): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\uiInteract.cpp(307,46): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   velocity.cpp
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\trig.h(13,73): error C2065: 'M_PI': undeclared identifier
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\trig.h(14,52): error C2065: 'M_PI': undeclared identifier
 C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\velocity.cpp(14,52): error C2084: function 'Velocity::Velocity(double,double)' already has a body
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\velocity.h(26): message : see previous definition of '{ctor}'
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\velocity.cpp(33,6): error C2039: 'ostream': is not a member of 'std'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include\cmath(683): message : see declaration of 'std'
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\velocity.cpp(33,13): error C2143: syntax error: missing ';' before '&'
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\velocity.cpp(33,13): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\velocity.cpp(33,33): error C2039: 'ostream': is not a member of 'std'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include\cmath(683): message : see declaration of 'std'
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\velocity.cpp(33,42): error C2065: 'out': undeclared identifier
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\velocity.cpp(33,47): error C2059: syntax error: 'const'
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\velocity.cpp(34,1): error C2143: syntax error: missing ';' before '{'
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\velocity.cpp(34,1): error C2447: '{': missing function header (old-style formal list?)
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\velocity.cpp(43,6): error C2039: 'istream': is not a member of 'std'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include\cmath(683): message : see declaration of 'std'
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\velocity.cpp(43,13): error C2143: syntax error: missing ';' before '&'
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\velocity.cpp(43,13): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\velocity.cpp(43,33): error C2039: 'istream': is not a member of 'std'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include\cmath(683): message : see declaration of 'std'
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\velocity.cpp(43,42): error C2065: 'in': undeclared identifier
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\velocity.cpp(43,56): error C2065: 'v': undeclared identifier
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\velocity.cpp(43,46): error C2275: 'Velocity': illegal use of this type as an expression
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\velocity.h(16): message : see declaration of 'Velocity'
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\velocity.cpp(43,57): error C2473: 'operator >>': looks like a function definition, but there is no parameter list.
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\velocity.cpp(43,57): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\velocity.cpp(44,1): error C2448: '>>': function-style initializer appears to be a function definition
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\velocity.cpp(86,29): error C2660: 'set': function does not take 2 arguments
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\velocity.cpp(85,6): message : see declaration of 'set'
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\velocity.cpp(95,5): error C3861: 'setDx': identifier not found
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\velocity.cpp(96,5): error C3861: 'setDy': identifier not found
+C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\velocity.h(27): message : see previous definition of '{ctor}'
   Generating Code...

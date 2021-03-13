@@ -80,7 +80,7 @@ public:
 
       // draw the projectile
       for (int i = 0; i < 20; i++)
-         gout.drawProjectile(howitzer.getProjectilePath(i), 0.5 * (double)i);
+         gout.drawProjectile(howitzer.getProjectilePathAt(i), 0.5 * (double)i);
 
       // draw some text on the screen
       gout.setf(ios::fixed | ios::showpoint);
@@ -113,6 +113,9 @@ public:
       if (pUI->getHeldKey(Q))
          exit(0);
    }
+
+   double time;
+   double angle;
 };
 
 /*************************************
