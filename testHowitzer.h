@@ -35,97 +35,98 @@ public:
       test_howitzer_setProjectilePathAt();
    }
 
-   void test_howitzer_nonDefault()
-   {
+   void test_howitzer_nonDefault() {
       //setup
-      //exercise
-      Howitzer h(Position(4, 5));
+      Position p(4, 5);
+      Howitzer h(p);
       //verfify
-      assert(h.getPosition == Position(4, 5));
-      //teardown
+      assert(h.position       == p);
+      assert(h.time           == 0.0);
+      assert(h.angleRadians   == 0.0);
    }
 
 
-   void test_howitzer_getters()
-   {
+   void test_howitzer_getPosition() {
       //setup
-
-      //exercise
-      //verfify
-      //teardown
+      Position p(4, 5);
+      Howitzer h(p);
+      //verify
+      assert(h.position == h.getPosition());
    }
 
-   void test_howitzer_getPosition()
-   {
+   void test_howitzer_getAngle() {
       //setup
-
-      //exercise
-      //verfify
-      //teardown
+      Position p(4, 5);
+      Howitzer h(p);
+      h.angle = 5.0;
+      //verify
+      assert(h.angleRadians == h.getAngle());
    }
 
-   void test_howitzer_getAngle()
-   {
+   void test_howitzer_getTime() {
       //setup
-
-      //exercise
-      //verfify
-      //teardown
+      Position p(4, 5);
+      Howitzer h(p);
+      h.time = 5.0;
+      //verify
+      assert(h.time == h.getTime());
    }
 
-   void test_howitzer_getTime()
-   {
+   void test_howitzer_getProjectilePathAt() {
       //setup
-
-      //exercise
-      //verfify
-      //teardown
-   }
-
-   void test_howitzer_getProjectilePathAt()
-   {
-      //setup
-
-      //exercise
-      //verfify
-      //teardown
+      Position p(4, 5);
+      Position pathP(3, 4);
+      Howitzer h(p);
+      int index = 5;
+      h.projectilePath[index] = pathP;
+      //verify
+      assert(h.projectilePath[index] == h.getProjectilePathAt(index));
    }
 
 
-   void test_howitzer_setPosition()
-   {
+   void test_howitzer_setPosition() {
       //setup
-
-      //exercise
-      //verfify
-      //teardown
+      Position p(4, 5);
+      Position newP(6, 7);
+      Howitzer h(p);
+      //excercise
+      h.setPosition(newP);
+      //verify
+      assert(h.position == newP);
    }
 
-   void test_howitzer_setAngle()
-   {
+   void test_howitzer_setAngle() {
       //setup
-
-      //exercise
-      //verfify
-      //teardown
+      Position p(4, 5);
+      double newAngle = 5.6;
+      Howitzer h(p);
+      //excercise
+      h.setAngle(newAngle);
+      //verify
+      assert(h.angleRadians == newAngle);
    }
 
-   void test_howitzer_setTime()
-   {
+   void test_howitzer_setTime() {
       //setup
-
-      //exercise
-      //verfify
-      //teardown
+      Position p(4, 5);
+      Position newTime = 5.6;
+      Howitzer h(p);
+      //excercise
+      h.setTime(newTime);
+      //verify
+      assert(h.time == newTime);
    }
 
-   void test_howitzer_setProjectilePathAt()
-   {
+   void test_howitzer_setProjectilePathAt() {
       //setup
-
-      //exercise
-      //verfify
-      //teardown
+      Position p(4, 5);
+      double index = 5;
+      Position newP(6, 7);
+      Howitzer h(p);
+      //excercise
+      h.setProjectilePathAt(index, newP);
+      //verify
+      assert(h.projectilePath[index] == newP);
    }
 
 };
