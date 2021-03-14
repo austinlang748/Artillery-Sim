@@ -12,6 +12,7 @@
  *****************************************************************/
 
 #include <cassert>      // for ASSERT
+#include <vector>
 #include "uiInteract.h" // for INTERFACE
 #include "uiDraw.h"     // for RANDOM and DRAW*
 #include "ground.h"     // for GROUND
@@ -39,14 +40,16 @@ public:
       ptUpperRight(ptUpperRight),
       ground(ptUpperRight)
    {
-      howitzer = Howitzer(Position(
+      Position hpos = Position(
          ptUpperRight.getPixelsX() * 0.5,
          ground.getElevationMeters(Position(ptUpperRight.getPixelsX() * 0.5, 0.0))
-      ));
+      );
 
-      howitzer.getPosition().setPixelsX(Position(ptUpperRight).getPixelsX() / 2.0);
-      Position hpos = howitzer.getPosition();
-      ground.reset(hpos);
+      // initialize objects
+      howitzer = Howitzer(hpos); // howitzer
+      ground.reset(hpos);        // ground
+      
+      // set projectile preview path
       for (int i = 0; i < 20; i++)
          howitzer.setProjectilePathAt(i, Position(
             (double)i * 2.0,
@@ -57,9 +60,11 @@ public:
    void update() {
 
       // advance time by half a second.
-      for (auto a : artillery) a.addHangTime(0.5);
+      if (artillery.size() > 0) artillery[0].addHangTime(0.5);
 
       // move the projectile across the screen
+      if (artillery.size() > 0) artillery[0].update();
+      /*
       for (int i = 0; i < 20; i++)
       {
          double x = howitzer.getProjectilePathAt(i).getPixelsX();
@@ -68,6 +73,7 @@ public:
             x = ptUpperRight.getPixelsX();
          howitzer.getProjectilePathAt(i).setPixelsX(x);
       }
+       */
    }
    
    void draw(ogstream & gout) {
@@ -79,33 +85,47 @@ public:
       gout.drawHowitzer(howitzer.getPosition(), howitzer.getAngle(), howitzer.getTime());
 
       // draw the projectile
-      for (int i = 0; i < 20; i++)
+      if (artillery.size() > 0)
+         gout.drawProjectile(artillery[0].getPosition());
+      
+      /*
+       // draw projected projectile path
+       for (int i = 0; i < 20; i++)
          gout.drawProjectile(howitzer.getProjectilePathAt(i), 0.5 * (double)i);
+       */
+   
+      if (artillery.size() > 0)
+         gout.drawProjectile(artillery[0].getPosition(), artillery[0].getHangTime());
 
       // draw some text on the screen
       gout.setf(ios::fixed | ios::showpoint);
       gout.precision(1);
-      gout  << "Time since the bullet was fired: "
-            << time << "s\n";
+      if (artillery.size() > 0)
+         gout  << "Time since the bullet was fired: "
+               << artillery[0].getHangTime() << "s\n";
    }
    
    void handleInput(const Interface* pUI) {
       
       // move a large amount
       if (pUI->getHeldKey(RIGHT))
-         angle += 0.05;
+         howitzer.addAngle(0.05);
       if (pUI->getHeldKey(LEFT))
-         angle -= 0.05;
+         howitzer.addAngle(-0.05);
 
       // move by a little
       if (pUI->getHeldKey(UP))
-         angle += (angle >= 0 ? -0.003 : 0.003);
+         howitzer.addAngle((howitzer.getAngle() >= 0 ? -0.003 : 0.003));
       if (pUI->getHeldKey(DOWN))
-         angle += (angle >= 0 ? 0.003 : -0.003);
+         howitzer.addAngle((howitzer.getAngle() >= 0 ? 0.003 : -0.003));
 
       // fire that gun
-      if (pUI->getHeldKey(SPACE))
-         time = 0.0;
+      if (pUI->getHeldKey(SPACE)) {
+         if (artillery.size() == 0)
+            artillery.push_back(Artillery(howitzer.getPosition(), howitzer.getAngle()));
+         else
+            artillery[0].reset();
+      }
       
       // restart demo
 

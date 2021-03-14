@@ -110,13 +110,15 @@ public:
       position.addMeters(velocity);
    }
 
-   double getAltitude() const { return position.getMetersY(); }
-   double getSpeed()    const { return speed; }
-   double getDistance() const { return position.getMetersX() - initialPositionX; }
-   double getHangTime() const { return position.getMetersY(); }
+   double getAltitude()    const { return position.getMetersY(); }
+   double getSpeed()       const { return speed; }
+   double getDistance()    const { return position.getMetersX() - initialPositionX; }
+   double getHangTime()    const { return position.getMetersY(); }
+   Position getPosition()  const { return position; }
    
-   void setAltitude(double y) { position.setMetersY(y); }
-   void addHangTime(double dt) { hangTime += dt; }
+   void reset()                  { hangTime = 0.0; }
+   void setAltitude(double y)    { position.setMetersY(y); }
+   void addHangTime(double dt)   { hangTime += dt; }
 
    friend class TestArtillery;
 };

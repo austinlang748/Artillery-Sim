@@ -45,6 +45,9 @@ public:
    void setProjectilePathAt(int index, Position p) {
       projectilePath[index] = p;
    }
+   
+   // adders
+   void addAngle(double dAngle)        { angleRadians += dAngle; }
 
    friend class TestHowitzer;
 
