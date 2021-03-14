@@ -8,15 +8,6 @@
 #include "velocity.h"
 
 /******************************************
-* VELOCITY : non-default constructor
-* create a new velocity obj in dx,dy in position_meters/s
-*****************************************/
-Velocity::Velocity(double dx_init, double dy_init) : dx(0.0), dy(0.0)
-{
-   set(dx, dy);
-}
-
-/******************************************
  * POINT : ASSIGNMENT
  * Assign a point
  *****************************************/
