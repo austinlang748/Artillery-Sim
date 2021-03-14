@@ -26,7 +26,10 @@ public:
    Velocity() : dx(0.0), dy(0.0) {}
    Velocity(double dx, double dy) { set(dx, dy); }
    Velocity(const Velocity& v) : dx(v.dx), dy(v.dy) {}
-   Velocity& operator = (const Velocity& v);
+   Velocity& operator = (const Velocity& v) {
+      set(v);
+      return *this;
+   }
 
    // getters
    double getDx()    const { return dx; }
@@ -40,16 +43,29 @@ public:
    void setDx(double dx) { this->dx = dx; }
    void setDy(double dy) { this->dy = dy; }
 
-   void set(const Velocity& v);
-   void set(double dx, double dy);
+   void set(const Velocity& v) {
+      set(v.getDx(), v.getDy());
+   }
+
+   void set(double dx, double dy) {
+      setDx(dx);
+      setDy(dy);
+   }
 
    // adders
    void addDx(double ddx) { dx += ddx; }
    void addDy(double ddy) { dy += ddy; }
 
-   void add(Velocity v);
-   void add(double ddx, double ddy);
-   void addMagnitude(double angleRadians, double magnitude);
+   void add(Velocity a) { add(a.getDx(), a.getDy()); }
+   void add(double ddx, double ddy) {
+      addDx(ddx);
+      addDy(ddy);
+   }
+
+   void addMagnitude(double angleRadians, double magnitude) {
+      addDx(Trig::horizontalComponent(   magnitude, Trig::deg(angleRadians)));
+      addDx(Trig::verticalComponent(     magnitude, Trig::deg(angleRadians)));
+   }
 
    friend class TestVelocity;
 };

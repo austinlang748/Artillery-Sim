@@ -10,8 +10,8 @@
 #pragma once
 
 #include <iostream>
-#include "artillery.h"
 #include <cassert>
+#include "artillery.h"
 
 using namespace std;
 
