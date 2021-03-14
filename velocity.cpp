@@ -82,7 +82,7 @@ bool Velocity::operator != (const Velocity & rhs) const {
  * VELOCITY : set
  * param: v:Velocity
  ******************************************/
-void set(const Velocity &v) {
+void Velocity::set(const Velocity &v) {
     set(v.getDx(), v.getDy());
 }
 
@@ -91,7 +91,7 @@ void set(const Velocity &v) {
  * param: dx:double
  * param: dy:double
  ******************************************/
-void set(double dx, double dy) {
+void Velocity::set(double dx, double dy) {
     setDx(dx);
     setDy(dy);
 }

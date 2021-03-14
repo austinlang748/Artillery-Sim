@@ -1,0 +1,18 @@
+﻿  artillery.cpp
+  ground.cpp
+  howitzer.cpp
+  Lab08.cpp
+  position.cpp
+  test.cpp
+  uiDraw.cpp
+C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\trig.h(10,1): warning C4005: 'M_PI': macro redefinition
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\corecrt_math_defines.h(22): message : see previous definition of 'M_PI'
+  uiInteract.cpp
+C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\trig.h(10,1): warning C4005: 'M_PI': macro redefinition
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\corecrt_math_defines.h(22): message : see previous definition of 'M_PI'
+C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\uiInteract.cpp(307,74): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\uiInteract.cpp(307,46): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  velocity.cpp
+C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\velocity.cpp(14,52): error C2084: function 'Velocity::Velocity(double,double)' already has a body
+C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\velocity.h(27): message : see previous definition of '{ctor}'
+  Generating Code...

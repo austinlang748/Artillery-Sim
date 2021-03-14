@@ -94,6 +94,8 @@ public:
          gout.drawProjectile(howitzer.getProjectilePathAt(i), 0.5 * (double)i);
        */
    
+      if (artillery.size() > 0)
+         gout.drawProjectile(artillery[0].getPosition(), artillery[0].getHangTime());
 
       // draw some text on the screen
       gout.setf(ios::fixed | ios::showpoint);
@@ -131,6 +133,9 @@ public:
       if (pUI->getHeldKey(Q))
          exit(0);
    }
+
+   double time;
+   double angle;
 };
 
 /*************************************
@@ -169,7 +174,7 @@ int main(int argc, char** argv)
 #endif // !_WIN32
 {
    // run test
-   bool runTest = false;
+   bool runTest = true;
    if (runTest) {
       testRunner();
       return 0; // quick exit
