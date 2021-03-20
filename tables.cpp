@@ -9,6 +9,16 @@
 
 #include "tables.h"
 
+
+/********************************************************************************
+ * STATICS
+ ********************************************************************************/
+map<double, double> Tables::machToDrag    = csvFileToMap("machToDragTable");
+map<double, double> Tables::altToDensity  = csvFileToMap("altToDensityTable");
+map<double, double> Tables::altToSos      = csvFileToMap("altToSosTable");
+map<double, double> Tables::altToGrav     = csvFileToMap("altToGravTable");
+
+
 /********************************************************************************
  * STATIC METHOD:    .csv-file to map
  *
@@ -20,8 +30,9 @@
  * PARAM:       filename : char[]
  * RETURN:      map<double, double>
  ********************************************************************************/
+// place function here, throwing errors before
 map<double, double> Tables::csvFileToMap(char filename[]) {
-
+   
    // initialize map
    map<double, double> myMap;
 
@@ -146,4 +157,75 @@ double Tables::getTableValue(vector<pair<double, double> > v, double value) {
  ********************************************************************************/
 double Tables::getTableValue(map<double, double> myMap, double value) {
    return Tables::getTableValue(mapToSortedVector(myMap), value);
+}
+
+/********************************************************************************
+ * STATIC METHOD:   get table value
+ *
+ * FROM CLASS:      Tables
+ *
+ * Overloaded function, calls getTableValue(vector<pair<double, double> >, double):
+ *
+ * takes a sorted 'table' (originally map, read as vector) and solves for the
+ * unknown y value using this form of the linear interpolation formula between
+ * two points:
+ *      value_y = y1 + (value_x - x1) * (y2 - y1) / (x2 - x1)
+ * where value_x is param 'value' and value_y is return value
+ *
+ * PARAM:           any map : map<double, double>
+ * PARAM:           value : double
+ *
+ * RETURN:          double: linear interpolation formula solved for unknown y value:
+ *                  [ value_y = y1 + (value_x - x1) * (y2 - y1) / (x2 - x1) ]
+ *                  where value_x is param 'value'
+ ********************************************************************************/
+void Tables::display(string whichMap) {
+   cout << "Tables::display(" << whichMap << ")\n";
+     
+   // choose the map based on the parameter
+   map<double, double> m;
+   if      (whichMap == "machToDrag")      m = machToDrag;
+   else if (whichMap == "altToDensity")    m = altToDensity;
+   else if (whichMap == "altToSos")        m = altToSos;
+   else if (whichMap == "altToGrav")       m = altToGrav;
+
+   // display error/success
+   else {
+      cout << " >> ERROR: Unable to identify which table to display.\n";
+      return; // quick exit if error
+   }
+   cout << " >> SUCCESS: " << whichMap << " table identified, displaying:\n";
+
+   // get column 1 name
+   string column1;
+   if (whichMap == "machToDrag") column1 = "mach";
+   else column1 = "altitude";
+
+   // get column 2 name
+   string column2;
+   if      (whichMap == "machToDrag")   column2 = "drag";
+   else if (whichMap == "altToDensity") column2 = "density";
+   else if (whichMap == "altToSos")     column2 = "speed of sound";
+   else if (whichMap == "altToGrav")    column2 = "gravity";
+   
+   // 'sort' map to get an iterable version (vector)
+   vector<pair<double, double> > sortedMap = mapToSortedVector(m);
+
+   // display columns
+   cout        << ' ' << column1
+               << " : " << column2 << endl;
+   
+   // display header lines
+   cout << ' ';
+   cout.width(column1.length());
+   cout.fill('-');
+   cout << " : ";
+   cout.width(column2.length());
+   cout.fill('-');
+   cout << endl;
+
+   // display rows
+   for (auto row : sortedMap)
+      cout  << ' ' << setw(column1.length()) << row.first
+            << " : " << row.second << endl;
 }
