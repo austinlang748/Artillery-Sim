@@ -15,11 +15,11 @@
 #include <vector>
 #include "uiInteract.h" // for INTERFACE
 #include "uiDraw.h"     // for RANDOM and DRAW*
+#include "position.h"   // for POINT
 #include "ground.h"     // for GROUND
 #include "howitzer.h"   // for HOWITZER
-#include "position.h"   // for POINT
 #include "artillery.h"  // for ARTILLERY
-#include "test.h"       // include unit test class
+// #include "test.h"       // include unit test class
 using namespace std;
 
 /*************************************************************************
@@ -174,9 +174,9 @@ int main(int argc, char** argv)
 #endif // !_WIN32
 {
    // run test
-   bool runTest = true;
+   bool runTest = false;
    if (runTest) {
-      testRunner();
+      // testRunner();
       return 0; // quick exit
    }
 

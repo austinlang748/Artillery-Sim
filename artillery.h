@@ -10,7 +10,6 @@
 
 #include "position.h"
 #include "velocity.h"
-#include "trig.h"
 #include "tables.h"
 #include <cmath>
 using namespace std;

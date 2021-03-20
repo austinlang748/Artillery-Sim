@@ -7,7 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EE3D11562603EA0D00EEBCD0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE3D11552603EA0D00EEBCD0 /* main.cpp */; };
+		EE3D11732603EA5900EEBCD0 /* artillery.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE3D11622603EA5900EEBCD0 /* artillery.cpp */; };
+		EE3D11742603EA5900EEBCD0 /* uiDraw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE3D11652603EA5900EEBCD0 /* uiDraw.cpp */; };
+		EE3D11752603EA5900EEBCD0 /* Lab08.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE3D11662603EA5900EEBCD0 /* Lab08.cpp */; };
+		EE3D11762603EA5900EEBCD0 /* position.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE3D11672603EA5900EEBCD0 /* position.cpp */; };
+		EE3D11772603EA5900EEBCD0 /* uiInteract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE3D11692603EA5900EEBCD0 /* uiInteract.cpp */; };
+		EE3D11782603EA5900EEBCD0 /* velocity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE3D116A2603EA5900EEBCD0 /* velocity.cpp */; };
+		EE3D11792603EA5900EEBCD0 /* howitzer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE3D116F2603EA5900EEBCD0 /* howitzer.cpp */; };
+		EE3D117A2603EA5900EEBCD0 /* ground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE3D11702603EA5900EEBCD0 /* ground.cpp */; };
+		EE3D11822603EB1000EEBCD0 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3D11812603EB1000EEBCD0 /* GLUT.framework */; };
+		EE3D11842603EB1400EEBCD0 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3D11832603EB1400EEBCD0 /* OpenGL.framework */; };
+		EE3D118D2603F79F00EEBCD0 /* tables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE3D118B2603F79F00EEBCD0 /* tables.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +34,30 @@
 
 /* Begin PBXFileReference section */
 		EE3D11522603EA0D00EEBCD0 /* Artillery-Sim */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Artillery-Sim"; sourceTree = BUILT_PRODUCTS_DIR; };
-		EE3D11552603EA0D00EEBCD0 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		EE3D115E2603EA2200EEBCD0 /* machToDragTable.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = machToDragTable.csv; path = ../machToDragTable.csv; sourceTree = "<group>"; };
+		EE3D115F2603EA2200EEBCD0 /* altToSosTable.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = altToSosTable.csv; path = ../altToSosTable.csv; sourceTree = "<group>"; };
+		EE3D11602603EA2200EEBCD0 /* altToGravTable.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = altToGravTable.csv; path = ../altToGravTable.csv; sourceTree = "<group>"; };
+		EE3D11612603EA2200EEBCD0 /* altToDensityTable.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = altToDensityTable.csv; path = ../altToDensityTable.csv; sourceTree = "<group>"; };
+		EE3D11622603EA5900EEBCD0 /* artillery.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = artillery.cpp; path = ../artillery.cpp; sourceTree = "<group>"; };
+		EE3D11632603EA5900EEBCD0 /* uiDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = uiDraw.h; path = ../uiDraw.h; sourceTree = "<group>"; };
+		EE3D11642603EA5900EEBCD0 /* velocity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = velocity.h; path = ../velocity.h; sourceTree = "<group>"; };
+		EE3D11652603EA5900EEBCD0 /* uiDraw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = uiDraw.cpp; path = ../uiDraw.cpp; sourceTree = "<group>"; };
+		EE3D11662603EA5900EEBCD0 /* Lab08.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Lab08.cpp; path = ../Lab08.cpp; sourceTree = "<group>"; };
+		EE3D11672603EA5900EEBCD0 /* position.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = position.cpp; path = ../position.cpp; sourceTree = "<group>"; };
+		EE3D11682603EA5900EEBCD0 /* tables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tables.h; path = ../tables.h; sourceTree = "<group>"; };
+		EE3D11692603EA5900EEBCD0 /* uiInteract.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = uiInteract.cpp; path = ../uiInteract.cpp; sourceTree = "<group>"; };
+		EE3D116A2603EA5900EEBCD0 /* velocity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = velocity.cpp; path = ../velocity.cpp; sourceTree = "<group>"; };
+		EE3D116B2603EA5900EEBCD0 /* uiInteract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = uiInteract.h; path = ../uiInteract.h; sourceTree = "<group>"; };
+		EE3D116C2603EA5900EEBCD0 /* ground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ground.h; path = ../ground.h; sourceTree = "<group>"; };
+		EE3D116D2603EA5900EEBCD0 /* artillery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = artillery.h; path = ../artillery.h; sourceTree = "<group>"; };
+		EE3D116E2603EA5900EEBCD0 /* position.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = position.h; path = ../position.h; sourceTree = "<group>"; };
+		EE3D116F2603EA5900EEBCD0 /* howitzer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = howitzer.cpp; path = ../howitzer.cpp; sourceTree = "<group>"; };
+		EE3D11702603EA5900EEBCD0 /* ground.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ground.cpp; path = ../ground.cpp; sourceTree = "<group>"; };
+		EE3D11712603EA5900EEBCD0 /* trig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = trig.h; path = ../trig.h; sourceTree = "<group>"; };
+		EE3D11722603EA5900EEBCD0 /* howitzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = howitzer.h; path = ../howitzer.h; sourceTree = "<group>"; };
+		EE3D11812603EB1000EEBCD0 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		EE3D11832603EB1400EEBCD0 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		EE3D118B2603F79F00EEBCD0 /* tables.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = tables.cpp; path = ../tables.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +65,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE3D11842603EB1400EEBCD0 /* OpenGL.framework in Frameworks */,
+				EE3D11822603EB1000EEBCD0 /* GLUT.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,8 +76,31 @@
 		EE3D11492603EA0D00EEBCD0 = {
 			isa = PBXGroup;
 			children = (
+				EE3D11662603EA5900EEBCD0 /* Lab08.cpp */,
+				EE3D11622603EA5900EEBCD0 /* artillery.cpp */,
+				EE3D116D2603EA5900EEBCD0 /* artillery.h */,
+				EE3D11702603EA5900EEBCD0 /* ground.cpp */,
+				EE3D116C2603EA5900EEBCD0 /* ground.h */,
+				EE3D116F2603EA5900EEBCD0 /* howitzer.cpp */,
+				EE3D11722603EA5900EEBCD0 /* howitzer.h */,
+				EE3D11672603EA5900EEBCD0 /* position.cpp */,
+				EE3D116E2603EA5900EEBCD0 /* position.h */,
+				EE3D118B2603F79F00EEBCD0 /* tables.cpp */,
+				EE3D11682603EA5900EEBCD0 /* tables.h */,
+				EE3D11712603EA5900EEBCD0 /* trig.h */,
+				EE3D11652603EA5900EEBCD0 /* uiDraw.cpp */,
+				EE3D11632603EA5900EEBCD0 /* uiDraw.h */,
+				EE3D11692603EA5900EEBCD0 /* uiInteract.cpp */,
+				EE3D116B2603EA5900EEBCD0 /* uiInteract.h */,
+				EE3D116A2603EA5900EEBCD0 /* velocity.cpp */,
+				EE3D11642603EA5900EEBCD0 /* velocity.h */,
+				EE3D11612603EA2200EEBCD0 /* altToDensityTable.csv */,
+				EE3D11602603EA2200EEBCD0 /* altToGravTable.csv */,
+				EE3D115F2603EA2200EEBCD0 /* altToSosTable.csv */,
+				EE3D115E2603EA2200EEBCD0 /* machToDragTable.csv */,
 				EE3D11542603EA0D00EEBCD0 /* Artillery-Sim */,
 				EE3D11532603EA0D00EEBCD0 /* Products */,
+				EE3D11802603EB1000EEBCD0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,9 +115,17 @@
 		EE3D11542603EA0D00EEBCD0 /* Artillery-Sim */ = {
 			isa = PBXGroup;
 			children = (
-				EE3D11552603EA0D00EEBCD0 /* main.cpp */,
 			);
 			path = "Artillery-Sim";
+			sourceTree = "<group>";
+		};
+		EE3D11802603EB1000EEBCD0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EE3D11832603EB1400EEBCD0 /* OpenGL.framework */,
+				EE3D11812603EB1000EEBCD0 /* GLUT.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,7 +184,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE3D11562603EA0D00EEBCD0 /* main.cpp in Sources */,
+				EE3D11772603EA5900EEBCD0 /* uiInteract.cpp in Sources */,
+				EE3D11752603EA5900EEBCD0 /* Lab08.cpp in Sources */,
+				EE3D117A2603EA5900EEBCD0 /* ground.cpp in Sources */,
+				EE3D11732603EA5900EEBCD0 /* artillery.cpp in Sources */,
+				EE3D11792603EA5900EEBCD0 /* howitzer.cpp in Sources */,
+				EE3D11762603EA5900EEBCD0 /* position.cpp in Sources */,
+				EE3D11782603EA5900EEBCD0 /* velocity.cpp in Sources */,
+				EE3D118D2603F79F00EEBCD0 /* tables.cpp in Sources */,
+				EE3D11742603EA5900EEBCD0 /* uiDraw.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +316,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 43BTZ5STMU;
 				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -252,6 +327,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 43BTZ5STMU;
 				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
