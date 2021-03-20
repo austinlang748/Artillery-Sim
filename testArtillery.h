@@ -115,6 +115,7 @@ public:
       Artillery artillery(point0, M_PI / 4);
       artillery.velocity.setDx(300);
       artillery.velocity.setDy(400);
+      artillery.update();
       //exercise
       double speed = artillery.getSpeed();
       //verfify
@@ -130,7 +131,7 @@ public:
       //exercise
       double speed = artillery.getSpeed();
       //verfify
-      assert(speed == 0);
+      assert(speed == 827.0);
       //teardown
    }
 
@@ -164,6 +165,7 @@ public:
       Position point0(0, 0);
       Artillery artillery(point0, M_PI / 4);
       artillery.hangTime = 100;
+      artillery.update();
       //exercise
       double time = artillery.getHangTime();
       //verfify

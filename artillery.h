@@ -60,6 +60,9 @@ public:
 
       // Initialize speed
       speed = artilleryV0;
+
+      // Initialize hang time
+      hangTime = 0.00;
       
       // initialize position
       position = position_0;
@@ -117,9 +120,9 @@ public:
    }
 
    double getAltitude()    const { return position.getMetersY(); }
-   double getSpeed()       const { return speed; }
    double getDistance()    const { return position.getMetersX() - initialPositionX; }
-   double getHangTime()    const { return position.getMetersY(); }
+   double getSpeed()       const { return speed; }
+   double getHangTime()    const { return hangTime; }
    Position getPosition()  const { return position; }
    
    void reset()                  { hangTime = 0.0; }
