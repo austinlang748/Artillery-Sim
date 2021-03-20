@@ -51,13 +51,20 @@ public:
     * param: position_0 : Position
     * param: angle_0    : double
     *************************************************/
-   Artillery(Position position_0, double angle_0) {
-      // initialize angle/speed
-      angleDegrees = 90 - angle_0;
+   Artillery(Position position_0, double angle0_Rads) {
+      // initialize angle
+      double angle0_Degrees = Trig::deg(angle0_Rads);
+      if (angle0_Degrees > 90 && angle0_Degrees <= 180) angle0_Degrees = 90;
+      else if (angle0_Degrees < -90 && angle0_Degrees >= -180) angle0_Degrees = -90;
+      angleDegrees = angle0_Degrees >= 0 ? 90 - angle0_Degrees : -90 - angle0_Degrees;
+
+      // Initialize speed
       speed = artilleryV0;
       
       // initialize position
       position = position_0;
+      if (position.getMetersX() < 0) position.setMetersX(0);
+      if (position.getMetersY() < 0) position.setMetersY(0);
       initialPositionX = position_0.getMetersX();
       
       // initialize velocity

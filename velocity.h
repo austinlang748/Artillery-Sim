@@ -63,8 +63,16 @@ public:
    }
 
    void addMagnitude(double angleRadians, double magnitude) {
-      addDx(Trig::horizontalComponent(   magnitude, Trig::deg(angleRadians)));
-      addDx(Trig::verticalComponent(     magnitude, Trig::deg(angleRadians)));
+      if (magnitude >= 0)
+      {
+         addDx(Trig::horizontalComponent(magnitude, Trig::deg(angleRadians)));
+         addDy(Trig::verticalComponent(magnitude, Trig::deg(angleRadians)));
+      }
+      else
+      {
+         addDx(Trig::horizontalComponent(-magnitude, Trig::deg(angleRadians - M_PI)));
+         addDy(Trig::verticalComponent(-magnitude, Trig::deg(angleRadians - M_PI)));
+      }
    }
 
    friend class TestVelocity;
