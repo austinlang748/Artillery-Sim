@@ -15,6 +15,7 @@
 		C1D4EB432577FC14002B56E3 /* uiInteract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1D4EB3A2577FC13002B56E3 /* uiInteract.cpp */; };
 		C1D4EB482577FC25002B56E3 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1D4EB462577FC25002B56E3 /* OpenGL.framework */; };
 		C1D4EB492577FC25002B56E3 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1D4EB472577FC25002B56E3 /* GLUT.framework */; };
+		EE3D11472603E9C300EEBCD0 /* tables.h in Sources */ = {isa = PBXBuildFile; fileRef = EEF7D4CB25F432C700836719 /* tables.h */; };
 		EEF7D4C725F42F1400836719 /* trig.h in Sources */ = {isa = PBXBuildFile; fileRef = EEF7D4C625F42EDE00836719 /* trig.h */; };
 		EEF7D4D525F4332100836719 /* howitzer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EEF7D4D325F4332100836719 /* howitzer.cpp */; };
 		EEF7D4D625F4332100836719 /* artillery.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EEF7D4D425F4332100836719 /* artillery.cpp */; };
@@ -48,6 +49,10 @@
 		C1D4EB3D2577FC14002B56E3 /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
 		C1D4EB462577FC25002B56E3 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		C1D4EB472577FC25002B56E3 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		EECB932325FDD25C0025C0B7 /* machToDragTable.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = machToDragTable.csv; sourceTree = "<group>"; };
+		EECB932425FDD25C0025C0B7 /* altToDensityTable.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = altToDensityTable.csv; sourceTree = "<group>"; };
+		EECB932525FDD25C0025C0B7 /* altToGravTable.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = altToGravTable.csv; sourceTree = "<group>"; };
+		EECB932625FDD25C0025C0B7 /* altToSosTable.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = altToSosTable.csv; sourceTree = "<group>"; };
 		EEF7D4C125F3FFF100836719 /* testVelocity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = testVelocity.h; sourceTree = "<group>"; };
 		EEF7D4C225F4011C00836719 /* velocity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = velocity.cpp; sourceTree = "<group>"; };
 		EEF7D4C325F4011C00836719 /* velocity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = velocity.h; sourceTree = "<group>"; };
@@ -91,6 +96,10 @@
 				C1D4EB372577FC13002B56E3 /* testPosition.h */,
 				EEF7D4C125F3FFF100836719 /* testVelocity.h */,
 				EEF7D4D025F4332000836719 /* testArtillery.h */,
+				EECB932425FDD25C0025C0B7 /* altToDensityTable.csv */,
+				EECB932525FDD25C0025C0B7 /* altToGravTable.csv */,
+				EECB932625FDD25C0025C0B7 /* altToSosTable.csv */,
+				EECB932325FDD25C0025C0B7 /* machToDragTable.csv */,
 				EEF7D4D225F4332100836719 /* testHowitzer.h */,
 				EEF7D4CB25F432C700836719 /* tables.h */,
 				EEF7D4C625F42EDE00836719 /* trig.h */,
@@ -178,6 +187,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE3D11472603E9C300EEBCD0 /* tables.h in Sources */,
 				EEF7D4C725F42F1400836719 /* trig.h in Sources */,
 				EEF7D4D525F4332100836719 /* howitzer.cpp in Sources */,
 				C1D4EB402577FC14002B56E3 /* Lab08.cpp in Sources */,

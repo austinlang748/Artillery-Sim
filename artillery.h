@@ -68,11 +68,11 @@ public:
       );
       
       // initialize gravity
-      g = altitudeToGravity(position.getMetersY());
+      g = -Tables::get("altitudeToGravity", position.getMetersY());
       
       // initialize drag
-      c = machToDragCoefficient(speed);
-      p = altitudeToDensity(position.getMetersY());
+      c = Tables::get("machToDragCoefficient", speed);
+      p = Tables::get("altitudeToDensity", position.getMetersY());
       artilleryRadius = getArtilleryDiameter() * .5;
       a = circleArea(artilleryRadius);
       dragF = dragForce(c, p, speed, a);
@@ -90,11 +90,11 @@ public:
       speed = velocity.getSpeed();
 
       // update gravity
-      g = -altitudeToGravity(position.getMetersY());
+      g = -Tables::get("altitudeToGravity", position.getMetersY());
 
       // update drag
-      c = machToDragCoefficient(speed);
-      p = altitudeToDensity(position.getMetersY());
+      c = Tables::get("machToDragCoefficient", speed);
+      p = Tables::get("altitudeToDensity", position.getMetersY());
       artilleryRadius = getArtilleryDiameter() * .5;
       a = circleArea(artilleryRadius);
       dragF = dragForce(c, p, speed, a);
