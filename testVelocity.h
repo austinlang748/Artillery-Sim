@@ -35,7 +35,7 @@ public:
       test_addDx_valid();                     
       test_addDy_valid();           
       test_add_valid();           
-      test_addMagnitude_negMag();             
+      test_addMagnitude_negmag();
    }
 
    void test_constructorDefault()
@@ -148,16 +148,24 @@ public:
       //teardown
    }
 
-   void test_addmagnitude_negmag()
+   void test_addMagnitude_negmag()
    {
       //setup
-      velocity vel;
-      vel.set(100, 100);
+      double x_init = 100;
+      double y_init = 100;
+      double angleDegrees = 30;
+      double magnitudeToAdd = -100;
+      
+      Velocity vel;
+      vel.set(x_init, y_init);
+
       //exercise
-      vel.addmagnitude(2, -100);
+      vel.addMagnitude(angleDegrees, magnitudeToAdd);
+      
       //verfify
-      assert(vel.dx == 100 + 100 * cos(2 - m_pi));
-      assert(vel.dy == 100 + 100 * sin(2 - m_pi));
+      assert(vel.dx == x_init + std::abs(magnitudeToAdd) * cos(Trig::rad(angleDegrees)));
+      assert(vel.dy == y_init + std::abs(magnitudeToAdd) * sin(Trig::rad(angleDegrees)));
+      
       //teardown
    }   
 };

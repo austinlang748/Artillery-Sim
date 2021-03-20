@@ -62,10 +62,14 @@ public:
       addDy(ddy);
    }
 
-   void addMagnitude(double angleRadians, double magnitude) {
-      addDx(Trig::horizontalComponent(   magnitude, Trig::deg(angleRadians)));
-      addDx(Trig::verticalComponent(     magnitude, Trig::deg(angleRadians)));
+   void addMagnitude(double angleDegrees, double magnitude) {
+      addDx(Trig::horizontalComponent( std::abs(magnitude), angleDegrees));
+      addDy(Trig::verticalComponent(   std::abs(magnitude), angleDegrees));
    }
 
    friend class TestVelocity;
 };
+
+// stream I/O useful for debugging
+std::ostream & operator << (std::ostream & out, const Velocity& vel);
+std::istream & operator >> (std::istream & in, Velocity& vel);
