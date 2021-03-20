@@ -124,7 +124,6 @@ public:
    double getDistance()    const { return position.getMetersX() - initialPositionX; }
    double getHangTime()    const { return position.getMetersY(); }
    Position getPosition()  const { return position; }
-   double getSpeed()       const { return speed; }
    
    void reset()                  { hangTime = 0.0; }
    void setAltitude(double y)    { position.setMetersY(y); }
