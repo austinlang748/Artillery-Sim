@@ -131,7 +131,7 @@ public:
       //exercise
       double speed = artillery.getSpeed();
       //verfify
-      assert(speed == Artillery::artilleryV0);
+      assert(speed == 827.0);
       //teardown
    }
 
@@ -165,6 +165,7 @@ public:
       Position point0(0, 0);
       Artillery artillery(point0, M_PI / 4);
       artillery.hangTime = 100;
+      artillery.update();
       //exercise
       double time = artillery.getHangTime();
       //verfify
