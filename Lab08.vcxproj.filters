@@ -36,10 +36,13 @@
     <ClCompile Include="velocity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="artillery.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="howitzer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="artillery.cpp">
+    <ClCompile Include="tables.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -89,5 +92,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="machToDragTable.csv">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="altToDensityTable.csv">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="altToGravTable.csv">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="altToSosTable.csv">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

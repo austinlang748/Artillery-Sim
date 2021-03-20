@@ -1,5 +1,5 @@
 /********************************************************************************
- * HEADER FILE: tables.cpp
+ * HEADER FILE: tables.cpp 
  *
  * Contains all the functions and prototypes needed for the Tables class
  *
@@ -15,6 +15,8 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
+#include <algorithm>
+
 using namespace std;
 
 /********************************************************************************
@@ -35,9 +37,8 @@ private:
    static map<double, double> altToSos;
    static map<double, double> altToGrav;
    
-   
    // private helper methods
-   static map<double, double> csvFileToMap(char filename[]);   
+   static map<double, double> csvFileToMap(const char filename[]);
    static vector<pair<double, double> > mapToSortedVector(map<double, double> &myMap);
    static bool     compare(pair<double, double> a, pair<double, double> b);
    static double   getTableValue(vector<pair<double, double> > v, double value);

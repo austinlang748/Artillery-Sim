@@ -1,5 +1,5 @@
 /********************************************************************************
- * SOURCE FILE: tables.cpp
+ * SOURCE FILE: tables.cpp 
  *
  * Contains all the function implementations prototyped in tables.h
  *
@@ -8,16 +8,6 @@
  ********************************************************************************/
 
 #include "tables.h"
-
-
-/********************************************************************************
- * STATICS
- ********************************************************************************/
-map<double, double> Tables::machToDrag    = csvFileToMap("machToDragTable");
-map<double, double> Tables::altToDensity  = csvFileToMap("altToDensityTable");
-map<double, double> Tables::altToSos      = csvFileToMap("altToSosTable");
-map<double, double> Tables::altToGrav     = csvFileToMap("altToGravTable");
-
 
 /********************************************************************************
  * STATIC METHOD:    .csv-file to map
@@ -30,9 +20,8 @@ map<double, double> Tables::altToGrav     = csvFileToMap("altToGravTable");
  * PARAM:       filename : char[]
  * RETURN:      map<double, double>
  ********************************************************************************/
-// place function here, throwing errors before
-map<double, double> Tables::csvFileToMap(char filename[]) {
-   
+map<double, double> Tables::csvFileToMap(const char filename[]) {
+
    // initialize map
    map<double, double> myMap;
 
@@ -80,7 +69,7 @@ map<double, double> Tables::csvFileToMap(char filename[]) {
 vector<pair<double, double> > Tables::mapToSortedVector(map<double, double> &myMap) {
     vector<pair<double, double> > v;
     for (auto& it : myMap) v.push_back(it);
-    sort(v.begin(), v.end(), Tables::compare);
+    std::sort(v.begin(), v.end(), Tables::compare);
     return v;
 }
 
@@ -229,3 +218,11 @@ void Tables::display(string whichMap) {
       cout  << ' ' << setw(column1.length()) << row.first
             << " : " << row.second << endl;
 }
+
+/********************************************************************************
+ * STATICS
+ ********************************************************************************/
+map<double, double> Tables::machToDrag = csvFileToMap("machToDragTable.csv");
+map<double, double> Tables::altToDensity = csvFileToMap("altToDensityTable.csv");
+map<double, double> Tables::altToSos = csvFileToMap("altToSosTable.csv");
+map<double, double> Tables::altToGrav = csvFileToMap("altToGravTable.csv");
