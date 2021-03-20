@@ -62,18 +62,14 @@ public:
       addDy(ddy);
    }
 
-   void addMagnitude(double angleRadians, double magnitude) {
-      if (magnitude >= 0)
-      {
-         addDx(Trig::horizontalComponent(magnitude, Trig::deg(angleRadians)));
-         addDy(Trig::verticalComponent(magnitude, Trig::deg(angleRadians)));
-      }
-      else
-      {
-         addDx(Trig::horizontalComponent(-magnitude, Trig::deg(angleRadians - M_PI)));
-         addDy(Trig::verticalComponent(-magnitude, Trig::deg(angleRadians - M_PI)));
-      }
+   void addMagnitude(double angleDegrees, double magnitude) {
+      addDx(Trig::horizontalComponent( std::abs(magnitude), angleDegrees));
+      addDy(Trig::verticalComponent(   std::abs(magnitude), angleDegrees));
    }
 
    friend class TestVelocity;
 };
+
+// stream I/O useful for debugging
+std::ostream & operator << (std::ostream & out, const Velocity& vel);
+std::istream & operator >> (std::istream & in, Velocity& vel);

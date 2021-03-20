@@ -18,6 +18,7 @@
 		EE3D11822603EB1000EEBCD0 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3D11812603EB1000EEBCD0 /* GLUT.framework */; };
 		EE3D11842603EB1400EEBCD0 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3D11832603EB1400EEBCD0 /* OpenGL.framework */; };
 		EE3D118D2603F79F00EEBCD0 /* tables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE3D118B2603F79F00EEBCD0 /* tables.cpp */; };
+		EEF81FBE26069DEB00F10995 /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EEF81FB726069D9000F10995 /* test.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -58,6 +59,12 @@
 		EE3D11812603EB1000EEBCD0 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		EE3D11832603EB1400EEBCD0 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		EE3D118B2603F79F00EEBCD0 /* tables.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = tables.cpp; path = ../tables.cpp; sourceTree = "<group>"; };
+		EEF81FB626069D9000F10995 /* testHowitzer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = testHowitzer.h; path = ../testHowitzer.h; sourceTree = "<group>"; };
+		EEF81FB726069D9000F10995 /* test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = test.cpp; path = ../test.cpp; sourceTree = "<group>"; };
+		EEF81FB826069D9000F10995 /* testArtillery.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = testArtillery.h; path = ../testArtillery.h; sourceTree = "<group>"; };
+		EEF81FB926069D9000F10995 /* testPosition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = testPosition.h; path = ../testPosition.h; sourceTree = "<group>"; };
+		EEF81FBA26069D9000F10995 /* test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = test.h; path = ../test.h; sourceTree = "<group>"; };
+		EEF81FBB26069D9000F10995 /* testVelocity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = testVelocity.h; path = ../testVelocity.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +95,12 @@
 				EE3D118B2603F79F00EEBCD0 /* tables.cpp */,
 				EE3D11682603EA5900EEBCD0 /* tables.h */,
 				EE3D11712603EA5900EEBCD0 /* trig.h */,
+				EEF81FB726069D9000F10995 /* test.cpp */,
+				EEF81FBA26069D9000F10995 /* test.h */,
+				EEF81FB826069D9000F10995 /* testArtillery.h */,
+				EEF81FB626069D9000F10995 /* testHowitzer.h */,
+				EEF81FB926069D9000F10995 /* testPosition.h */,
+				EEF81FBB26069D9000F10995 /* testVelocity.h */,
 				EE3D11652603EA5900EEBCD0 /* uiDraw.cpp */,
 				EE3D11632603EA5900EEBCD0 /* uiDraw.h */,
 				EE3D11692603EA5900EEBCD0 /* uiInteract.cpp */,
@@ -184,6 +197,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEF81FBE26069DEB00F10995 /* test.cpp in Sources */,
 				EE3D11772603EA5900EEBCD0 /* uiInteract.cpp in Sources */,
 				EE3D11752603EA5900EEBCD0 /* Lab08.cpp in Sources */,
 				EE3D117A2603EA5900EEBCD0 /* ground.cpp in Sources */,
