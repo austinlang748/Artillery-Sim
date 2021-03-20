@@ -15,6 +15,8 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
+#include <algorithm>
+
 using namespace std;
 
 /********************************************************************************
@@ -31,7 +33,7 @@ class Tables
 {
 private:
    // static private member data: instantiated below under /**STATICS**/
-   static map<double, double> csvFileToMap(char filename[]);
+   static map<double, double> csvFileToMap(const char filename[]);
    static map<double, double> machToDrag;
    static map<double, double> altToDensity;
    static map<double, double> altToSos;
@@ -130,11 +132,3 @@ public:
                  << " : " << row.second << endl;
    }
 };
-
-/********************************************************************************
- * STATICS
- ********************************************************************************/
-map<double, double> Tables::machToDrag    = csvFileToMap("machToDragTable.csv");
-map<double, double> Tables::altToDensity  = csvFileToMap("altToDensityTable.csv");
-map<double, double> Tables::altToSos      = csvFileToMap("altToSosTable.csv");
-map<double, double> Tables::altToGrav     = csvFileToMap("altToGravTable.csv");

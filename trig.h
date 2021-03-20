@@ -7,7 +7,9 @@
 
 #pragma once
 
-#define M_PI 3.141592653589793238
+#ifndef M_PI
+   #define M_PI 3.141592653589793238
+#endif
 
 class Trig
 {

@@ -19,7 +19,7 @@
 #include "ground.h"     // for GROUND
 #include "howitzer.h"   // for HOWITZER
 #include "artillery.h"  // for ARTILLERY
-// #include "test.h"       // include unit test class
+#include "test.h"       // include unit test class
 using namespace std;
 
 /*************************************************************************
@@ -174,9 +174,9 @@ int main(int argc, char** argv)
 #endif // !_WIN32
 {
    // run test
-   bool runTest = false;
+   bool runTest = true;
    if (runTest) {
-      // testRunner();
+      testRunner();
       return 0; // quick exit
    }
 

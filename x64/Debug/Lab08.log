@@ -1,18 +1,2 @@
-﻿  velocity.cpp
-Lab08.obj : error LNK2005: "double __cdecl altitudeToDensity(double)" (?altitudeToDensity@@YANN@Z) already defined in artillery.obj
-Lab08.obj : error LNK2005: "double __cdecl altitudeToGravity(double)" (?altitudeToGravity@@YANN@Z) already defined in artillery.obj
-Lab08.obj : error LNK2005: "double __cdecl altitudeToSpeedOfSound(double)" (?altitudeToSpeedOfSound@@YANN@Z) already defined in artillery.obj
-Lab08.obj : error LNK2005: "double __cdecl machToDragCoefficient(double)" (?machToDragCoefficient@@YANN@Z) already defined in artillery.obj
-Lab08.obj : error LNK2005: "struct conversionTable1 * machToDragTable" (?machToDragTable@@3PAUconversionTable1@@A) already defined in artillery.obj
-Lab08.obj : error LNK2005: "struct conversionTable2 * altToDensityTable" (?altToDensityTable@@3PAUconversionTable2@@A) already defined in artillery.obj
-Lab08.obj : error LNK2005: "struct conversionTable3 * altToSosTable" (?altToSosTable@@3PAUconversionTable3@@A) already defined in artillery.obj
-Lab08.obj : error LNK2005: "struct conversionTable4 * altToGravTable" (?altToGravTable@@3PAUconversionTable4@@A) already defined in artillery.obj
-test.obj : error LNK2005: "double __cdecl altitudeToDensity(double)" (?altitudeToDensity@@YANN@Z) already defined in artillery.obj
-test.obj : error LNK2005: "double __cdecl altitudeToGravity(double)" (?altitudeToGravity@@YANN@Z) already defined in artillery.obj
-test.obj : error LNK2005: "double __cdecl altitudeToSpeedOfSound(double)" (?altitudeToSpeedOfSound@@YANN@Z) already defined in artillery.obj
-test.obj : error LNK2005: "double __cdecl machToDragCoefficient(double)" (?machToDragCoefficient@@YANN@Z) already defined in artillery.obj
-test.obj : error LNK2005: "struct conversionTable1 * machToDragTable" (?machToDragTable@@3PAUconversionTable1@@A) already defined in artillery.obj
-test.obj : error LNK2005: "struct conversionTable2 * altToDensityTable" (?altToDensityTable@@3PAUconversionTable2@@A) already defined in artillery.obj
-test.obj : error LNK2005: "struct conversionTable3 * altToSosTable" (?altToSosTable@@3PAUconversionTable3@@A) already defined in artillery.obj
-test.obj : error LNK2005: "struct conversionTable4 * altToGravTable" (?altToGravTable@@3PAUconversionTable4@@A) already defined in artillery.obj
-C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\x64\Debug\Lab08.exe : fatal error LNK1169: one or more multiply defined symbols found
+﻿  test.cpp
+  Lab08.vcxproj -> C:\Users\User1\Documents\BYU-Idaho\Winter 2021\CSE 230\Artillery-Sim\x64\Debug\Lab08.exe

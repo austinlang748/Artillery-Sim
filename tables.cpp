@@ -9,6 +9,8 @@
 
 #include "tables.h"
 
+using namespace std;
+
 /********************************************************************************
  * STATIC METHOD:    .csv-file to map
  *
@@ -20,7 +22,7 @@
  * PARAM:       filename : char[]
  * RETURN:      map<double, double>
  ********************************************************************************/
-map<double, double> Tables::csvFileToMap(char filename[]) {
+map<double, double> Tables::csvFileToMap(const char filename[]) {
 
    // initialize map
    map<double, double> myMap;
@@ -69,7 +71,7 @@ map<double, double> Tables::csvFileToMap(char filename[]) {
 vector<pair<double, double> > Tables::mapToSortedVector(map<double, double> &myMap) {
     vector<pair<double, double> > v;
     for (auto& it : myMap) v.push_back(it);
-    sort(v.begin(), v.end(), Tables::compare);
+    std::sort(v.begin(), v.end(), Tables::compare);
     return v;
 }
 
@@ -147,3 +149,12 @@ double Tables::getTableValue(vector<pair<double, double> > v, double value) {
 double Tables::getTableValue(map<double, double> myMap, double value) {
    return Tables::getTableValue(mapToSortedVector(myMap), value);
 }
+
+
+/********************************************************************************
+ * STATICS
+ ********************************************************************************/
+map<double, double> Tables::machToDrag = csvFileToMap("machToDragTable.csv");
+map<double, double> Tables::altToDensity = csvFileToMap("altToDensityTable.csv");
+map<double, double> Tables::altToSos = csvFileToMap("altToSosTable.csv");
+map<double, double> Tables::altToGrav = csvFileToMap("altToGravTable.csv");

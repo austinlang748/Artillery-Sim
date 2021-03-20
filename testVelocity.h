@@ -148,16 +148,16 @@ public:
       //teardown
    }
 
-   void test_addMagnitude_negMag()
+   void test_addmagnitude_negmag()
    {
       //setup
-      Velocity vel;
+      velocity vel;
       vel.set(100, 100);
       //exercise
-      vel.addMagnitude(2, -100);
+      vel.addmagnitude(2, -100);
       //verfify
-      assert(vel.dx == 100 + 100 * cos(2 - M_PI));
-      assert(vel.dy == 100 + 100 * sin(2 - M_PI));
+      assert(vel.dx == 100 + 100 * cos(2 - m_pi));
+      assert(vel.dy == 100 + 100 * sin(2 - m_pi));
       //teardown
    }   
 };
