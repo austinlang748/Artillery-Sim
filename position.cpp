@@ -36,7 +36,7 @@ Position& Position::operator = (const Position& pt)
  *****************************************/
 std::ostream& operator << (std::ostream& out, const Position& pt)
 {
-   out << "(" << pt.getMetersX() << "m , " << pt.getMetersY() << ",)";
+   out << "(" << pt.getMetersX() << "m , " << pt.getMetersY() << "m)";
    return out;
 }
 

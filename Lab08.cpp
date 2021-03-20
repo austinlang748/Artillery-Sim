@@ -12,7 +12,6 @@
  *****************************************************************/
 
 #include <cassert>      // for ASSERT
-#include <vector>
 #include "uiInteract.h" // for INTERFACE
 #include "uiDraw.h"     // for RANDOM and DRAW*
 #include "position.h"   // for POINT
@@ -21,6 +20,9 @@
 #include "artillery.h"  // for ARTILLERY
 #include "test.h"       // include unit test class
 using namespace std;
+
+#define SCREEN_WIDTH 700
+#define SCREEN_HEIGHT 500
 
 /*************************************************************************
  * Demo
@@ -32,7 +34,7 @@ private:
    Ground   ground;              // the ground
    Position ptUpperRight;        // size of the screen
    Howitzer howitzer;            // howitzer cannon object
-   vector<Artillery> artillery;  // artillery
+   Artillery* artillery;  // artillery
 
 public:
 
@@ -48,6 +50,7 @@ public:
       // initialize objects
       howitzer = Howitzer(hpos); // howitzer
       ground.reset(hpos);        // ground
+      artillery = NULL;
       
       // set projectile preview path
       for (int i = 0; i < 20; i++)
@@ -60,10 +63,10 @@ public:
    void update() {
 
       // advance time by half a second.
-      if (artillery.size() > 0) artillery[0].addHangTime(0.5);
+      if (artillery) artillery[0].addHangTime(0.5);
 
       // move the projectile across the screen
-      if (artillery.size() > 0) artillery[0].update();
+      if (artillery) artillery[0].update();
       /*
       for (int i = 0; i < 20; i++)
       {
@@ -85,7 +88,7 @@ public:
       gout.drawHowitzer(howitzer.getPosition(), howitzer.getAngle(), howitzer.getTime());
 
       // draw the projectile
-      if (artillery.size() > 0)
+      if (artillery)
          gout.drawProjectile(artillery[0].getPosition());
       
       
@@ -94,15 +97,33 @@ public:
        //  gout.drawProjectile(howitzer.getProjectilePathAt(i), 0.5 * (double)i);
        
    
-      if (artillery.size() > 0)
+      if (artillery)
          gout.drawProjectile(artillery[0].getPosition(), artillery[0].getHangTime());
 
       // draw some text on the screen
       gout.setf(ios::fixed | ios::showpoint);
       gout.precision(1);
-      if (artillery.size() > 0)
-         gout  << "Time since the bullet was fired: "
-               << artillery[0].getHangTime() << "s\n";
+      
+      // artillery info
+      if (artillery) {
+         double posx = 5000;
+
+         gout.setPosition(Position(posx, 19000));
+         gout  << "Artillery Hang Time :        " << artillery[0].getHangTime() << "s\n";
+      
+         gout.setPosition(Position(posx, 18000));
+         gout << "Artillery Altitude:           " << artillery[0].getAltitude();
+         
+         gout.setPosition(Position(posx, 17000));
+         gout << "Artillery Speed:              " << artillery[0].getSpeed();
+         
+         gout.setPosition(Position(posx, 16000));
+         gout << "Artillery Distance Traveled:  " << artillery[0].getDistance();
+      }
+      
+      // other text
+      gout.setPosition(Position(22000, 19000));
+      gout << "Press 'Q' to quit\n";
    }
    
    void handleInput(const Interface* pUI) {
@@ -120,12 +141,8 @@ public:
          howitzer.addAngle((howitzer.getAngle() >= 0 ? 0.003 : -0.003));
 
       // fire that gun
-      if (pUI->getHeldKey(SPACE)) {
-         if (artillery.size() == 0)
-            artillery.push_back(Artillery(howitzer.getPosition(), howitzer.getAngle()));
-         else
-            artillery[0].reset();
-      }
+      if (pUI->getHeldKey(SPACE))
+         artillery = new Artillery(howitzer.getPosition(), howitzer.getAngle());
       
       // restart demo
 
@@ -136,6 +153,8 @@ public:
 
    double time;
    double angle;
+   
+   Position getScreenDims() const { return ptUpperRight; }
 };
 
 /*************************************
@@ -155,6 +174,12 @@ void callBack(const Interface* pUI, void* p)
    pGame->update();
    pGame->draw(gout);
    pGame->handleInput(pUI);
+   
+   // restart on 'R'
+   if (pUI->getHeldKey(R)) {
+      cout << "R\n";
+      p = new Demo(pGame->getScreenDims());
+   }
 }
 
 double Position::metersFromPixels = 40.0;
@@ -181,9 +206,9 @@ int main(int argc, char** argv)
    }
 
    // Initialize OpenGL
-   Position ptUpperRight;
-   ptUpperRight.setPixelsX(700.0);
-   ptUpperRight.setPixelsY(500.0);
+   Position ptUpperRight(SCREEN_WIDTH, SCREEN_HEIGHT);
+   ptUpperRight.setPixelsX(ptUpperRight.getMetersX());
+   ptUpperRight.setPixelsY(ptUpperRight.getMetersY());
    Position().setZoom(40.0 /* 42 meters equals 1 pixel */);
    Interface ui(0, NULL,
       "Demo",   /* name on the window */
@@ -191,6 +216,8 @@ int main(int argc, char** argv)
 
    // Initialize the demo
    Demo demo(ptUpperRight);
+   
+   cout << demo.getScreenDims() << endl;
 
    // set everything into action
    ui.run(callBack, &demo);

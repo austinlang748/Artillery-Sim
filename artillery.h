@@ -12,6 +12,7 @@
 #include "velocity.h"
 #include "tables.h"
 #include <cmath>
+#include <iostream>
 using namespace std;
 
 class Artillery
@@ -64,6 +65,9 @@ public:
       // Initialize hang time
       hangTime = 0.00;
       
+      // initialize hang time
+      hangTime = 0;
+      
       // initialize position
       position = position_0;
       if (position.getMetersX() < 0) position.setMetersX(0);
@@ -113,6 +117,8 @@ public:
          getAccelerationX(dragF, angleDegrees),
          getAccelerationY(g, dragF, angleDegrees)
       );
+      
+      cout << "gravity: " << g << endl;
 
       // update position
       velocity.add(acceleration);
@@ -125,7 +131,6 @@ public:
    double getHangTime()    const { return position.getMetersY(); }
    Position getPosition()  const { return position; }
    
-   void reset()                  { hangTime = 0.0; }
    void setAltitude(double y)    { position.setMetersY(y); }
    void addHangTime(double dt)   { hangTime += dt; }
 
