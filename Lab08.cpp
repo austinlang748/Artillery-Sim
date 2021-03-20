@@ -41,8 +41,8 @@ public:
       ground(ptUpperRight)
    {
       Position hpos = Position(
-         ptUpperRight.getPixelsX() * 0.5,
-         ground.getElevationMeters(Position(ptUpperRight.getPixelsX() * 0.5, 0.0))
+         ptUpperRight.getMetersX() * 0.5,
+         ground.getElevationMeters(Position(ptUpperRight.getMetersX() * 0.5, 0.0))
       );
 
       // initialize objects
@@ -88,11 +88,11 @@ public:
       if (artillery.size() > 0)
          gout.drawProjectile(artillery[0].getPosition());
       
-      /*
-       // draw projected projectile path
-       for (int i = 0; i < 20; i++)
-         gout.drawProjectile(howitzer.getProjectilePathAt(i), 0.5 * (double)i);
-       */
+      
+       //// draw projected projectile path
+       //for (int i = 0; i < 20; i++)
+       //  gout.drawProjectile(howitzer.getProjectilePathAt(i), 0.5 * (double)i);
+       
    
       if (artillery.size() > 0)
          gout.drawProjectile(artillery[0].getPosition(), artillery[0].getHangTime());
