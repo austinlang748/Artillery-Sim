@@ -46,15 +46,15 @@ private:
 
 
 public:
-   static double get(string whichMap, double keyValue) {
-        map<double, double> m;
-        if      (whichMap == "machToDrag")      m = machToDrag;
-        else if (whichMap == "altToDensity")    m = altToDensity;
-        else if (whichMap == "altToSos")        m = altToSos;
-        else if (whichMap == "altToGrav")       m = altToGrav;
-        else return 0.0;
-        return getTableValue(m, keyValue);
-   }
+  static double get(string whichMap, double keyValue) {
+     map<double, double> m;
+     if      (whichMap == "machToDragCoefficient")    m = machToDrag;
+     else if (whichMap == "altitudeToDensity")        m = altToDensity;
+     else if (whichMap == "altitudeToSpeedOfSound")   m = altToSos;
+     else if (whichMap == "altitudeToGravity")        m = altToGrav;
+     else return 0.0;
+     return getTableValue(m, keyValue);
+  }
 
    static void display(string whichMap);
 };

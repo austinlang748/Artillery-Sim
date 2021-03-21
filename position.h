@@ -26,7 +26,7 @@ public:
    // constructors
    Position()            : x(0.0), y(0.0)  {}
    Position(double x, double y); // in meters
-   Position(const Position & pt) : x(pt.x), y(pt.y) {}
+   Position(const Position & pt) : x(pt.getMetersX()), y(pt.getMetersY()) {}
    Position& operator = (const Position& pt);
 
    // getters
@@ -51,10 +51,9 @@ public:
    void addPixelsY(double dyPixels) { setPixelsY(getPixelsY() + dyPixels); }
 
    // deal with the ratio of meters to pixels
-   void setZoom(double metersFromPixels)
-   {
-      this->metersFromPixels = metersFromPixels;
-   }
+   void setZoom(double metersFromPixels) { this->metersFromPixels = metersFromPixels; }
+   void zoomIn() { metersFromPixels += 20.0; }
+   void zoomOut() { if (metersFromPixels > 20.0) metersFromPixels -= 20.0; }
    double getZoom() const { return metersFromPixels; }
 
 private:

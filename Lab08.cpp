@@ -21,8 +21,8 @@
 #include "test.h"       // include unit test class
 using namespace std;
 
-#define SCREEN_WIDTH 700
-#define SCREEN_HEIGHT 500
+#define  SCREEN_WIDTH   1000
+#define  SCREEN_HEIGHT  800
 
 /*************************************************************************
  * Demo
@@ -31,13 +31,15 @@ using namespace std;
 class Demo
 {
 private:
-   Ground   ground;              // the ground
-   Position ptUpperRight;        // size of the screen
-   Howitzer howitzer;            // howitzer cannon object
-   Artillery* artillery;  // artillery
+   Ground      ground;        // the ground
+   Position    ptUpperRight;  // size of the screen
+   Howitzer    howitzer;      // howitzer cannon object
+   Artillery*  artillery;     // artillery
+   
+   int keyDownTimer = 0;
 
 public:
-
+   
    Demo(Position ptUpperRight) :
       ptUpperRight(ptUpperRight),
       ground(ptUpperRight)
@@ -51,32 +53,23 @@ public:
       howitzer = Howitzer(hpos); // howitzer
       ground.reset(hpos);        // ground
       artillery = NULL;
-      
-      // set projectile preview path
-      for (int i = 0; i < 20; i++)
-         howitzer.setProjectilePathAt(i, Position(
-            (double)i * 2.0,
-            ptUpperRight.getPixelsY()/1.5
-         ));
    }
    
    void update() {
 
-      // advance time by half a second.
-      if (artillery) artillery[0].addHangTime(0.5);
+      if (artillery) {
+         
+         // advance time one frame's worth of time elapsed
+         artillery->addHangTime(1/30);
 
-      // move the projectile across the screen
-      if (artillery) artillery[0].update();
-      /*
-      for (int i = 0; i < 20; i++)
-      {
-         double x = howitzer.getProjectilePathAt(i).getPixelsX();
-         x -= 1.0;
-         if (x < 0)
-            x = ptUpperRight.getPixelsX();
-         howitzer.getProjectilePathAt(i).setPixelsX(x);
+         // move the projectile across the screen
+         artillery->update();
+         
+         // stop updating artillery when it hits the ground
+         if (artillery->getPosition().getMetersY() < ground.getElevationMeters(artillery->getPosition())) {
+            artillery->setUpdate(false);
+         }
       }
-       */
    }
    
    void draw(ogstream & gout) {
@@ -86,44 +79,26 @@ public:
 
       // draw the howitzer
       gout.drawHowitzer(howitzer.getPosition(), howitzer.getAngle(), howitzer.getTime());
-
-      // draw the projectile
-      if (artillery)
-         gout.drawProjectile(artillery[0].getPosition());
       
-      /*
-       // draw projected projectile path
-       for (int i = 0; i < 20; i++)
-         gout.drawProjectile(howitzer.getProjectilePathAt(i), 0.5 * (double)i);
-       */
-   
-      if (artillery)
-         gout.drawProjectile(artillery[0].getPosition(), artillery[0].getHangTime());
+      if (artillery) {
+         gout.drawProjectile(artillery->getPosition(), artillery->getHangTime());
+         for (int i = 0; i < 20; i++)
+            gout.drawProjectile(artillery->getProjectilePathAt(i), (double)i * .5);
+      }
 
       // draw some text on the screen
       gout.setf(ios::fixed | ios::showpoint);
       gout.precision(1);
       
       // artillery info
-      if (artillery) {
-         double posx = 5000;
-
-         gout.setPosition(Position(posx, 19000));
-         gout  << "Artillery Hang Time :        " << artillery[0].getHangTime() << "s\n";
-      
-         gout.setPosition(Position(posx, 18000));
-         gout << "Artillery Altitude:           " << artillery[0].getAltitude();
-         
-         gout.setPosition(Position(posx, 17000));
-         gout << "Artillery Speed:              " << artillery[0].getSpeed();
-         
-         gout.setPosition(Position(posx, 16000));
-         gout << "Artillery Distance Traveled:  " << artillery[0].getDistance();
-      }
+      if (artillery) artillery->draw(gout);
       
       // other text
       gout.setPosition(Position(22000, 19000));
       gout << "Press 'Q' to quit\n";
+      
+      gout.setPosition(Position(22000, 18000));
+      gout << "Press 'R' to reset\n";
    }
    
    void handleInput(const Interface* pUI) {
@@ -144,17 +119,24 @@ public:
       if (pUI->getHeldKey(SPACE))
          artillery = new Artillery(howitzer.getPosition(), howitzer.getAngle());
       
-      // restart demo
+      // restart artillery
+      if (pUI->getHeldKey(R))
+         artillery = NULL;
 
       // exit demo window (quit)
       if (pUI->getHeldKey(Q))
          exit(0);
    }
-
-   double time;
-   double angle;
    
    Position getScreenDims() const { return ptUpperRight; }
+   void setKeyDownTimer() { setKeyDownTimer(10); }
+   void setKeyDownTimer(int value) { keyDownTimer = value; }
+   bool keyDownTimerIsNonzero() { return keyDownTimer > 0; }
+   void updateKeyDownTimer(bool debug=false) {
+      if (debug) cout << keyDownTimer << endl;
+      keyDownTimer--;
+   }
+
 };
 
 /*************************************
@@ -175,10 +157,12 @@ void callBack(const Interface* pUI, void* p)
    pGame->draw(gout);
    pGame->handleInput(pUI);
    
-   // restart on 'R'
-   if (pUI->getHeldKey(R)) {
-      cout << "R\n";
-      p = new Demo(pGame->getScreenDims());
+   // zoom in/out on up/down press
+   if (pGame->keyDownTimerIsNonzero()) pGame->updateKeyDownTimer();
+   else if (pUI->getHeldKey(UP) || pUI->getHeldKey(DOWN)) {
+      pGame->setKeyDownTimer(10);
+      if       (pUI->getHeldKey(UP))   Position().zoomIn();
+      else if  (pUI->getHeldKey(DOWN)) Position().zoomOut();
    }
 }
 

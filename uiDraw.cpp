@@ -131,6 +131,7 @@ void ogstream :: drawProjectile(const Position& pos, double age)
    posEnd.setPixelsX(pos.getPixelsX() + 1.5);
    posEnd.setPixelsY(pos.getPixelsY() + 1.5);
    drawRectangle(posBegin, posEnd, color /* red % */, color /* green % */, color /* blue % */);
+   glResetColor();
 }
 
 /************************************************************************

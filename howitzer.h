@@ -12,7 +12,6 @@
 class Howitzer
 {
 private:
-   Position projectilePath[20];  // path of the projectile
    Position position;
    double   angleRadians;
    double   time;    // amount of time since the last firing
@@ -33,19 +32,11 @@ public:
    double getAngle()       { return angleRadians; }
    double getTime()        { return time; }
    
-   Position getProjectilePathAt(int index) {
-      return projectilePath[index];
-   }
-   
    // setters
    void setPosition(Position position) { this->position = position;  }
    void setAngle(double angleRadians)  { this->angleRadians = angleRadians; }
    void setTime(double time)           { this->time = time; }
 
-   void setProjectilePathAt(int index, Position p) {
-      projectilePath[index] = p;
-   }
-   
    // adders
    void addAngle(double dAngle)        { angleRadians += dAngle; }
 
