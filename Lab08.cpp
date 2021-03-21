@@ -45,8 +45,8 @@ public:
       ground(ptUpperRight)
    {
       Position hpos = Position(
-         ptUpperRight.getPixelsX() * 0.5,
-         ground.getElevationMeters(Position(ptUpperRight.getPixelsX() * 0.5, 0.0))
+         ptUpperRight.getMetersX() * 0.5,
+         ground.getElevationMeters(Position(ptUpperRight.getMetersX() * 0.5, 0.0))
       );
 
       // initialize objects
@@ -85,7 +85,6 @@ public:
          for (int i = 0; i < 20; i++)
             gout.drawProjectile(artillery->getProjectilePathAt(i), (double)i * .5);
       }
-
       // draw some text on the screen
       gout.setf(ios::fixed | ios::showpoint);
       gout.precision(1);
