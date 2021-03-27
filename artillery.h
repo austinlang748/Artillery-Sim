@@ -1,10 +1,13 @@
-/*************************************************
- * Artillery.h
- * Artillery class header file
+/**********************************************************************
+ * artillery.h
+ * Artillery class declaration
+
  * Authors:
- *      Austin Hilderbrand (creator of functions)
- *      Elijah Harrison (populated functions)
- *************************************************/
+ *    Austin Hilderbrand (creator of functions)
+ *    Elijah Harrison (populated functions)
+ *
+ * The Artillery class describes each projectile. 
+ **********************************************************************/
 
 #pragma once
 

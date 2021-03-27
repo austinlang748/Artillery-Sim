@@ -1,11 +1,13 @@
-/***********************************************************************
- * Header File:
- *    Test Velocity : Test the Velocity class
+/**********************************************************************
+ * testVelocity.h
+ * TestVelocity class declaration
+
  * Authors:
  *    Austin Hilderbrand
- * Summary:
- *    All the unit tests for Velocity
- ************************************************************************/
+ *
+ * The TestVelocity class contains all the unit tests for the
+ * Velocity class.
+ **********************************************************************/
 
 #pragma once
 

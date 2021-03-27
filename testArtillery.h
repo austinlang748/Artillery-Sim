@@ -1,11 +1,13 @@
-/***********************************************************************
- * Header File:
- *    Test Artillery : Test the Artillery class
+/**********************************************************************
+ * testArtillery.h
+ * TestArtillery class declaration
+
  * Authors:
  *    Austin Hilderbrand
- * Summary:
- *    All the unit tests for Artillery
- ************************************************************************/
+ *
+ * The TestArtillery class contains all the unit tests for the
+ * Artillery class.
+ **********************************************************************/
 
 #pragma once
 

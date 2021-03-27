@@ -1,11 +1,12 @@
-/***********************************************************************
- * Heaader File:
- *    Test : Test runner
- * Author:
- *    Br. Helfrich
- * Summary:
- *    The test runner for all the unit tests
- ************************************************************************/
+/**********************************************************************
+ * test.h
+ * testRunner function prototype
+
+ * Authors:
+ *    Elijah Harrison (populated functions)
+ *
+ * The testRunner is the wrapper for the unit tests.
+ **********************************************************************/
 
 #pragma once
 

@@ -1,11 +1,13 @@
-/********************************************************************************
- * HEADER FILE: tables.cpp 
+/**********************************************************************
+ * tables.h
+ * Tables class declaration
+
+ * Authors:
+ *    Austin Hilderbrand
+ *    Elijah Harrison
  *
- * Contains all the functions and prototypes needed for the Tables class
- *
- * AUTHOR: Elijah Harrison
- * AUTHOR: Austin Hilderbrand
- ********************************************************************************/
+ * The Tables class describes the conversion tables.
+ **********************************************************************/
 
 #pragma once
 

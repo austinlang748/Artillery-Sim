@@ -1,9 +1,12 @@
-//
-//  velocity.h
-//  Lab08
-//
-//  Created by Elijah Harrison on 3/6/21.
-//
+/**********************************************************************
+ * velocity.h
+ * Velocity class declaration
+
+ * Authors:
+ *    Austin Hilderbrand
+ *
+ * The Velocity class describes all velocity-related behavior.
+ **********************************************************************/
 
 #pragma once
 

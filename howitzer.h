@@ -1,9 +1,13 @@
-//
-//  howitzer.h
-//  Lab08
-//
-//  Created by Austin Hilderbrand on 3/6/21.
-//
+/**********************************************************************
+ * howitzer.h
+ * Howitzer class declaration
+
+ * Authors:
+ *    Austin Hilderbrand
+ *    Elijah Harrison
+ *
+ * The Howitzer class describes the howitzer.
+ **********************************************************************/
 
 #pragma once
 

@@ -1,11 +1,13 @@
-/********************************************************************************
- * HEADER FILE: demo.h
+/**********************************************************************
+ * demo.h
+ * Demo class declaration
+
+ * Authors:
+ *    Austin Hilderbrand (creator of functions)
+ *    Elijah Harrison (populated functions)
  *
- * Contains the definition of and prototypes involved with the Demo class
- *
- * AUTHOR: Elijah Harrison
- * AUTHOR: Austin Hilderbrand
- ********************************************************************************/
+ * The Demo class describes the basic gameplay elements.
+ **********************************************************************/
 
 #pragma once
 

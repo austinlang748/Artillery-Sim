@@ -1,9 +1,12 @@
-//
-//  Trig::hpp
-//  Lab08
-//
-// static functions for quick geometric calculations
-//
+/**********************************************************************
+ * trig.h
+ * Trig class declaration
+
+ * Authors:
+ *    Elijah Harrison
+ *
+ * The Trig class contains trig math and conversion helper functions.
+ **********************************************************************/
 
 #pragma once
 

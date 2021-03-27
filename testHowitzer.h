@@ -1,11 +1,14 @@
-/***********************************************************************
- * Header File:
- *    Test Howitzer : Test the Howitzer class
+/**********************************************************************
+ * testHowitzer.h
+ * TestHowitzer class declaration
+
  * Authors:
- *    Elijah Harrison and Austin Hilderbrand
- * Summary:
- *    All the unit tests for Howitzer
- ************************************************************************/
+ *    Elijah Harrison (creater of methods)
+ *    Austin Hilderbrand (populator of methods)
+ *
+ * The TestHowitzer class contains all the unit tests for the
+ * Howitzer class.
+ **********************************************************************/
 
 #pragma once
 
