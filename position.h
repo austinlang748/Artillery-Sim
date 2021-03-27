@@ -40,15 +40,19 @@ public:
 
 
    // setters
-   void setMetersX(double xMeters)  { this->x = xMeters; }
-   void setMetersY(double yMeters)  { this->y = yMeters; }
-   void addMeters(Velocity v)       { addMetersX(v.getDx()); addMetersY(v.getDy()); }
-   void addMetersX(double dxMeters) { setMetersX(getMetersX() + dxMeters); }
-   void addMetersY(double dyMeters) { setMetersY(getMetersY() + dyMeters); }
-   void setPixelsX(double xPixels)  { this->x = xPixels * metersFromPixels;   }
-   void setPixelsY(double yPixels)  { this->y = yPixels * metersFromPixels;   }
-   void addPixelsX(double dxPixels) { setPixelsX(getPixelsX() + dxPixels); }
-   void addPixelsY(double dyPixels) { setPixelsY(getPixelsY() + dyPixels); }
+   void setMeters (Position p)         { setMeters(p.getMetersX(), p.getMetersY()); }
+   void setMeters (double x, double y) { setMetersX(x); setMetersY(y); }
+   void setMetersX(double xMeters)     { this->x = xMeters; }
+   void setMetersY(double yMeters)     { this->y = yMeters; }
+   void addMetersX(double dxMeters)    { setMetersX(getMetersX() + dxMeters); }
+   void addMetersY(double dyMeters)    { setMetersY(getMetersY() + dyMeters); }
+   void setPixels (Position p)         { setPixels(p.getPixelsX(), p.getPixelsY()); }
+   void setPixels (double x, double y) { setPixelsX(x); setPixelsY(y); }
+   void setPixelsX(double xPixels)     { this->x = xPixels * metersFromPixels;   }
+   void setPixelsY(double yPixels)     { this->y = yPixels * metersFromPixels;   }
+   void addMeters (Velocity v)         { addMetersX(v.getDx()); addMetersY(v.getDy()); }
+   void addPixelsX(double dxPixels)    { setPixelsX(getPixelsX() + dxPixels); }
+   void addPixelsY(double dyPixels)    { setPixelsY(getPixelsY() + dyPixels); }
 
    // deal with the ratio of meters to pixels
    void setZoom(double metersFromPixels) { this->metersFromPixels = metersFromPixels; }

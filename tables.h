@@ -55,6 +55,8 @@ public:
      else return 0.0;
      return getTableValue(m, keyValue);
   }
+   
+   static map<double, double> getAltToSos() { return altToSos; }
 
    static void display(string whichMap);
 };

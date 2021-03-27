@@ -19,10 +19,9 @@ using namespace std;
 class Artillery
 {
 private:
-   static constexpr const double artilleryV0 = 827.0*.5;       // m/s
+   static constexpr const double artilleryV0 = 827.0;       // m/s
    static constexpr const double artilleryMass = 46.7;         // kg
    static constexpr const double artilleryDiameterMm = 154.89; // mm
-   static constexpr const double dt = 1/30;                    // s
    static double getArtilleryDiameter() { return artilleryDiameterMm / 1000; } // m
 
    static double dragForce(double c, double p, double v, double a);
@@ -38,6 +37,7 @@ private:
    double      initialPositionX;
    double      angleDegrees;
    double      speed;
+   double      sos;
    double      mach;
    double      g;       // gravity
    double      c;       // drag constant
@@ -58,10 +58,12 @@ public:
     *************************************************/
    Artillery(Position position_0, double angle0_Rads) {
       
-      // initialize angle
+      // handle angle
       double angle0_Degrees = Trig::deg(angle0_Rads);
       if (angle0_Degrees > 90 && angle0_Degrees <= 180) angle0_Degrees = 90;
       else if (angle0_Degrees < -90 && angle0_Degrees >= -180) angle0_Degrees = -90;
+      
+      // initialize angle
       angleDegrees = angle0_Degrees >= 0 ? 90 - angle0_Degrees : -90 - angle0_Degrees;
 
       // Initialize speed
@@ -87,7 +89,7 @@ public:
       g     = Tables::get("altitudeToGravity", getAltitude());
       
       // initialize drag
-      mach  = Tables::get("altitudeToSos", getAltitude());
+      mach  = Tables::get("altitudeToSpeedOfSound", getAltitude());
       c     = Tables::get("machToDragCoefficient", mach);
       p     = Tables::get("altitudeToDensity", getAltitude());
       a     = circleArea(getArtilleryDiameter() * .5);
@@ -109,7 +111,7 @@ public:
       if (!updateTrue) return;
       
       // update hang time
-      hangTime += dt;
+      addHangTime(.05); // fps == 30
 
       // update angle/speed/velocity
       angleDegrees = Trig::deg(Trig::cartesianToAngle(velocity.getDx(), velocity.getDy()));
@@ -119,8 +121,13 @@ public:
       g     = Tables::get("altitudeToGravity", getAltitude());
 
       // update drag
-      mach  = Tables::get("altitudeToSos", getAltitude());
+      
+      sos   = Tables::get("altitudeToSpeedOfSound", getAltitude());
+      
+      mach  = 0; // convert speed of sound to mach?
+      
       c     = Tables::get("machToDragCoefficient", mach);
+      
       p     = Tables::get("altitudeToDensity", getAltitude());
       a     = circleArea(getArtilleryDiameter() * .5);
       dragF = dragForce(c, p, speed, a);
@@ -154,65 +161,51 @@ public:
             gout.drawProjectile(projectilePath[i], (double)i*.5);
    }
    
+   Position textPosition;
+   Position valuePosition;
+   Position unitsPosition;
    void drawInfo(ogstream & gout) {
       // this method will be called by demo, and will only be called for
       // one single artillery object (the last one in the stack)
 
-      if (false) return; // toggle display
+      // set positioning/column spacing
+      textPosition.setPixels(80, 310);
+      valuePosition = textPosition;
+      valuePosition.addPixelsX(300);
+      unitsPosition = valuePosition;
+      unitsPosition.addPixelsX(60);
 
-      int i = 0;
-      int textX = 5000;
-      int numbersX = textX + 11000;
-      int dy = 1000;
-      int y = 12250;
+      // display info
+      drawInfo(gout, "Artillery Hang Time", getHangTime(), "s");
+      drawInfo(gout, "Artillery Altitude", getAltitude(), "m");
+      drawInfo(gout, "Artillery Speed", getSpeed(), "m/s");
+      drawInfo(gout, "Artillery Distance Traveled", getDistance(), "m");
+      drawInfo(gout, "", 0, ""); // empty line
+      drawInfo(gout, "Gravity at Altitude", g, "m/s/s");
+      drawInfo(gout, "Air Density at Altitude", p, "kg/m^3");
+      drawInfo(gout, "Speed of Sound at Altitude", mach, "m/s");
+      drawInfo(gout, "Drag Coefficient at Current Mach", c, "");
 
-      gout.setPosition(Position(textX, y - dy*i));
-      gout  << "Artillery Hang Time:";
-      gout.setPosition(Position(numbersX, y - dy*i++));
-      gout  << getHangTime() << " s";
-   
-      gout.setPosition(Position(textX, y - dy*i));
-      gout  << "Artillery Altitude:";
-      gout.setPosition(Position(numbersX, y - dy*i++));
-      gout  << getAltitude() << " m";
-      
-      gout.setPosition(Position(textX, y - dy*i));
-      gout  << "Artillery Speed:";
-      gout.setPosition(Position(numbersX, y - dy*i++));
-      gout  << getSpeed() << " m/s";
-      
-      gout.setPosition(Position(textX, y - dy*i));
-      gout  << "Artillery Distance Traveled:";
-      gout.setPosition(Position(numbersX, y - dy*i++));
-      gout  << getDistance() << " m";
-      
-      gout.setPosition(Position(textX, y - dy*i));
-      gout  << "Gravity at Altitude:";
-      gout.setPosition(Position(numbersX, y - dy*i++));
-      gout  << g << " m/s/s";
-      
-      gout.setPosition(Position(textX, y - dy*i));
-      gout  << "Air Density at Altitude:";
-      gout.setPosition(Position(numbersX, y - dy*i++));
-      gout  << p << " kg/m^3";
-      
-      gout.setPosition(Position(textX, y - dy*i));
-      gout  << "Speed of Sound at Altitude:";
-      gout.setPosition(Position(numbersX, y - dy*i++));
-      gout  << mach << "m/s";
-      
-      gout.setPosition(Position(textX, y - dy*i));
-      gout  << "Drag Coefficient at current mach:";
-      gout.setPosition(Position(numbersX, y - dy*i++));
-      gout  << c << "m/s";
-      
       if (landed) {
-         gout.setPosition(Position(3500, 4000)
-           //Position(gout.getCenterPoint().getPixelsX()-1000,
-           //         gout.getCenterPoint().getPixelsY())
-         );
+         gout.setPosition(Position(3500, 4000));
          gout << "LANDED";
       }
+   }
+   
+   void drawInfo(ogstream & gout, string description, double value, string units) {
+      
+      double dy = -20;
+      gout.setPosition(textPosition);
+      gout << description << ":";
+      textPosition.addPixelsY(dy);
+      
+      gout.setPosition(valuePosition);
+      gout << value;
+      valuePosition.addPixelsY(dy);
+      
+      gout.setPosition(unitsPosition);
+      gout << " " << units;
+      unitsPosition.addPixelsY(dy);
    }
    
    // getters

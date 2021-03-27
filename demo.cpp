@@ -29,10 +29,8 @@ Demo::Demo(Position ptUpperRight) :
 void Demo::update() {
 
    for (auto projectile : artillery) {
-      // advance time one frame's worth of time elapsed
-      projectile->addHangTime(1/30);
       
-      // move the projectile across the screen
+      // update each projectile
       projectile->update();
       
       // stop updating artillery when it hits the ground
