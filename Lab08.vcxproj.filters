@@ -39,10 +39,10 @@
     <ClCompile Include="artillery.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="howitzer.cpp">
+    <ClCompile Include="tables.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tables.cpp">
+    <ClCompile Include="demo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -87,6 +87,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="trig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="demo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

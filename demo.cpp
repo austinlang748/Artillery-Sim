@@ -28,6 +28,8 @@ Demo::Demo(Position ptUpperRight) :
 
 void Demo::update() {
 
+   howitzer.incrementTime(0.5);
+
    for (auto projectile : artillery) {
       
       // update each projectile

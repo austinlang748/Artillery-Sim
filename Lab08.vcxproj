@@ -140,8 +140,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="artillery.cpp" />
+    <ClCompile Include="demo.cpp" />
     <ClCompile Include="ground.cpp" />
-    <ClCompile Include="howitzer.cpp" />
     <ClCompile Include="Lab08.cpp" />
     <ClCompile Include="position.cpp" />
     <ClCompile Include="tables.cpp" />
@@ -152,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="artillery.h" />
+    <ClInclude Include="demo.h" />
     <ClInclude Include="ground.h" />
     <ClInclude Include="howitzer.h" />
     <ClInclude Include="tables.h" />
