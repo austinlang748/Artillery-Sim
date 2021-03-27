@@ -19,9 +19,10 @@ using namespace std;
 class Artillery
 {
 private:
-   static constexpr const double artilleryV0 = 827.0*.5;           // m/s
-   static constexpr const double artilleryMass = 46.7;          // kg
-   static constexpr const double artilleryDiameterMm = 154.89;  // mm
+   static constexpr const double artilleryV0 = 827.0*.5;       // m/s
+   static constexpr const double artilleryMass = 46.7;         // kg
+   static constexpr const double artilleryDiameterMm = 154.89; // mm
+   static constexpr const double dt = 1/30;                    // s
    static double getArtilleryDiameter() { return artilleryDiameterMm / 1000; } // m
 
    static double dragForce(double c, double p, double v, double a);
@@ -106,6 +107,9 @@ public:
 
       // quick update
       if (!updateTrue) return;
+      
+      // update hang time
+      hangTime += dt;
 
       // update angle/speed/velocity
       angleDegrees = Trig::deg(Trig::cartesianToAngle(velocity.getDx(), velocity.getDy()));
@@ -154,13 +158,13 @@ public:
       // this method will be called by demo, and will only be called for
       // one single artillery object (the last one in the stack)
 
-      if (true) return; // toggle display
+      if (false) return; // toggle display
 
       int i = 0;
       int textX = 5000;
       int numbersX = textX + 11000;
       int dy = 1000;
-      int y = 12000;
+      int y = 12250;
 
       gout.setPosition(Position(textX, y - dy*i));
       gout  << "Artillery Hang Time:";
@@ -203,7 +207,7 @@ public:
       gout  << c << "m/s";
       
       if (landed) {
-         gout.setPosition(Position(4000, 4000)
+         gout.setPosition(Position(3500, 4000)
            //Position(gout.getCenterPoint().getPixelsX()-1000,
            //         gout.getCenterPoint().getPixelsY())
          );
