@@ -56,11 +56,14 @@ void Demo::draw(ogstream & gout) {
    // draw some text on the screen
    
    // how to quit
-   gout.setPosition(Position(3500, 15050));
+   Position textPos;
+   textPos.setPixels(90, 380);
+   gout.setPosition(textPos);
    gout << "Press 'Q' to quit\n";
    
    // how to reset
-   gout.setPosition(Position(3500, 14050));
+   textPos.setPixelsX(290);
+   gout.setPosition(textPos);
    gout << "Press 'R' to reset terrain\n";
 }
 

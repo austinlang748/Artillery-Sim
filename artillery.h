@@ -19,12 +19,13 @@ using namespace std;
 class Artillery
 {
 private:
-   static constexpr const double artilleryV0 = 827.0;       // m/s
+   static constexpr const double artilleryV0 = 827.0;          // m/s
    static constexpr const double artilleryMass = 46.7;         // kg
    static constexpr const double artilleryDiameterMm = 154.89; // mm
    static double getArtilleryDiameter() { return artilleryDiameterMm / 1000; } // m
 
    static double dragForce(double c, double p, double v, double a);
+   static double sosToDragCoefficient(double sos);
    static double circleArea(double radius);
    static double getForce(double mass, double acceleration);
    static double getAccelerationX(double dragF, double angle);
@@ -124,7 +125,7 @@ public:
       
       sos   = Tables::get("altitudeToSpeedOfSound", getAltitude());
       
-      mach  = 1; // convert speed of sound to mach?
+      mach  = sosToDragCoefficient(sos)*1.1; // convert speed of sound to mach?
       
       c     = Tables::get("machToDragCoefficient", mach);
       
@@ -169,7 +170,7 @@ public:
       // one single artillery object (the last one in the stack)
 
       // set positioning/column spacing
-      textPosition.setPixels(80, 310);
+      textPosition.setPixels(90, 350);
       valuePosition = textPosition;
       valuePosition.addPixelsX(300);
       unitsPosition = valuePosition;
