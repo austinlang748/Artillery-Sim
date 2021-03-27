@@ -1,33 +1,26 @@
-/*************************************************
- * Artillery.cpp
- * Artillery class source file
+/**********************************************************************
+ * artillery.cpp
+ * Artillery class definition
+
  * Authors:
- *      Austin Hilderbrand (creator of functions)
- *      Elijah Harrison (populated functions)
- *************************************************/
+ *    Austin Hilderbrand
+ *    Elijah Harrison
+ *
+ * The Artillery class describes each projectile.
+ **********************************************************************/
 
 #include "artillery.h"
 
-/*************************************************
- * ARTILLERY: Constructor
+/**********************************************************************
+ * Artillery::Artillery
  *
  * PARAM: position_0 : Position
  * PARAM: angle_0    : double
- *************************************************/
+ **********************************************************************/
 Artillery::Artillery(Position position_0, double angle0_Rads) {
    
-   // TODO: make function called setAngle to house the following verifications/angle handling
-   
-   // handle angle
-   double angle0_Degrees = Trig::deg(angle0_Rads);
-   if (angle0_Degrees > 90 && angle0_Degrees <= 180) angle0_Degrees = 90;
-   else if (angle0_Degrees < -90 && angle0_Degrees >= -180) angle0_Degrees = -90;
-   
-   // initialize angle
-   angleDegrees = angle0_Degrees >= 0 ? 90 - angle0_Degrees : -90 - angle0_Degrees;
-   
-   // save initial angle as howitzer angle for display
-   howitzerAngle = angleDegrees;
+   // Initialize angle and perform error-checking
+   setAngle(angle0_Rads);
 
    // Initialize speed
    speed = artilleryV0;
@@ -68,9 +61,29 @@ Artillery::Artillery(Position position_0, double angle0_Rads) {
    for (int i = 0; i < 20; i++) projectilePath[i] = Position();
 }
 
-/*
+/**********************************************************************
+ * Artillery::setAngle
+ * 
+ * Sets the artillery angle and performs error handling.
+ **********************************************************************/
+void Artillery::setAngle(double angle) {
+   // handle angle
+   double angle0_Degrees = Trig::deg(angle);
+   if (angle0_Degrees > 90 && angle0_Degrees <= 180) angle0_Degrees = 90;
+   else if (angle0_Degrees < -90 && angle0_Degrees >= -180) angle0_Degrees = -90;
+
+   // initialize angle
+   angleDegrees = angle0_Degrees >= 0 ? 90 - angle0_Degrees : -90 - angle0_Degrees;
+
+   // save initial angle as howitzer angle for display
+   howitzerAngle = angleDegrees;
+}
+
+/**********************************************************************
+ * Artillery::update
  *
- */
+ * Call this periodically to update the artillery attributes.
+ **********************************************************************/
 void Artillery::update() {
 
    // quick update
@@ -110,9 +123,11 @@ void Artillery::update() {
    setProjectilePathAt(0, position);
 }
 
-/*
+/**********************************************************************
+ * Artillery::draw
  *
- */
+ * Draws the artillery to the screen.
+ **********************************************************************/
 void Artillery::draw(ogstream & gout) {
    
    // draw main projectile
@@ -124,9 +139,11 @@ void Artillery::draw(ogstream & gout) {
          gout.drawProjectile(projectilePath[i], (double)i*.5);
 }
 
-/*
+/**********************************************************************
+ * Artillery::drawInfo
  *
- */
+ * PARAM: gout : ogstream&
+ **********************************************************************/
 void Artillery::drawInfo(ogstream & gout) {
    // this method will be called by demo, and will only be called for
    // one single artillery object (the last one in the stack)
@@ -151,6 +168,14 @@ void Artillery::drawInfo(ogstream & gout) {
    }
 }
 
+/**********************************************************************
+ * Artillery::drawInfo
+ *
+ * PARAM: gout        : ogstream&
+ * PARAM: description : String
+ * PARAM: value       : Double
+ * PARAM: units       : String
+ **********************************************************************/
 void Artillery::drawInfo(ogstream & gout, string description, double value, string units) {
    
    double dy = -20;
@@ -167,11 +192,11 @@ void Artillery::drawInfo(ogstream & gout, string description, double value, stri
    unitsPosition.addPixelsY(dy);
 }
 
-/*************************************************
+/**********************************************************************
  * STATIC METHODS
- *************************************************/
+ **********************************************************************/
 
-/*************************************************
+/**********************************************************************
  * STATIC METHOD: get force
  *
  * calculates and returns force based on given mass and acceleration
@@ -185,15 +210,16 @@ void Artillery::drawInfo(ogstream & gout, string description, double value, stri
  * f = force in newtons (N)
  * m = mass in kilograms (kg)
  * a = acceleration (m/s²)
- **************************************************/
+ **********************************************************************/
 double Artillery::getForce(double mass, double acceleration) {
     return mass * acceleration;
 }
 
-/*************************************************
+/**********************************************************************
  * STATIC METHOD: speed of sound to drag coefficient
  *
- * calculates and returns drag coefficient based on current sos/reference sos
+ * calculates and returns drag coefficient based on current 
+ * sos/reference sos
  *
  * PARAM: speed of sound : double
  *
@@ -204,13 +230,13 @@ double Artillery::getForce(double mass, double acceleration) {
  * current sos = current speed of sound
  * reference sos = speed of sound in dry air at 20 ºC
  * speed of sound in dry air at 20 °C = 343 m / s
- **************************************************/
+ **********************************************************************/
 double Artillery::sosToDragCoefficient(double sos) {
    double sosReference = 343;
    return sos/sosReference;
 }
 
-/*************************************************
+/**********************************************************************
  * STATIC METHOD: drag force
  *
  * calculates and returns drag force given the following parameters:
@@ -228,12 +254,12 @@ double Artillery::sosToDragCoefficient(double sos) {
  * ρ = density of the fluid/gas (kg/m^3)
  * v = velocity of the projectile (m/s)
  * a = surface area (m^2)
- **************************************************/
+ **********************************************************************/
 double Artillery::dragForce(double c, double p, double v, double a) {
     return 0.5 * c * p * v * v * a;
 }
 
-/*************************************************
+/**********************************************************************
  * STATIC METHOD: circle area
  *
  * calculates and returns area of a circle
@@ -245,12 +271,12 @@ double Artillery::dragForce(double c, double p, double v, double a) {
  * where
  * a = area of the circle (m²)
  * r = radius of the circle (m)
- **************************************************/
+ **********************************************************************/
 double Artillery::circleArea(double radius) {
     return M_PI * radius * radius;
 }
 
-/*************************************************
+/**********************************************************************
  * STATIC METHOD: get acceleration x
  *
  * calculates and returns the horizontal acceleration to be
@@ -259,17 +285,19 @@ double Artillery::circleArea(double radius) {
  * PARAM: dragF : double
  * PARAM: angle : double
  *
- * horizontal acceleration formula: accelerationX = -dragF * cos(angle) / artilleryMass
+ * horizontal acceleration formula: 
+ *    accelerationX = -dragF * cos(angle) / artilleryMass
  *
  * where
- * dragF = drag force (directional force applied on projectile due to drag) (N)
+ * dragF = drag force (directional force applied on projectile 
+           due to drag) (N)
  * angle = direction of drag force applied on projectile (degrees)
- **************************************************/
+ **********************************************************************/
 double Artillery::getAccelerationX(double dragF, double angle) {
     return -(Trig::horizontalComponent(dragF, angle) / artilleryMass);
 }
 
-/*************************************************
+/**********************************************************************
  * STATIC METHOD: get acceleration y
  *
  * calculates and returns the vertical acceleration to be
@@ -279,14 +307,16 @@ double Artillery::getAccelerationX(double dragF, double angle) {
  * PARAM: dragF : double
  * PARAM: angle : double
  *
- * horizontal acceleration formula: accelerationY = - (gravity + dragF * sin(angle) / artilleryMass)
+ * horizontal acceleration formula: 
+ *    accelerationY = - (gravity + dragF * sin(angle) / artilleryMass)
  *
  * where
  * gravity = acceleration due to gravity at given altitude (m/s/s)
- * dragF = drag force (directional force applied on projectile due to drag) (N)
+ * dragF = drag force (directional force applied on projectile 
+           due to drag) (N)
  * angle = direction of drag force applied on projectile (degrees)
  * artilleryMass = mass of artillery (kg)
- **************************************************/
+ **********************************************************************/
 double Artillery::getAccelerationY(double gravity, double dragF, double angle) {
     return -(gravity + Trig::verticalComponent(dragF, angle) / artilleryMass);
 }

@@ -23,9 +23,9 @@ class Artillery
 {
 private:
    // constants
-   static constexpr const double artilleryV0 = 827.0;          // m/s
-   static constexpr const double artilleryMass = 46.7;         // kg
-   static constexpr const double artilleryDiameterMm = 154.89; // mm
+   static constexpr const double artilleryV0 = 827.0;                          // m/s
+   static constexpr const double artilleryMass = 46.7;                         // kg
+   static constexpr const double artilleryDiameterMm = 154.89;                 // mm
    static double getArtilleryDiameter() { return artilleryDiameterMm / 1000; } // m
 
    // static calculation helper methods
@@ -62,6 +62,7 @@ private:
    Position textPosition;
    Position valuePosition;
    Position unitsPosition;
+
    // helper methods for ui
    void drawInfo(ogstream & gout, string description, double value, string units);
 
@@ -83,7 +84,6 @@ public:
    double   getDistance()  const { return position.getMetersX() - initialPositionX; }
    double   getHangTime()  const { return hangTime; }
    Position getPosition()  const { return position; }
-   
    Position getProjectilePathAt(int index) {
       return projectilePath[index];
    }
@@ -93,10 +93,11 @@ public:
    void addHangTime(double dt)   { hangTime += dt; }
    void setLanded(bool value)    { landed = value; }
    void setUpdate(bool value)    { updateTrue = value; }
-   
+   void setAngle(double angle);
    void setProjectilePathAt(int index, Position p) {
       projectilePath[index] = p;
    }
    
+   // Make the test class a friend
    friend class TestArtillery;
 };

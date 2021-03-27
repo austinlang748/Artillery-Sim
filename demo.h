@@ -17,10 +17,6 @@
 #include "howitzer.h"   // for HOWITZER
 #include "artillery.h"  // for ARTILLERY
 
-/********************************************************************************
- * CLASS: Demo
- * Test structure to capture the LM that will move around the screen
- ********************************************************************************/
 class Demo
 {
 private:

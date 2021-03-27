@@ -9,6 +9,11 @@
 
 #include "demo.h"
 
+ /**********************************************************************
+  * Demo:Demo
+  *
+  * Initialize the ground and the howitzer.
+  **********************************************************************/
 Demo::Demo(Position ptUpperRight) :
    ptUpperRight(ptUpperRight),
    ground(ptUpperRight)
@@ -25,6 +30,11 @@ Demo::Demo(Position ptUpperRight) :
    howitzer.placeOnGround(&ground);
 }
 
+/**********************************************************************
+ * Demo::update
+ *
+ * Call this periodically to update the simulation.
+ **********************************************************************/
 void Demo::update() {
 
    howitzer.incrementTime(0.5);
@@ -45,6 +55,11 @@ void Demo::update() {
    }
 }
 
+/**********************************************************************
+ * Demo::draw
+ *
+ * Draw all objects to the screen.
+ **********************************************************************/
 void Demo::draw(ogstream & gout) {
    
    ground.draw(gout);                  // draw the ground first
@@ -68,6 +83,18 @@ void Demo::draw(ogstream & gout) {
    gout << "Press 'R' to reset terrain\n";
 }
 
+/**********************************************************************
+ * Demo::handleInput
+ *
+ * Handle user input, including:
+ *    Q:     quit
+ *    R:     reset
+ *    RIGHT: adjust aim, fast
+ *    LEFT:  adjust aim, fast
+ *    UP:    adjust aim, slow
+ *    DOWN:  adjust aim, slow
+ *    SPACE: fire howitzer
+ **********************************************************************/
 void Demo::handleInput(const Interface* pUI) {
    
    // move a large amount

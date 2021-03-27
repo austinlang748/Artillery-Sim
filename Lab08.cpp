@@ -1,15 +1,17 @@
-/*************************************************************
- * 1. Name:
- *      The Key
+/**********************************************************************
+ * 1. Names:
+ *      Austin Hilderbrand
+ *      Elijah Harrison
  * 2. Assignment Name:
- *      Lab 08: M777 Howitzer
+ *      Artillery Simulator - Final Draft
  * 3. Assignment Description:
  *      Simulate firing the M777 howitzer 15mm artillery piece
  * 4. What was the hardest part? Be as specific as possible.
- *      ??
+ *      The most difficult part was working through persistent 
+ *      compiler and behavioral bugs. 
  * 5. How long did it take for you to complete the assignment?
- *      ??
- *****************************************************************/
+ *      6 weeks
+ **********************************************************************/
 
 #include <cassert>      // for ASSERT
 #include "uiInteract.h" // for INTERFACE
@@ -22,13 +24,13 @@ using namespace std;
 #define  SCREEN_WIDTH   600
 #define  SCREEN_HEIGHT  500
 
-/*************************************
+/**********************************************************************
  * All the interesting work happens here, when
  * I get called back from OpenGL to draw a frame.
  * When I am finished drawing, then the graphics
  * engine will wait until the proper amount of
  * time has passed and put the drawing on the screen.
- **************************************/
+ **********************************************************************/
 void callBack(const Interface* pUI, void* p)
 {
    // the first step is to cast the void pointer into a game object. This
@@ -49,9 +51,9 @@ void callBack(const Interface* pUI, void* p)
 
 double Position::metersFromPixels = 40.0;
 
-/*********************************
+/**********************************************************************
  * Initialize the simulation and set it in motion
- *********************************/
+ **********************************************************************/
 #ifdef _WIN32_X
 #include <windows.h>
 int WINAPI wWinMain(

@@ -14,9 +14,6 @@
 #include <cmath>
 #include "trig.h"
 
-/**
- * Velocity Class
- **/
 class Velocity
 {
 private:

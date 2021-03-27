@@ -142,6 +142,7 @@
     <ClCompile Include="artillery.cpp" />
     <ClCompile Include="demo.cpp" />
     <ClCompile Include="ground.cpp" />
+    <ClCompile Include="howitzer.cpp" />
     <ClCompile Include="Lab08.cpp" />
     <ClCompile Include="position.cpp" />
     <ClCompile Include="tables.cpp" />
