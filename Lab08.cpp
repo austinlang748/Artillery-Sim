@@ -19,8 +19,8 @@
 #include "test.h"       // include unit test class
 using namespace std;
 
-#define  SCREEN_WIDTH   500
-#define  SCREEN_HEIGHT  400
+#define  SCREEN_WIDTH   600
+#define  SCREEN_HEIGHT  500
 
 /*************************************
  * All the interesting work happens here, when
