@@ -26,13 +26,11 @@ public:
       test_howitzer_getPosition();
       test_howitzer_getAngle();
       test_howitzer_getTime();
-      test_howitzer_getProjectilePathAt();
 
       // Setters
       test_howitzer_setPosition();
       test_howitzer_setAngle();
       test_howitzer_setTime();
-      test_howitzer_setProjectilePathAt();
    }
 
    void test_howitzer_nonDefault()
@@ -82,18 +80,6 @@ public:
       //teardown
    }
 
-   void test_howitzer_getProjectilePathAt()
-   {
-      //setup
-      Howitzer howitzer(Position(10, 10));
-      howitzer.projectilePath[0] = Position(20, 20);
-      //exercise
-      Position projectilePosition = howitzer.getProjectilePathAt(0);
-      //verfify
-      assert(projectilePosition == Position(20, 20));
-      //teardown
-   }
-
 
    void test_howitzer_setPosition()
    {
@@ -127,18 +113,6 @@ public:
       howitzer.setTime(50.00);
       //verfify
       assert(howitzer.time == 50.00);
-      //teardown
-   }
-
-   void test_howitzer_setProjectilePathAt()
-   {
-      //setup
-      Howitzer howitzer(Position(10, 10));
-      howitzer.projectilePath[0] = Position(10, 10);
-      //exercise
-      howitzer.setProjectilePathAt(0, Position(20, 20));
-      //verfify
-      assert(howitzer.projectilePath[0] == Position(20, 20));
       //teardown
    }
 

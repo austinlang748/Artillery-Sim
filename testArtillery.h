@@ -35,10 +35,13 @@ public:
       test_getSpeed_valid();
       test_getHangTime_initial(); 
       test_getHangTime_valid();
+      test_getProjectilePathAt();
+      
+      // setters
+      test_setProjectilePathAt();
    }
 
-   void test_initialize_valid()
-   {
+   void test_initialize_valid() {
       //setup
       Position point0(0, 0);
       //exercise
@@ -50,8 +53,7 @@ public:
       //teardown
    }
 
-   void test_initialize_invalidPoint()
-   {
+   void test_initialize_invalidPoint() {
       //setup
       Position point0(-1, 0);
       //exercise
@@ -62,8 +64,7 @@ public:
       //teardown
    }
 
-   void test_initialize_invalidAngle1()
-   {
+   void test_initialize_invalidAngle1() {
       //setup
       Position point0(0, 0);
       //exercise
@@ -73,8 +74,7 @@ public:
       //teardown
    }
 
-   void test_initialize_invalidAngle2()
-   {
+   void test_initialize_invalidAngle2() {
       //setup
       Position point0(0, 0);
       //exercise
@@ -84,8 +84,7 @@ public:
       //teardown
    }
 
-   void test_getAltitude_initial()
-   {
+   void test_getAltitude_initial() {
       //setup
       Position point0(0, 0);
       Artillery artillery(point0, M_PI / 4);
@@ -96,8 +95,7 @@ public:
       //teardown
    }
 
-   void test_getAltitude_valid()
-   {
+   void test_getAltitude_valid() {
       //setup
       Position point0(0, 1000);
       Artillery artillery(point0, M_PI / 4);
@@ -108,8 +106,7 @@ public:
       //teardown
    }
 
-   void test_getSpeed_valid()
-   {
+   void test_getSpeed_valid() {
       //setup
       Position point0(0, 0);
       Artillery artillery(point0, M_PI / 4);
@@ -123,8 +120,7 @@ public:
       //teardown
    }
 
-   void test_getSpeed_initial()
-   {
+   void test_getSpeed_initial() {
       //setup
       Position point0(0, 0);
       Artillery artillery(point0, M_PI / 4);
@@ -135,8 +131,7 @@ public:
       //teardown
    }
 
-   void test_getDistance_invalidTime()
-   {
+   void test_getDistance_invalidTime() {
       //setup
       Position point0(100, 0);
       Artillery artillery(point0, M_PI / 4);
@@ -147,11 +142,10 @@ public:
       //teardown
    }
 
-   void test_getDistance_initial()
-   {
+   void test_getDistance_initial() {
       //setup
-      Position point0(0, 0);
-      Artillery artillery(point0, M_PI / 4);
+      Position point0(50, 100);
+      Artillery artillery(point0, 30);
       //exercise
       double distance = artillery.getDistance();
       //verfify
@@ -159,13 +153,11 @@ public:
       //teardown
    }
 
-   void test_getHangTime_valid()
-   {
+   void test_getHangTime_valid() {
       //setup
       Position point0(0, 0);
       Artillery artillery(point0, M_PI / 4);
       artillery.hangTime = 100;
-      artillery.update();
       //exercise
       double time = artillery.getHangTime();
       //verfify
@@ -173,8 +165,7 @@ public:
       //teardown
    }
 
-   void test_getHangTime_initial()
-   {
+   void test_getHangTime_initial() {
       //setup
       Position point0(0, 0);
       Artillery artillery(point0, M_PI / 4);
@@ -184,6 +175,31 @@ public:
       assert (time == 0);
       //teardown
    }
+   
+   void test_getProjectilePathAt() {
+      //setup
+      Artillery artillery(Position(10, 10), 0);
+      artillery.projectilePath[0] = Position(20, 20);
+      //exercise
+      Position projectilePosition = artillery.getProjectilePathAt(0);
+      //verfify
+      assert(projectilePosition == Position(20, 20));
+      //teardown
+   }
+
+   void test_setProjectilePathAt() {
+      //setup
+      Artillery artillery(Position(10, 10), 0);
+      Position newPosition(30, 30);
+      int index = 5;
+      artillery.projectilePath[index] = Position(20, 20);
+      //exercise
+      artillery.setProjectilePathAt(index, newPosition);
+      //verfify
+      assert(artillery.projectilePath[index] == newPosition);
+      //teardown
+   }
+
 
 };
 

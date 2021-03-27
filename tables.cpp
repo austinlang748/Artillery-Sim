@@ -222,7 +222,7 @@ void Tables::display(string whichMap) {
 /********************************************************************************
  * STATICS
  ********************************************************************************/
-map<double, double> Tables::machToDrag = csvFileToMap("machToDragTable.csv");
-map<double, double> Tables::altToDensity = csvFileToMap("altToDensityTable.csv");
-map<double, double> Tables::altToSos = csvFileToMap("altToSosTable.csv");
-map<double, double> Tables::altToGrav = csvFileToMap("altToGravTable.csv");
+map<double, double> Tables::machToDrag    = csvFileToMap("machToDragTable.csv");
+map<double, double> Tables::altToDensity  = csvFileToMap("altToDensityTable.csv");
+map<double, double> Tables::altToSos      = csvFileToMap("altToSosTable.csv");
+map<double, double> Tables::altToGrav     = csvFileToMap("altToGravTable.csv");
