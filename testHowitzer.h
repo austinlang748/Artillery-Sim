@@ -29,7 +29,7 @@ public:
       // Setters
       test_howitzer_setPosition();
       test_howitzer_setAngle();
-      test_howitzer_setTime();
+      test_howitzer_incrementTime();
    }
 
    void test_howitzer_nonDefault()
@@ -91,15 +91,15 @@ public:
       //teardown
    }
 
-   void test_howitzer_setTime()
+   void test_howitzer_incrementTime()
    {
       //setup
       Howitzer howitzer(Position(10, 10));
       howitzer.time = 0.00;
       //exercise
-      howitzer.setTime(50.00);
+      howitzer.incrementTime(0.50);
       //verfify
-      assert(howitzer.time == 50.00);
+      assert(howitzer.time == 0.50);
       //teardown
    }
 

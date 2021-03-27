@@ -61,7 +61,9 @@ public:
          if (pUI->keysAreHeld()) displayControls = false;
    }
    
-   Artillery* fire() { return new Artillery(position, angleRadians); }
+   Artillery* fire() { 
+      time = 0.00;
+      return new Artillery(position, angleRadians); }
    
    // getters
    Position getPosition()  { 
@@ -76,7 +78,7 @@ public:
       this->position = position;  
    }
    void setAngle(double angleRadians)  { this->angleRadians = angleRadians; }
-   void setTime(double time)           { this->time = time; }
+   void incrementTime(double time)           { this->time += time; }
    
    void placeOnGround(Ground * ground) {
       position.setMetersY(ground->getElevationMeters(position));
