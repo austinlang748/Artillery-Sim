@@ -24,49 +24,53 @@ Demo::Demo(Position ptUpperRight) :
    
    // now that ground is initialized, reset howitzer y position
    howitzer.placeOnGround(&ground);
-
-   // artillery shouldn't exist (yet)
-   artillery = NULL;
 }
 
 void Demo::update() {
 
-   if (artillery) {
-      
+   for (auto projectile : artillery) {
       // advance time one frame's worth of time elapsed
-      artillery->addHangTime(1/30);
-
+      projectile->addHangTime(1/30);
+      
       // move the projectile across the screen
-      artillery->update();
+      projectile->update();
       
       // stop updating artillery when it hits the ground
-      if (artillery->getPosition().getMetersY() < ground.getElevationMeters(artillery->getPosition())) {
-         artillery->setUpdate(false);
+      if (projectile->getPosition().getMetersY() < ground.getElevationMeters(projectile->getPosition())) {
+         projectile->setUpdate(false);
+         
+         // if artillery has hit ground and stopped updating, check to see if it has hit the target
+         if (ground.hasHitTarget(projectile->getPosition()))
+            projectile->setLanded(true);
       }
    }
 }
 
 void Demo::draw(ogstream & gout) {
    
-   ground.draw(gout);                     // draw the ground first
-   howitzer.draw(gout);                   // draw the howitzer
-   if (artillery) artillery->draw(gout);  // draw projectile (if it exists)
+   ground.draw(gout);                  // draw the ground first
+   howitzer.draw(gout);                // draw the howitzer
+   for (auto projectile : artillery)   // draw projectile (if it exists)
+      projectile->draw(gout);
+   if (artillery.size() > 0)           // display projectile info (for last projectile in stack)
+      artillery.back()->drawInfo(gout);
 
    // draw some text on the screen
-   gout.setPosition(Position(22000, 19000));
+   
+   // how to quit
+   gout.setPosition(Position(3500, 15050));
    gout << "Press 'Q' to quit\n";
    
-   gout.setPosition(Position(22000, 18000));
-   gout << "Press 'R' to reset\n";
+   // how to reset
+   gout.setPosition(Position(3500, 14050));
+   gout << "Press 'R' to reset terrain\n";
 }
 
 void Demo::handleInput(const Interface* pUI) {
    
    // move a large amount
-   if (pUI->getHeldKey(RIGHT))
-      howitzer.addAngle(0.05);
-   if (pUI->getHeldKey(LEFT))
-      howitzer.addAngle(-0.05);
+   if ( pUI->getHeldKey(RIGHT) ) howitzer.addAngle( 0.05);
+   if ( pUI->getHeldKey(LEFT)  ) howitzer.addAngle(-0.05);
 
    // move by a little
    if (pUI->getHeldKey(UP))
@@ -76,17 +80,19 @@ void Demo::handleInput(const Interface* pUI) {
 
    // fire that gun
    if (pUI->getHeldKey(SPACE))
-      artillery = new Artillery(howitzer.getPosition(), howitzer.getAngle());
+      artillery.push_back(howitzer.fire());
    
-   // restart artillery
+   // reset ground
    if (pUI->getHeldKey(R)) {
       Position hpos(howitzer.getPosition());
       ground.reset(hpos);
       howitzer.placeOnGround(&ground);
-      artillery = NULL;
+      artillery.clear();
    }
 
    // exit demo window (quit)
    if (pUI->getHeldKey(Q))
       exit(0);
+   
+   howitzer.handleInput(pUI);
 }

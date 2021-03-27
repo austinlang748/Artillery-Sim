@@ -15,6 +15,7 @@
 #include <cassert>    // I feel the need... the need for asserts
 #include <time.h>     // for clock
 #include <cstdlib>    // for rand()
+#include <iostream>
 
 
 #ifdef __APPLE__
@@ -200,18 +201,43 @@ void Interface::keyEvent() {
 }
 
 /*****************************************************
- * INTERFACE : GET/SET HELD KEY
+ * INTERFACE : GET HELD KEY
+ *
  * Author: Elijah Harrison
- * Basic Getter/Setter to see if key is being held
+ *
+ * Basic Getter to see if key is being held
  *****************************************************/
-bool Interface::getHeldKey(int key) const
-{
+bool Interface::getHeldKey(int key) const {
    return heldKeys[key];
 }
 
-void Interface::setHeldKey(int key, bool value)
-{
+/*****************************************************
+ * INTERFACE : SET HELD KEY
+ *
+ * Author: Elijah Harrison
+ *
+ * Basic setter to set if key is being held
+ *****************************************************/
+void Interface::setHeldKey(int key, bool value) {
    heldKeys[key] = value;
+}
+
+/*****************************************************
+ * INTERFACE : keys are held
+ *
+ * Author: Elijah Harrison
+ *
+ * Getter: returns true representing if any keys in heldKeys are 'true'
+ * else returns false
+ *****************************************************/
+bool Interface::keysAreHeld() const {
+   // return true representing if any keys in heldKeys are 'true'
+   // else return false
+   for (auto key : heldKeys) {
+      // cout << key.first << endl;
+      if (key.second) return true;
+   }
+   return false;
 }
 
 /************************************************************************

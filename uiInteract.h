@@ -76,6 +76,7 @@ public:
    // Get/Set various key events
    bool getHeldKey(int key) const;
    void setHeldKey(int key, bool value);
+   bool keysAreHeld() const;
 
    // Current frame rate
    double frameRate() const { return timePeriod;      }

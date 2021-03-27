@@ -36,11 +36,12 @@ void callBack(const Interface* pUI, void* p)
    Demo* pGame = (Demo*)p;
    ogstream gout;
    
-   // handle some text display things
+   // handle some opengl things
    gout.setf(ios::fixed | ios::showpoint);
    gout.precision(1);
+   gout.setScreenDimensions(Position(SCREEN_WIDTH, SCREEN_HEIGHT));
 
-   // update game (methods defined in demo.cpp)
+   // update game (methods defined in demo.cpp) (should be the last thing done in callback)
    pGame->update();
    pGame->draw(gout);
    pGame->handleInput(pUI);
@@ -80,8 +81,6 @@ int main(int argc, char** argv)
 
    // Initialize the demo
    Demo demo(ptUpperRight);
-   
-   // cout << demo.getScreenDims() << endl;
 
    // set everything into action
    ui.run(callBack, &demo);

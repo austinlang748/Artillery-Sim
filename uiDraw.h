@@ -48,6 +48,11 @@ public:
       return *this;
    }
    
+   // Methods specific to representing the screen dimensions
+   void setScreenDimensions(const Position& tr) { this->tr = tr; }
+   Position getScreenDimensions() const { return tr; }
+   Position getCenterPoint() const { return Position(tr.getPixelsX()*.5, tr.getPixelsY()*.5); }
+   
    // Specific methods for the game
    void drawLine(const Position & begin, const Position & end,
                  double red = 0.0, double green = 0.0, double blue = 0.0);
@@ -60,7 +65,8 @@ public:
 private:
    
    Position rotate(const Position& origin, double x, double y, double rotation);
-   Position pos;
+   Position pos;  // position at which to draw text
+   Position tr;   // position obj representing screen dimensions
 };
 
 

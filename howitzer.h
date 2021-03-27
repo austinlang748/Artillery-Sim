@@ -10,6 +10,8 @@
 #include "position.h"
 #include "uiDraw.h"
 #include "ground.h"
+#include "artillery.h"
+#include "uiInteract.h"
 
 class Howitzer
 {
@@ -17,6 +19,8 @@ private:
    Position position;
    double   angleRadians;
    double   time;    // amount of time since the last firing
+   
+   bool displayControls = true;
 
 public:
    
@@ -27,11 +31,37 @@ public:
    }
    
    void draw(ogstream & gout) {
+      
+      // draw cannon
       gout.drawHowitzer(position, angleRadians, time);
       
+      // draw some text
+      
+      // howitzer angle
       gout.setPosition(Position(4000, 31000));
       gout << "Howitzer Angle: " << Trig::deg(angleRadians);
+      
+      // initial instructions for controls
+      if (displayControls) {
+         gout.setPosition(Position(3500, 11500));
+         gout << "Controls";
+         gout.setPosition(Position(3500, 10000));
+         gout << "LEFT/RIGHT";
+         gout.setPosition(Position(3500, 9000));
+         gout << "- change howitzer angle by large amount";
+         gout.setPosition(Position(3500, 8000));
+         gout << "UP/DOWN";
+         gout.setPosition(Position(3500, 7000));
+         gout << "- change howitzer angle by a small amount";
+      }
    }
+   
+   void handleInput(const Interface* pUI) {
+      if (displayControls) // hide controls instructions on any key press
+         if (pUI->keysAreHeld()) displayControls = false;
+   }
+   
+   Artillery* fire() { return new Artillery(position, angleRadians); }
    
    // getters
    Position getPosition()  { 

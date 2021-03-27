@@ -22,10 +22,10 @@
 class Demo
 {
 private:
-   Ground      ground;        // the ground
-   Position    ptUpperRight;  // size of the screen
-   Howitzer    howitzer;      // howitzer cannon object
-   Artillery*  artillery;     // artillery
+   Ground               ground;        // the ground
+   Position             ptUpperRight;  // size of the screen
+   Howitzer             howitzer;      // howitzer cannon object
+   vector<Artillery*>   artillery;     // artillery
    
    int keyDownTimer = 0;
 
@@ -41,5 +41,4 @@ public:
    void setKeyDownTimer(int value) { keyDownTimer = value; }
    bool keyDownTimerIsNonzero() { return keyDownTimer > 0; }
    void updateKeyDownTimer(bool debug=false) { keyDownTimer--; }
-
 };

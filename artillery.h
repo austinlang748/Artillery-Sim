@@ -45,8 +45,8 @@ private:
    double      dragF;   // drag force
 
    Position    projectilePath[20]; // path already traveled of the projectile
-   bool        updateTrue;
-   bool        landed;
+   bool        updateTrue           = true;
+   bool        landed               = false;
 
 public:
    
@@ -100,10 +100,6 @@ public:
       
       // initialize projectile path
       for (int i = 0; i < 20; i++) projectilePath[i] = Position();
-      
-      // set booleans
-      setUpdate(true);
-      landed = false;
    }
 
    void update() {
@@ -143,44 +139,75 @@ public:
       setProjectilePathAt(0, position);
    }
    
-   void setUpdate(bool value) { updateTrue = value; }
-   
    void draw(ogstream & gout) {
       
+      // draw main projectile
       gout.drawProjectile(position);
       
-      int i = 0;
-      int x = 3000;
-      int y = 30000;
-      int dy = 1000;
-
-      gout.setPosition(Position(x, y - dy*i++));
-      gout  << "Artillery Hang Time :           " << getHangTime() << "s";
+      // draw path traveled
+      if (updateTrue) // only draw when projectile is moving
+         for (int i = 0; i < 20; i++)
+            gout.drawProjectile(projectilePath[i], (double)i*.5);
+   }
    
-      gout.setPosition(Position(x, y - dy*i++));
-      gout  << "Artillery Altitude:             " << getAltitude() << "m";
+   void drawInfo(ogstream & gout) {
+      // this method will be called by demo, and will only be called for
+      // one single artillery object (the last one in the stack)
+
+      if (true) return; // toggle display
+
+      int i = 0;
+      int textX = 5000;
+      int numbersX = textX + 11000;
+      int dy = 1000;
+      int y = 12000;
+
+      gout.setPosition(Position(textX, y - dy*i));
+      gout  << "Artillery Hang Time:";
+      gout.setPosition(Position(numbersX, y - dy*i++));
+      gout  << getHangTime() << " s";
+   
+      gout.setPosition(Position(textX, y - dy*i));
+      gout  << "Artillery Altitude:";
+      gout.setPosition(Position(numbersX, y - dy*i++));
+      gout  << getAltitude() << " m";
       
-      gout.setPosition(Position(x, y - dy*i++));
-      gout  << "Artillery Speed:                " << getSpeed() << " m/s";
+      gout.setPosition(Position(textX, y - dy*i));
+      gout  << "Artillery Speed:";
+      gout.setPosition(Position(numbersX, y - dy*i++));
+      gout  << getSpeed() << " m/s";
       
-      gout.setPosition(Position(x, y - dy*i++));
-      gout  << "Artillery Distance Traveled:    " << getDistance() << "m";
+      gout.setPosition(Position(textX, y - dy*i));
+      gout  << "Artillery Distance Traveled:";
+      gout.setPosition(Position(numbersX, y - dy*i++));
+      gout  << getDistance() << " m";
       
-      gout.setPosition(Position(x, y - dy*i++));
-      gout  << "Gravity at Altitude:            " << g << "m/s/s";
+      gout.setPosition(Position(textX, y - dy*i));
+      gout  << "Gravity at Altitude:";
+      gout.setPosition(Position(numbersX, y - dy*i++));
+      gout  << g << " m/s/s";
       
-      gout.setPosition(Position(x, y - dy*i++));
-      gout  << "Air Density at Altitude:        " << p << "kg/m^3";
+      gout.setPosition(Position(textX, y - dy*i));
+      gout  << "Air Density at Altitude:";
+      gout.setPosition(Position(numbersX, y - dy*i++));
+      gout  << p << " kg/m^3";
       
-      gout.setPosition(Position(x, y - dy*i++));
-      gout  << "Speed of Sound at Altitude:     " << mach << "m/s";
+      gout.setPosition(Position(textX, y - dy*i));
+      gout  << "Speed of Sound at Altitude:";
+      gout.setPosition(Position(numbersX, y - dy*i++));
+      gout  << mach << "m/s";
       
-      gout.setPosition(Position(x, y - dy*i++));
-      gout  << "Drag Coefficient at current mach:  " << mach;
+      gout.setPosition(Position(textX, y - dy*i));
+      gout  << "Drag Coefficient at current mach:";
+      gout.setPosition(Position(numbersX, y - dy*i++));
+      gout  << c << "m/s";
       
       if (landed) {
-         gout.setPosition(Position(6000, 6000));
-         gout << "TEST";
+         gout.setPosition(Position(4000, 4000)
+           //Position(gout.getCenterPoint().getPixelsX()-1000,
+           //         gout.getCenterPoint().getPixelsY())
+         );
+         gout << "LANDED";
       }
    }
    
@@ -198,7 +225,9 @@ public:
    // setters
    void setAltitude(double y)    { position.setMetersY(y); }
    void addHangTime(double dt)   { hangTime += dt; }
-
+   void setLanded(bool value)    { landed = value; }
+   void setUpdate(bool value)    { updateTrue = value; }
+   
    void setProjectilePathAt(int index, Position p) {
       projectilePath[index] = p;
    }
