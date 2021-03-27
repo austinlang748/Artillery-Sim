@@ -124,7 +124,7 @@ public:
       
       sos   = Tables::get("altitudeToSpeedOfSound", getAltitude());
       
-      mach  = 0; // convert speed of sound to mach?
+      mach  = 1; // convert speed of sound to mach?
       
       c     = Tables::get("machToDragCoefficient", mach);
       
