@@ -60,7 +60,6 @@ private:
    Position valuePosition;
    Position unitsPosition;
    // helper methods for ui
-   void drawInfo(ogstream & gout);
    void drawInfo(ogstream & gout, string description, double value, string units);
 
 public:
@@ -71,6 +70,9 @@ public:
    // public update methods
    void update();
    void draw(ogstream & gout);
+   
+   // used by Artillery::draw and Demo::draw
+   void drawInfo(ogstream & gout);
    
    // getters
    double   getAltitude()  const { return position.getMetersY(); }

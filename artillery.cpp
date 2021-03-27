@@ -134,7 +134,7 @@ void Artillery::drawInfo(ogstream & gout) {
    // set positioning/column spacing
    textPosition.setPixels(200, 450);
    valuePosition = textPosition;
-   valuePosition.addPixelsX(200);
+   valuePosition.addPixelsX(240);
    unitsPosition = valuePosition;
    unitsPosition.addPixelsX(70);
 
