@@ -23,6 +23,7 @@ public:
    Howitzer() : time(0.0), angleRadians(0.0) { }
    Howitzer(Position position) : Howitzer() { // use default as delegate constructor
       this->position = position;
+      assert(position.getPixelsY() > 0.0);
    }
    
    void draw(ogstream & gout) {
@@ -33,11 +34,17 @@ public:
    }
    
    // getters
-   Position getPosition()  const { return position; }
-   double   getAngle()     const { return angleRadians; }
-
+   Position getPosition()  { 
+      assert(position.getPixelsY() > 0.0);
+      return position; 
+   }
+   double getAngle()       { return angleRadians; }
+   
    // setters
-   void setPosition(Position position) { this->position = position;  }
+   void setPosition(Position position) { 
+      assert(position.getPixelsY() > 0.0);
+      this->position = position;  
+   }
    void setAngle(double angleRadians)  { this->angleRadians = angleRadians; }
    void setTime(double time)           { this->time = time; }
    

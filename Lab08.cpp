@@ -81,7 +81,7 @@ int main(int argc, char** argv)
    // Initialize the demo
    Demo demo(ptUpperRight);
    
-   cout << demo.getScreenDims() << endl;
+   // cout << demo.getScreenDims() << endl;
 
    // set everything into action
    ui.run(callBack, &demo);
