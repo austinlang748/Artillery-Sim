@@ -13,7 +13,6 @@ Demo::Demo(Position ptUpperRight) :
    ptUpperRight(ptUpperRight),
    ground(ptUpperRight)
 {
-
    Position hpos(ptUpperRight.getMetersX() * 0.2, 10);
 
    // initialize howitzer
@@ -57,12 +56,12 @@ void Demo::draw(ogstream & gout) {
    
    // how to quit
    Position textPos;
-   textPos.setPixels(90, 380);
+   textPos.setPixels(90, 480);
    gout.setPosition(textPos);
    gout << "Press 'Q' to quit\n";
    
    // how to reset
-   textPos.setPixelsX(290);
+   textPos.setPixelsX(390);
    gout.setPosition(textPos);
    gout << "Press 'R' to reset terrain\n";
 }
