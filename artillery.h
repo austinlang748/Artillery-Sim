@@ -19,7 +19,7 @@ using namespace std;
 class Artillery
 {
 private:
-   static constexpr const double artilleryV0 = 827.0;           // m/s
+   static constexpr const double artilleryV0 = 827.0*.5;           // m/s
    static constexpr const double artilleryMass = 46.7;          // kg
    static constexpr const double artilleryDiameterMm = 154.89;  // mm
    static double getArtilleryDiameter() { return artilleryDiameterMm / 1000; } // m
@@ -46,6 +46,7 @@ private:
 
    Position    projectilePath[20]; // path already traveled of the projectile
    bool        updateTrue;
+   bool        landed;
 
 public:
    
@@ -100,8 +101,9 @@ public:
       // initialize projectile path
       for (int i = 0; i < 20; i++) projectilePath[i] = Position();
       
-      // set update to true
+      // set booleans
       setUpdate(true);
+      landed = false;
    }
 
    void update() {
@@ -144,38 +146,49 @@ public:
    void setUpdate(bool value) { updateTrue = value; }
    
    void draw(ogstream & gout) {
-      double posx = 5000;
+      
+      gout.drawProjectile(position);
+      
+      int i = 0;
+      int x = 3000;
+      int y = 30000;
+      int dy = 1000;
 
-      gout.setPosition(Position(posx, 10000));
+      gout.setPosition(Position(x, y - dy*i++));
       gout  << "Artillery Hang Time :           " << getHangTime() << "s";
    
-      gout.setPosition(Position(posx, 9000));
+      gout.setPosition(Position(x, y - dy*i++));
       gout  << "Artillery Altitude:             " << getAltitude() << "m";
       
-      gout.setPosition(Position(posx, 8000));
+      gout.setPosition(Position(x, y - dy*i++));
       gout  << "Artillery Speed:                " << getSpeed() << " m/s";
       
-      gout.setPosition(Position(posx, 7000));
+      gout.setPosition(Position(x, y - dy*i++));
       gout  << "Artillery Distance Traveled:    " << getDistance() << "m";
       
-      gout.setPosition(Position(posx, 6000));
+      gout.setPosition(Position(x, y - dy*i++));
       gout  << "Gravity at Altitude:            " << g << "m/s/s";
       
-      gout.setPosition(Position(posx, 5000));
+      gout.setPosition(Position(x, y - dy*i++));
       gout  << "Air Density at Altitude:        " << p << "kg/m^3";
       
-      gout.setPosition(Position(posx, 4000));
+      gout.setPosition(Position(x, y - dy*i++));
       gout  << "Speed of Sound at Altitude:     " << mach << "m/s";
       
-      gout.setPosition(Position(posx, 3000));
+      gout.setPosition(Position(x, y - dy*i++));
       gout  << "Drag Coefficient at current mach:  " << mach;
+      
+      if (landed) {
+         gout.setPosition(Position(6000, 6000));
+         gout << "TEST";
+      }
    }
    
    // getters
-   double getAltitude()    const { return position.getMetersY(); }
-   double getSpeed()       const { return speed; }
-   double getDistance()    const { return position.getMetersX() - initialPositionX; }
-   double getHangTime()    const { return hangTime; }
+   double   getAltitude()  const { return position.getMetersY(); }
+   double   getSpeed()     const { return speed; }
+   double   getDistance()  const { return position.getMetersX() - initialPositionX; }
+   double   getHangTime()  const { return hangTime; }
    Position getPosition()  const { return position; }
    
    Position getProjectilePathAt(int index) {

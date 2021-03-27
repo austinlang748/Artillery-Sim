@@ -17,8 +17,8 @@
 class Velocity
 {
 private:
-   double dx; // change of position in pixelsX
-   double dy; // change of position in pixelsY
+   double dx; // change of position in metersX
+   double dy; // change of position in metersY
 
 public:
 

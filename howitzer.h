@@ -8,6 +8,8 @@
 #pragma once
 
 #include "position.h"
+#include "uiDraw.h"
+#include "ground.h"
 
 class Howitzer
 {
@@ -18,24 +20,30 @@ private:
 
 public:
    
-   Howitzer() {
-      time = 0.0;
-      angleRadians = 0.0;
-   }
-
+   Howitzer() : time(0.0), angleRadians(0.0) { }
    Howitzer(Position position) : Howitzer() { // use default as delegate constructor
       this->position = position;
    }
    
-   // getters
-   Position getPosition()  { return position; }
-   double getAngle()       { return angleRadians; }
-   double getTime()        { return time; }
+   void draw(ogstream & gout) {
+      gout.drawHowitzer(position, angleRadians, time);
+      
+      gout.setPosition(Position(4000, 31000));
+      gout << "Howitzer Angle: " << Trig::deg(angleRadians);
+   }
    
+   // getters
+   Position getPosition()  const { return position; }
+   double   getAngle()     const { return angleRadians; }
+
    // setters
    void setPosition(Position position) { this->position = position;  }
    void setAngle(double angleRadians)  { this->angleRadians = angleRadians; }
    void setTime(double time)           { this->time = time; }
+   
+   void placeOnGround(Ground * ground) {
+      position.setMetersY(ground->getElevationMeters(position));
+   }
 
    // adders
    void addAngle(double dAngle)        { angleRadians += dAngle; }

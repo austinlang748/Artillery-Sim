@@ -25,7 +25,6 @@ public:
       // Getters
       test_howitzer_getPosition();
       test_howitzer_getAngle();
-      test_howitzer_getTime();
 
       // Setters
       test_howitzer_setPosition();
@@ -65,18 +64,6 @@ public:
       double angle = howitzer.getAngle();
       //verfify
       assert(angle == 2.00);
-      //teardown
-   }
-
-   void test_howitzer_getTime()
-   {
-      //setup
-      Howitzer howitzer(Position(10, 10));
-      howitzer.time = 50.00;
-      //exercise
-      double time = howitzer.getTime();
-      //verfify
-      assert(time == 50.00);
       //teardown
    }
 

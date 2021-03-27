@@ -146,5 +146,4 @@ void Ground::draw(ogstream & gout) const
       gout = posText;
       gout << (int)(pos.getMetersY()) << "m";
    }
-
 }

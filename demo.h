@@ -7,9 +7,39 @@
  * AUTHOR: Austin Hilderbrand
  ********************************************************************************/
 
-#ifndef demo_hpp
-#define demo_hpp
+#pragma once
 
-#include <stdio.h>
+#include "uiDraw.h"
+#include "uiInteract.h"
+#include "ground.h"     // for GROUND
+#include "howitzer.h"   // for HOWITZER
+#include "artillery.h"  // for ARTILLERY
 
-#endif /* demo_hpp */
+/********************************************************************************
+ * CLASS: Demo
+ * Test structure to capture the LM that will move around the screen
+ ********************************************************************************/
+class Demo
+{
+private:
+   Ground      ground;        // the ground
+   Position    ptUpperRight;  // size of the screen
+   Howitzer    howitzer;      // howitzer cannon object
+   Artillery*  artillery;     // artillery
+   
+   int keyDownTimer = 0;
+
+public:
+   
+   Demo(Position ptUpperRight);
+   void update();
+   void draw(ogstream & gout);
+   void handleInput(const Interface* pUI);
+   
+   Position getScreenDims() const { return ptUpperRight; }
+   void setKeyDownTimer() { setKeyDownTimer(10); }
+   void setKeyDownTimer(int value) { keyDownTimer = value; }
+   bool keyDownTimerIsNonzero() { return keyDownTimer > 0; }
+   void updateKeyDownTimer(bool debug=false) { keyDownTimer--; }
+
+};

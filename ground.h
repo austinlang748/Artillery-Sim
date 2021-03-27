@@ -46,6 +46,17 @@ public:
    {
       return posTarget;
    }
+   
+   bool hasHitTarget(const Position & posProjectile) {
+      float targetWidth = 10.0;
+      double projX = posProjectile.getPixelsX();
+      double targX = posTarget.getPixelsX();
+      
+      if (projX > targX - targetWidth/2 && projX < targX + targetWidth/2)
+         return true;
+      
+      return false;
+   }
 
 private:
    double * ground;               // elevation of the ground, in pixels 

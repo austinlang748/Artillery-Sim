@@ -15,128 +15,12 @@
 #include "uiInteract.h" // for INTERFACE
 #include "uiDraw.h"     // for RANDOM and DRAW*
 #include "position.h"   // for POINT
-#include "ground.h"     // for GROUND
-#include "howitzer.h"   // for HOWITZER
-#include "artillery.h"  // for ARTILLERY
+#include "demo.h"       // main class for simulator
 #include "test.h"       // include unit test class
 using namespace std;
 
-#define  SCREEN_WIDTH   1000
-#define  SCREEN_HEIGHT  800
-
-/*************************************************************************
- * Demo
- * Test structure to capture the LM that will move around the screen
- *************************************************************************/
-class Demo
-{
-private:
-   Ground      ground;        // the ground
-   Position    ptUpperRight;  // size of the screen
-   Howitzer    howitzer;      // howitzer cannon object
-   Artillery*  artillery;     // artillery
-   
-   int keyDownTimer = 0;
-
-public:
-   
-   Demo(Position ptUpperRight) :
-      ptUpperRight(ptUpperRight),
-      ground(ptUpperRight)
-   {
-      Position hpos = Position(
-         ptUpperRight.getMetersX() * 0.5,
-         ground.getElevationMeters(Position(ptUpperRight.getMetersX() * 0.5, 0.0))
-      );
-
-      // initialize objects
-      howitzer = Howitzer(hpos); // howitzer
-      ground.reset(hpos);        // ground
-      artillery = NULL;
-   }
-   
-   void update() {
-
-      if (artillery) {
-         
-         // advance time one frame's worth of time elapsed
-         artillery->addHangTime(1/30);
-
-         // move the projectile across the screen
-         artillery->update();
-         
-         // stop updating artillery when it hits the ground
-         if (artillery->getPosition().getMetersY() < ground.getElevationMeters(artillery->getPosition())) {
-            artillery->setUpdate(false);
-         }
-      }
-   }
-   
-   void draw(ogstream & gout) {
-      
-      // draw the ground first
-      ground.draw(gout);
-
-      // draw the howitzer
-      gout.drawHowitzer(howitzer.getPosition(), howitzer.getAngle(), howitzer.getTime());
-      
-      if (artillery) {
-         gout.drawProjectile(artillery->getPosition(), artillery->getHangTime());
-         for (int i = 0; i < 20; i++)
-            gout.drawProjectile(artillery->getProjectilePathAt(i), (double)i * .5);
-      }
-      // draw some text on the screen
-      gout.setf(ios::fixed | ios::showpoint);
-      gout.precision(1);
-      
-      // artillery info
-      if (artillery) artillery->draw(gout);
-      
-      // other text
-      gout.setPosition(Position(22000, 19000));
-      gout << "Press 'Q' to quit\n";
-      
-      gout.setPosition(Position(22000, 18000));
-      gout << "Press 'R' to reset\n";
-   }
-   
-   void handleInput(const Interface* pUI) {
-      
-      // move a large amount
-      if (pUI->getHeldKey(RIGHT))
-         howitzer.addAngle(0.05);
-      if (pUI->getHeldKey(LEFT))
-         howitzer.addAngle(-0.05);
-
-      // move by a little
-      if (pUI->getHeldKey(UP))
-         howitzer.addAngle((howitzer.getAngle() >= 0 ? -0.003 : 0.003));
-      if (pUI->getHeldKey(DOWN))
-         howitzer.addAngle((howitzer.getAngle() >= 0 ? 0.003 : -0.003));
-
-      // fire that gun
-      if (pUI->getHeldKey(SPACE))
-         artillery = new Artillery(howitzer.getPosition(), howitzer.getAngle());
-      
-      // restart artillery
-      if (pUI->getHeldKey(R))
-         artillery = NULL;
-
-      // exit demo window (quit)
-      if (pUI->getHeldKey(Q))
-         exit(0);
-   }
-   
-   Position getScreenDims() const { return ptUpperRight; }
-   void setKeyDownTimer() { setKeyDownTimer(10); }
-   void setKeyDownTimer(int value) { keyDownTimer = value; }
-   bool keyDownTimerIsNonzero() { return keyDownTimer > 0; }
-   void updateKeyDownTimer(bool debug=false) {
-      if (debug) cout << keyDownTimer << endl;
-      keyDownTimer--;
-   }
-
-};
+#define  SCREEN_WIDTH   500
+#define  SCREEN_HEIGHT  400
 
 /*************************************
  * All the interesting work happens here, when
@@ -151,18 +35,15 @@ void callBack(const Interface* pUI, void* p)
    // is the first step of every single callback function in OpenGL. 
    Demo* pGame = (Demo*)p;
    ogstream gout;
+   
+   // handle some text display things
+   gout.setf(ios::fixed | ios::showpoint);
+   gout.precision(1);
 
+   // update game (methods defined in demo.cpp)
    pGame->update();
    pGame->draw(gout);
    pGame->handleInput(pUI);
-   
-   // zoom in/out on up/down press
-   if (pGame->keyDownTimerIsNonzero()) pGame->updateKeyDownTimer();
-   else if (pUI->getHeldKey(UP) || pUI->getHeldKey(DOWN)) {
-      pGame->setKeyDownTimer(10);
-      if       (pUI->getHeldKey(UP))   Position().zoomIn();
-      else if  (pUI->getHeldKey(DOWN)) Position().zoomOut();
-   }
 }
 
 double Position::metersFromPixels = 40.0;
