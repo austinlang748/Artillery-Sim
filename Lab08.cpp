@@ -42,10 +42,12 @@ public:
       ptUpperRight(ptUpperRight),
       ground(ptUpperRight)
    {
-      Position hpos = Position(
+      Position hpos = Position(ptUpperRight.getMetersX() * 0.5, 0);
+      ground.reset(hpos);
+      hpos = Position(
          ptUpperRight.getMetersX() * 0.5,
-         ground.getElevationMeters(Position(ptUpperRight.getMetersX() * 0.5, 0.0))
-      );
+         ground.getElevationMeters(hpos));
+
 
       // initialize objects
       howitzer = Howitzer(hpos); // howitzer
@@ -217,7 +219,7 @@ int main(int argc, char** argv)
    // Initialize the demo
    Demo demo(ptUpperRight);
    
-   cout << demo.getScreenDims() << endl;
+   // cout << demo.getScreenDims() << endl;
 
    // set everything into action
    ui.run(callBack, &demo);

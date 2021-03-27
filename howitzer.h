@@ -22,14 +22,19 @@ public:
    Howitzer() {
       time = 0.0;
       angleRadians = 0.0;
+      //assert(position.getPixelsY() > 0.0);
    }
 
    Howitzer(Position position) : Howitzer() { // use default as delegate constructor
       this->position = position;
+      assert(position.getPixelsY() > 0.0);
    }
    
    // getters
-   Position getPosition()  { return position; }
+   Position getPosition()  { 
+      assert(position.getPixelsY() > 0.0);
+      return position; 
+   }
    double getAngle()       { return angleRadians; }
    double getTime()        { return time; }
    
@@ -38,7 +43,10 @@ public:
    }
    
    // setters
-   void setPosition(Position position) { this->position = position;  }
+   void setPosition(Position position) { 
+      assert(position.getPixelsY() > 0.0);
+      this->position = position;  
+   }
    void setAngle(double angleRadians)  { this->angleRadians = angleRadians; }
    void setTime(double time)           { this->time = time; }
 

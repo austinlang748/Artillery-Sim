@@ -118,7 +118,7 @@ public:
          getAccelerationY(g, dragF, angleDegrees)
       );
       
-      cout << "gravity: " << g << endl;
+      // cout << "gravity: " << g << endl;
 
       // update position
       velocity.add(acceleration);
