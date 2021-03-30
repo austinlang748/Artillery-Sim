@@ -24,8 +24,6 @@ private:
    Position             ptUpperRight;  // size of the screen
    Howitzer             howitzer;      // howitzer cannon object
    vector<Artillery*>   artillery;     // artillery
-   
-   int keyDownTimer = 0;
 
 public:
    
@@ -33,10 +31,4 @@ public:
    void update();
    void draw(ogstream & gout);
    void handleInput(const Interface* pUI);
-   
-   Position getScreenDims() const { return ptUpperRight; }
-   void setKeyDownTimer() { setKeyDownTimer(10); }
-   void setKeyDownTimer(int value) { keyDownTimer = value; }
-   bool keyDownTimerIsNonzero() { return keyDownTimer > 0; }
-   void updateKeyDownTimer(bool debug=false) { keyDownTimer--; }
 };

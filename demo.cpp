@@ -10,7 +10,9 @@
 #include "demo.h"
 
  /**********************************************************************
-  * Demo:Demo
+  * Non-Default Constructor
+  *
+  * CLASS: Demo
   *
   * Initialize the ground and the howitzer.
   **********************************************************************/
@@ -31,7 +33,9 @@ Demo::Demo(Position ptUpperRight) :
 }
 
 /**********************************************************************
- * Demo::update
+ * METHOD: update
+ *
+ * CLASS: Demo
  *
  * Call this periodically to update the simulation.
  **********************************************************************/
@@ -40,23 +44,18 @@ void Demo::update() {
    howitzer.incrementTime(0.5);
 
    for (auto projectile : artillery) {
-      
       // update each projectile
       projectile->update();
       
-      // stop updating artillery when it hits the ground
-      if (projectile->getPosition().getMetersY() < ground.getElevationMeters(projectile->getPosition())) {
-         projectile->setUpdate(false);
-         
-         // if artillery has hit ground and stopped updating, check to see if it has hit the target
-         if (ground.hasHitTarget(projectile->getPosition()))
-            projectile->setLanded(true);
-      }
+      // check for collisions
+      projectile->checkCollisionsWith(&ground);
    }
 }
 
 /**********************************************************************
- * Demo::draw
+ * METHOD: draw
+ *
+ * CLASS: Demo
  *
  * Draw all objects to the screen.
  **********************************************************************/
@@ -78,13 +77,14 @@ void Demo::draw(ogstream & gout) {
    gout << "Press 'Q' to quit\n";
    
    // how to reset
-   textPos.setPixelsX(390);
-   gout.setPosition(textPos);
+   gout.setPosition(textPos.addPixelsX(300));
    gout << "Press 'R' to reset terrain\n";
 }
 
 /**********************************************************************
- * Demo::handleInput
+ * METHOD: handleInput
+ *
+ * CLASS: Demo
  *
  * Handle user input, including:
  *    Q:     quit
@@ -124,4 +124,27 @@ void Demo::handleInput(const Interface* pUI) {
       exit(0);
    
    howitzer.handleInput(pUI);
+}
+
+/**********************************************************************
+ * METHOD: Check collisions with (ground)
+ *
+ * CLASS: Demo
+ *
+ * Handles certain game logic by setting specific Artillery obj boolean values:
+ * - stop updating when artillery projectile hits the ground
+ * - indicate that the projectile has hit the target by setting landed -> true
+ *
+ * PARAM: Ground : ground object pointer (Ground*)
+ **********************************************************************/
+void Artillery::checkCollisionsWith(Ground * ground) {
+   
+   // stop updating artillery when it hits the ground
+   if (getAltitude() < ground->getElevationMeters(this->position)) {
+      setUpdate(false);
+      
+      // if artillery has hit ground and stopped updating, check to see if it has hit the target
+      if (ground->hasHitTarget(this->position))
+         setLanded(true);
+   }
 }

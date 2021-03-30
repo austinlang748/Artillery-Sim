@@ -73,3 +73,60 @@ bool Position::operator == (const Position & rhs) const {
 bool Position::operator != (const Position & rhs) const {
     return x != rhs.getMetersX() || y != rhs.getMetersY();
 }
+
+/*******************************************
+ * ADDERS
+ * For convenience, let's return a referenced value for this*
+ * This will make ui positioning easier to read
+ ******************************************/
+
+/*******************************************
+ * METHOD: add meters
+ * PARAM: v : Velocity
+ * RETURN: Position (reference to this)
+ ******************************************/
+Position Position::addMeters (Velocity v) {
+   addMetersX(v.getDx());
+   addMetersY(v.getDy());
+   return *this;
+}
+
+/*******************************************
+ * METHOD: add meters
+ * PARAM: v : Velocity
+ * RETURN: Position (reference to this)
+ ******************************************/
+Position Position::addPixelsX(double dxPixels) {
+   setPixelsX(getPixelsX() + dxPixels);
+   return *this;
+}
+
+/*******************************************
+ * METHOD: add meters
+ * PARAM: v : Velocity
+ * RETURN: Position (reference to this)
+ ******************************************/
+Position Position::addPixelsY(double dyPixels) {
+   setPixelsY(getPixelsY() + dyPixels);
+   return *this;
+}
+
+/*******************************************
+ * METHOD: add meters
+ * PARAM: v : Velocity
+ * RETURN: Position (reference to this)
+ ******************************************/
+Position Position::addMetersX(double dxMeters) {
+   setMetersX(getMetersX() + dxMeters);
+   return *this;
+}
+
+/*******************************************
+ * METHOD: add meters
+ * PARAM: v : Velocity
+ * RETURN: Position (reference to this)
+ ******************************************/
+Position Position::addMetersY(double dyMeters) {
+   setMetersY(getMetersY() + dyMeters);
+   return *this;
+}

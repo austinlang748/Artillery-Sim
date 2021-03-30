@@ -37,10 +37,6 @@ public:
       test_getSpeed_valid();
       test_getHangTime_initial(); 
       test_getHangTime_valid();
-      test_getProjectilePathAt();
-      
-      // setters
-      test_setProjectilePathAt();
    }
 
    void test_initialize_valid() {
@@ -175,30 +171,6 @@ public:
       double time = artillery.getHangTime();
       //verfify
       assert (time == 0);
-      //teardown
-   }
-   
-   void test_getProjectilePathAt() {
-      //setup
-      Artillery artillery(Position(10, 10), 0);
-      artillery.projectilePath[0] = Position(20, 20);
-      //exercise
-      Position projectilePosition = artillery.getProjectilePathAt(0);
-      //verfify
-      assert(projectilePosition == Position(20, 20));
-      //teardown
-   }
-
-   void test_setProjectilePathAt() {
-      //setup
-      Artillery artillery(Position(10, 10), 0);
-      Position newPosition(30, 30);
-      int index = 5;
-      artillery.projectilePath[index] = Position(20, 20);
-      //exercise
-      artillery.setProjectilePathAt(index, newPosition);
-      //verfify
-      assert(artillery.projectilePath[index] == newPosition);
       //teardown
    }
 

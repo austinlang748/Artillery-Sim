@@ -14,6 +14,7 @@
 #include "position.h"
 #include "velocity.h"
 #include "tables.h"
+#include "ground.h"
 #include "uiDraw.h"
 #include <cmath>
 #include <iostream>
@@ -54,49 +55,43 @@ private:
    double   howitzerAngle;       // angle at which artillery was launched (angle of howitzer) (degrees°)
    Position projectilePath[20];  // traversed path of the projectile (m, m)
    
+   // getters
+   double   getAltitude()  const { return position.getMetersY(); }
+   double   getSpeed()     const { return speed; }
+   double   getDistance()  const { return position.getMetersX() - initialPositionX; }
+   double   getHangTime()  const { return hangTime; }
+   
+   // setters
+   void setAngle(double angle);
+   void addHangTime(double dt)   { hangTime += dt; }
+   void setLanded(bool value)    { landed = value; }
+   void setUpdate(bool value)    { updateTrue = value; }
+   
+   // update helper method
+   void updateProjectilePath();
+   
    // booleans for Demo class logic
    bool     updateTrue  = true;
    bool     landed      = false;
    
    // specific for ui elements
    Position textPosition;
-   Position valuePosition;
-   Position unitsPosition;
 
    // helper methods for ui
    void drawInfo(ogstream & gout, string description, double value, string units);
 
 public:
    
-   // constructors
+   // constructor
    Artillery(Position position_0, double angle0_Rads);
 
    // public update methods
    void update();
    void draw(ogstream & gout);
+   void checkCollisionsWith(Ground * ground);
    
    // used by Artillery::draw and Demo::draw
    void drawInfo(ogstream & gout);
-   
-   // getters
-   double   getAltitude()  const { return position.getMetersY(); }
-   double   getSpeed()     const { return speed; }
-   double   getDistance()  const { return position.getMetersX() - initialPositionX; }
-   double   getHangTime()  const { return hangTime; }
-   Position getPosition()  const { return position; }
-   Position getProjectilePathAt(int index) {
-      return projectilePath[index];
-   }
-   
-   // setters
-   void setAltitude(double y)    { position.setMetersY(y); }
-   void addHangTime(double dt)   { hangTime += dt; }
-   void setLanded(bool value)    { landed = value; }
-   void setUpdate(bool value)    { updateTrue = value; }
-   void setAngle(double angle);
-   void setProjectilePathAt(int index, Position p) {
-      projectilePath[index] = p;
-   }
    
    // Make the test class a friend
    friend class TestArtillery;

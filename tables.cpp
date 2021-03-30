@@ -158,7 +158,7 @@ double Tables::getTableValue(map<double, double> myMap, double value) {
  * Tables::display
  *
  * Support method - displays information about the conversion table
- * being used.
+ * being used to the terminal.
  **********************************************************************/
 void Tables::display(string whichMap) {
    cout << "Tables::display(" << whichMap << ")\n";
@@ -209,6 +209,30 @@ void Tables::display(string whichMap) {
    for (auto row : sortedMap)
       cout  << ' ' << setw(column1.length()) << row.first
             << " : " << row.second << endl;
+}
+
+/**********************************************************************
+ * STATIC METHOD: get
+ * 
+ * CLASS: Tables
+ *
+ * easy-to-use getter to retrieve values from maps contained in 'Tables'
+ * - retrieves from map specified by whichMap parameter
+ * - calculates return value based on keyValue parameter using linear
+ *   interpolation formula
+ * 
+ * PARAM: whichMap : String
+ * PARAM: keyValue : double
+ * PARAM: (return value) : double
+ **********************************************************************/
+static double get(string whichMap, double keyValue) {
+   map<double, double> m;
+   if      (whichMap == "machToDragCoefficient")    m = machToDrag;
+   else if (whichMap == "altitudeToDensity")        m = altToDensity;
+   else if (whichMap == "altitudeToSpeedOfSound")   m = altToSos;
+   else if (whichMap == "altitudeToGravity")        m = altToGrav;
+   else return 0.0;
+   return getTableValue(m, keyValue);
 }
 
 /**********************************************************************

@@ -39,21 +39,22 @@ void Howitzer::draw(ogstream & gout) {
    // draw some text
    // 
 
-   // howitzer angle
+   // howitzer angle
    gout.setPosition(Position(4000, 31000));
    gout << "Howitzer Angle: " << Trig::deg(angleRadians);
 
-   // initial instructions for controls
+   // initial instructions for controls
    if (displayControls) {
-      gout.setPosition(Position(3500, 11500));
+      Position displayPosition(3500, 11500);
+      gout.setPosition(displayPosition);
       gout << "Controls";
-      gout.setPosition(Position(3500, 10000));
+      gout.setPosition(displayPosition.addPixelsY(-40));
       gout << "LEFT/RIGHT";
-      gout.setPosition(Position(3500, 9000));
+      gout.setPosition(displayPosition.addPixelsY(-20));
       gout << "- change howitzer angle by large amount";
-      gout.setPosition(Position(3500, 8000));
+      gout.setPosition(displayPosition.addPixelsY(-20));
       gout << "UP/DOWN";
-      gout.setPosition(Position(3500, 7000));
+      gout.setPosition(displayPosition.addPixelsY(-20));
       gout << "- change howitzer angle by a small amount";
    }
 }

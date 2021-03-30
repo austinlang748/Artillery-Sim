@@ -31,12 +31,12 @@ public:
    Howitzer();
    Howitzer(Position position);
 
-   void placeOnGround(Ground* ground);
-   
+   // update/draw/handle methods
    void draw(ogstream& gout);
-   
    void handleInput(const Interface* pUI);
-   
+
+   // helper methods
+   void placeOnGround(Ground* ground);
    Artillery* fire();
    
    // getters

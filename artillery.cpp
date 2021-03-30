@@ -42,12 +42,12 @@ Artillery::Artillery(Position position_0, double angle0_Rads) {
    );
    
    // initialize gravity
-   g     = Tables::get("altitudeToGravity", getAltitude());
+   g     = Tables::get("altitudeToGravity", position.getMetersY());
    
    // initialize drag
-   mach  = Tables::get("altitudeToSpeedOfSound", getAltitude());
+   mach  = Tables::get("altitudeToSpeedOfSound", position.getMetersY());
    c     = Tables::get("machToDragCoefficient", mach);
-   p     = Tables::get("altitudeToDensity", getAltitude());
+   p     = Tables::get("altitudeToDensity", position.getMetersY());
    a     = circleArea(getArtilleryDiameter() * .5);
    dragF = dragForce(c, p, speed, a);
    
@@ -59,24 +59,6 @@ Artillery::Artillery(Position position_0, double angle0_Rads) {
    
    // initialize projectile path
    for (int i = 0; i < 20; i++) projectilePath[i] = Position();
-}
-
-/**********************************************************************
- * Artillery::setAngle
- * 
- * Sets the artillery angle and performs error handling.
- **********************************************************************/
-void Artillery::setAngle(double angle) {
-   // handle angle
-   double angle0_Degrees = Trig::deg(angle);
-   if (angle0_Degrees > 90 && angle0_Degrees <= 180) angle0_Degrees = 90;
-   else if (angle0_Degrees < -90 && angle0_Degrees >= -180) angle0_Degrees = -90;
-
-   // initialize angle
-   angleDegrees = angle0_Degrees >= 0 ? 90 - angle0_Degrees : -90 - angle0_Degrees;
-
-   // save initial angle as howitzer angle for display
-   howitzerAngle = angleDegrees;
 }
 
 /**********************************************************************
@@ -97,13 +79,13 @@ void Artillery::update() {
    speed = velocity.getSpeed();
 
    // update gravity
-   g     = Tables::get("altitudeToGravity", getAltitude());
+   g     = -Tables::get("altitudeToGravity", position.getMetersY());
 
    // update drag
-   sos   = Tables::get("altitudeToSpeedOfSound", getAltitude());
+   sos   = Tables::get("altitudeToSpeedOfSound", position.getMetersY());
    mach  = sosToDragCoefficient(sos);
    c     = Tables::get("machToDragCoefficient", mach);
-   p     = Tables::get("altitudeToDensity", getAltitude());
+   p     = Tables::get("altitudeToDensity", position.getMetersY());
    a     = circleArea(getArtilleryDiameter() * .5);
    dragF = dragForce(c, p, speed, a);
 
@@ -118,9 +100,26 @@ void Artillery::update() {
    position.addMeters(velocity);
    
    // update projectile path
+   updateProjectilePath();
+}
+
+/**********************************************************************
+ * METHOD: update projectile path
+ *
+ * CLASS: Artillery
+ *
+ * loops through each of the positions in Artillery::projectilePath[20]
+ * and shifts each Position element to the previous slot. At the end,
+ * the current position (attribute) is fed into the first slot of the array.
+ **********************************************************************/
+void Artillery::updateProjectilePath() {
+   
+   // shift positions to previous slots
    for (int i = 19; i > 0; --i)
-      setProjectilePathAt(i, projectilePath[i-1]);
-   setProjectilePathAt(0, position);
+      projectilePath[i] = projectilePath[i-1];
+   
+   // feed current position into available slot
+   projectilePath[0] = position;
 }
 
 /**********************************************************************
@@ -130,9 +129,9 @@ void Artillery::update() {
  **********************************************************************/
 void Artillery::draw(ogstream & gout) {
    
-   // draw main projectile
+   // draw projectile at current position
    gout.drawProjectile(position);
-   
+
    // draw path traveled
    if (updateTrue) // only draw when projectile is moving
       for (int i = 0; i < 20; i++)
@@ -147,20 +146,17 @@ void Artillery::draw(ogstream & gout) {
 void Artillery::drawInfo(ogstream & gout) {
    // this method will be called by demo, and will only be called for
    // one single artillery object (the last one in the stack)
-
-   // set positioning/column spacing
-   textPosition.setPixels(200, 450);
-   valuePosition = textPosition;
-   valuePosition.addPixelsX(240);
-   unitsPosition = valuePosition;
-   unitsPosition.addPixelsX(70);
+   
+   // initialize textPosition y value once per frame
+   textPosition.setPixelsY(460);
 
    // display info
-   drawInfo(gout, "Artillery Hang Time", getHangTime(), "s");
-   drawInfo(gout, "Artillery Altitude", getAltitude(), "m");
-   drawInfo(gout, "Artillery Speed", getSpeed(), "m/s");
-   drawInfo(gout, "Artillery Distance Traveled", getDistance(), "m");
-   drawInfo(gout, "Howitzer Angle", howitzerAngle, "º");
+   drawInfo(gout, "Artillery Hang Time",           hangTime,               "s");
+   drawInfo(gout, "Artillery Altitude",            position.getMetersY(),  "m");
+   drawInfo(gout, "Artillery Speed",               getSpeed(),             "m/s");
+   drawInfo(gout, "Artillery Distance Traveled",   getDistance(),          "m");
+   drawInfo(gout, "Howitzer Angle",                howitzerAngle,          "degrees");
+   drawInfo(gout, "acceleration magnitude", acceleration.getSpeed(), "m/s/s");
 
    if (landed) {
       gout.setPosition(Position(3500, 4000));
@@ -178,18 +174,44 @@ void Artillery::drawInfo(ogstream & gout) {
  **********************************************************************/
 void Artillery::drawInfo(ogstream & gout, string description, double value, string units) {
    
-   double dy = -20;
+   // set column/row spacing
+   double column1Width = 240;
+   double column2Width = 80;
+   
+   // new line (reset positioning)
+   textPosition.setPixelsX(190); // x init
+   textPosition.addPixelsY(-20); // dy
+   
+   // column 1: description
    gout.setPosition(textPosition);
    gout << description << ":";
-   textPosition.addPixelsY(dy);
    
-   gout.setPosition(valuePosition);
+   // column 2: value
+   gout.setPosition(textPosition.addPixelsX(column1Width));
    gout << value;
-   valuePosition.addPixelsY(dy);
    
-   gout.setPosition(unitsPosition);
-   gout << " " << units;
-   unitsPosition.addPixelsY(dy);
+   // column 3: units
+   gout.setPosition(textPosition.addPixelsX(column2Width));
+   gout << units;
+}
+
+/**********************************************************************
+ * Artillery::setAngle
+ *
+ * Sets the artillery angle and performs error handling.
+ **********************************************************************/
+void Artillery::setAngle(double angle) {
+   
+   // handle angle
+   double angle0_Degrees = Trig::deg(angle);
+   if (angle0_Degrees > 90 && angle0_Degrees <= 180) angle0_Degrees = 90;
+   else if (angle0_Degrees < -90 && angle0_Degrees >= -180) angle0_Degrees = -90;
+
+   // initialize angle
+   angleDegrees = angle0_Degrees >= 0 ? 90 - angle0_Degrees : -90 - angle0_Degrees;
+
+   // save initial angle as howitzer angle for display
+   howitzerAngle = angleDegrees;
 }
 
 /**********************************************************************
@@ -318,5 +340,5 @@ double Artillery::getAccelerationX(double dragF, double angle) {
  * artilleryMass = mass of artillery (kg)
  **********************************************************************/
 double Artillery::getAccelerationY(double gravity, double dragF, double angle) {
-    return -(gravity + Trig::verticalComponent(dragF, angle) / artilleryMass);
+   return gravity - (Trig::verticalComponent(dragF, angle)/artilleryMass);
 }

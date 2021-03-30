@@ -44,27 +44,12 @@ private:
    static double   getTableValue(vector<pair<double, double> > v, double value);
    static double   getTableValue(map<double, double> myMap, double value);
 
-
 public:
- /**********************************************************************
-  *
-  *
-  * (NOTE: This method is declared here because this type can not be
-  * declared in the source file)
-  **********************************************************************/
-   static double get(string whichMap, double keyValue) {
-      map<double, double> m;
-      if (whichMap == "machToDragCoefficient")    m = machToDrag;
-      else if (whichMap == "altitudeToDensity")        m = altToDensity;
-      else if (whichMap == "altitudeToSpeedOfSound")   m = altToSos;
-      else if (whichMap == "altitudeToGravity")        m = altToGrav;
-      else return 0.0;
-      return getTableValue(m, keyValue);
-   }
-   
-   // Getter
+
+   // Getters
+   static double get(string whichMap, double keyValue);
    static map<double, double> getAltToSos() { return altToSos; }
 
-   // Display declaration
+   // Display
    static void display(string whichMap);
 };
