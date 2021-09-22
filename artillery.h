@@ -30,12 +30,12 @@ private:
    static double getArtilleryDiameter() { return artilleryDiameterMm / 1000; } // m
 
    // static calculation helper methods
-   static double dragForce(double c, double p, double v, double a);
-   static double sosToDragCoefficient(double sos);
-   static double circleArea(double radius);
-   static double getForce(double mass, double acceleration);
-   static double getAccelerationX(double dragF, double angle);
-   static double getAccelerationY(double gravity, double dragF, double angle);
+   static double dragForce(double c, double p, double v, double a); // F_drag = .5 * c * ρ * v^2 * SA
+   static double sosToDragCoefficient(double sos);                  // c = SoS / SoS_reference (343m/s)
+   static double circleArea(double radius);                         // A = PI * r^2
+   static double getForce(double mass, double acceleration);        // F = m * a_total
+   static double getAccelerationX(double dragF, double angle);      // a_x = -F_drag * cos(angle) / m
+   static double getAccelerationY(double gravity, double dragF, double angle); // a_y = F_g * sin(angle) / m
 
    // attributes for artillery calculations/positioning
    Position position;            // current position (m, m)

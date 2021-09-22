@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		141E47DE26FB999B001E6A7F /* velocity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EEF7D4C225F4011C00836719 /* velocity.cpp */; };
+		141E47DF26FB999B001E6A7F /* demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141E47DD26FB998D001E6A7F /* demo.cpp */; };
+		141E47E026FB999B001E6A7F /* tables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141E47DB26FB998D001E6A7F /* tables.cpp */; };
 		C1D4EB3E2577FC14002B56E3 /* ground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1D4EB322577FC12002B56E3 /* ground.cpp */; };
 		C1D4EB3F2577FC14002B56E3 /* position.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1D4EB332577FC12002B56E3 /* position.cpp */; };
 		C1D4EB402577FC14002B56E3 /* Lab08.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1D4EB342577FC12002B56E3 /* Lab08.cpp */; };
@@ -34,6 +37,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		141E47DB26FB998D001E6A7F /* tables.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tables.cpp; sourceTree = "<group>"; };
+		141E47DC26FB998D001E6A7F /* demo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = demo.h; sourceTree = "<group>"; };
+		141E47DD26FB998D001E6A7F /* demo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = demo.cpp; sourceTree = "<group>"; };
 		C1D4EB262577FB0F002B56E3 /* Lab08 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Lab08; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1D4EB322577FC12002B56E3 /* ground.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ground.cpp; sourceTree = "<group>"; };
 		C1D4EB332577FC12002B56E3 /* position.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = position.cpp; sourceTree = "<group>"; };
@@ -83,6 +89,8 @@
 			isa = PBXGroup;
 			children = (
 				C1D4EB342577FC12002B56E3 /* Lab08.cpp */,
+				141E47DD26FB998D001E6A7F /* demo.cpp */,
+				141E47DC26FB998D001E6A7F /* demo.h */,
 				EEF7D4D325F4332100836719 /* howitzer.cpp */,
 				EEF7D4CF25F4332000836719 /* howitzer.h */,
 				EEF7D4D425F4332100836719 /* artillery.cpp */,
@@ -101,6 +109,7 @@
 				EECB932625FDD25C0025C0B7 /* altToSosTable.csv */,
 				EECB932325FDD25C0025C0B7 /* machToDragTable.csv */,
 				EEF7D4D225F4332100836719 /* testHowitzer.h */,
+				141E47DB26FB998D001E6A7F /* tables.cpp */,
 				EEF7D4CB25F432C700836719 /* tables.h */,
 				EEF7D4C625F42EDE00836719 /* trig.h */,
 				EEF7D4C225F4011C00836719 /* velocity.cpp */,
@@ -187,6 +196,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				141E47DE26FB999B001E6A7F /* velocity.cpp in Sources */,
+				141E47DF26FB999B001E6A7F /* demo.cpp in Sources */,
+				141E47E026FB999B001E6A7F /* tables.cpp in Sources */,
 				EE3D11472603E9C300EEBCD0 /* tables.h in Sources */,
 				EEF7D4C725F42F1400836719 /* trig.h in Sources */,
 				EEF7D4D525F4332100836719 /* howitzer.cpp in Sources */,

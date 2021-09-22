@@ -225,7 +225,7 @@ void Tables::display(string whichMap) {
  * PARAM: keyValue : double
  * PARAM: (return value) : double
  **********************************************************************/
-static double get(string whichMap, double keyValue) {
+double Tables::get(string whichMap, double keyValue) {
    map<double, double> m;
    if      (whichMap == "machToDragCoefficient")    m = machToDrag;
    else if (whichMap == "altitudeToDensity")        m = altToDensity;
